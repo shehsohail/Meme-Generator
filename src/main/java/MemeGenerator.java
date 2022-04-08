@@ -1,5 +1,4 @@
-
-
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
@@ -88,6 +87,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   {
     new MemeGenerator();
     
+    
   }
 
   @Override
@@ -108,11 +108,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //Pops up a blue window
 
       //Want to pop up window with picture
-        //This works kind of.  Window comes up but as
-        //of now it only has one pic.  Nothing is 
-        //indexed yet.
+        //This works kind of.  I refrence my D drive but I want it to
+        //work on all PCs
       try {
         BrowseWindow();  
+        browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
         
       } catch (Exception BW) {
         //TODO: handle exception
@@ -137,9 +137,27 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     
   }
   public int BrowseWindow() throws IOException {
+    File generatedMemesDirectory = new File("D:\\Users\\dudeo\\Documents\\Meme-Generator");
+    String backgroundImage[] = generatedMemesDirectory.list();
+    int readyForReturn = 0;
+    while(readyForReturn == 0){
+      if(backgroundImage[indexOfBrowsingMeme].contains("jpg")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingMeme].contains("png")){
+        readyForReturn = 1;
+      }
+      else if((indexOfBrowsingMeme+1) == backgroundImage.length){
+        indexOfBrowsingMeme = 0;
+      }
+      else {
+        indexOfBrowsingMeme = indexOfBrowsingMeme + 1;
+      }
+    }
+    System.out.println(backgroundImage[indexOfBrowsingMeme]);
     this.setContentPane(new JPanel() {
     });
-    add(new JLabel(new ImageIcon("ezgif.com-gif-maker.jpg")));
+    add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
     pack();
     setVisible(true);
     return 1;
