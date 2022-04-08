@@ -1,5 +1,4 @@
-
-
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
@@ -22,8 +21,15 @@ import javax.swing.*;
  * dont do much yet since those methods were not implemented yet but basic button 
  * interactivity has been made. - Evan 4/6/2022 
  *
+ * No way can I remember the git commands so I'll list them here:
+ * cd /d D:\Users\dudeo\Documents\Meme-Generator
+ * git status
+ * git add .
+ * git commit -m "comment"
+ * 
+ * 
  */
-public class MemeGenerator implements ActionListener
+public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 {
   JButton browse;
   JButton upload;
@@ -34,25 +40,33 @@ public class MemeGenerator implements ActionListener
   int x;
   int y;
   int z;
+  int indexOfBrowsingMeme;
 
   public MemeGenerator(){
+    
     JFrame memeFrame = new JFrame();
     JPanel memePanel = new JPanel();
 
+    //Created buttons
     browse = new JButton("Browse the memes");
-    browse.addActionListener(this);
     upload = new JButton("Upload your own meme template");
     preset = new JButton("Choose a meme");
+
+    //wait for button pressed then perform action associated with that button
+    browse.addActionListener(this);
     upload.addActionListener(this);
     preset.addActionListener(this);
+
+    //Final product might not need lable but if it does the lable exists
     browseLable = new JLabel("Browse " +String.valueOf(x));
     uploadLable = new JLabel("Upload " +String.valueOf(y));
     presetLable = new JLabel("Preset " +String.valueOf(z));
 
 
 
-    memePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 420, 8));
-    memePanel.setLayout(new GridLayout());
+    memePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+    //I like it better without the gridlayout
+    //memePanel.setLayout(new GridLayout());
 
     memePanel.add(browse);
     memePanel.add(upload);
@@ -61,6 +75,7 @@ public class MemeGenerator implements ActionListener
     memePanel.add(uploadLable);
     memePanel.add(presetLable);
 
+    memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
     memeFrame.setDefaultCloseOperation(memeFrame.EXIT_ON_CLOSE);
     memeFrame.setTitle("Much Great Meme Generator");
@@ -72,15 +87,39 @@ public class MemeGenerator implements ActionListener
   {
     new MemeGenerator();
     
+    
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == browse){
       //Do the browse method
-      x++;
       System.out.println(277353);
-      browseLable.setText("Browse" + String.valueOf(x));
+      browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
+
+      //Pops up a blue pic
+      // JFrame oldMemesViewer = new JFrame();
+      // oldMemesViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      // oldMemesViewer.setPreferredSize(new Dimension(550, 300));
+      // oldMemesViewer.getContentPane().setBackground(Color.BLUE);
+      // oldMemesViewer.pack();
+      // oldMemesViewer.setVisible(true);
+      //Pops up a blue window
+
+      //Want to pop up window with picture
+        //This works.  For now I added some memes to try.
+        //For now lets say memes are saved in \Meme-Generator
+        //and templates are saved somewhere else
+      try {
+        BrowseWindow();  
+        browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
+        
+      } catch (Exception BW) {
+        //TODO: handle exception
+        System.out.println(BW.getStackTrace());
+      }
+      //Want to pop up window with picture
+
     }
     else if(e.getSource() == preset){
       //Do the preset meme method
@@ -97,4 +136,49 @@ public class MemeGenerator implements ActionListener
     else{System.out.println("");}
     
   }
+  public int BrowseWindow() throws IOException {
+    File file=new File(".");
+    String directory = file.getAbsolutePath();
+    System.out.println(directory);
+    File generatedMemesDirectory = new File(directory);
+    String backgroundImage[] = generatedMemesDirectory.list();
+    System.out.println(backgroundImage.length);
+    System.out.println(indexOfBrowsingMeme);
+    int readyForReturn = 0;
+    if(indexOfBrowsingMeme == backgroundImage.length){
+      
+      indexOfBrowsingMeme = 0;
+    }
+    while(readyForReturn == 0){
+      if(backgroundImage[indexOfBrowsingMeme].contains("jpg")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingMeme].contains("png")){
+        readyForReturn = 1;
+      }
+      else {
+        System.out.println("inc");
+        indexOfBrowsingMeme = indexOfBrowsingMeme + 1;
+      }
+    }
+    System.out.println(backgroundImage[indexOfBrowsingMeme]);
+    this.setContentPane(new JPanel() {
+    });
+    try {
+      add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
+      pack();
+      setVisible(true);
+      indexOfBrowsingMeme++;
+      return 1;
+      
+    } catch (Exception e) {
+      //TODO: handle exception
+      indexOfBrowsingMeme = 0;
+    add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
+    pack();
+    setVisible(true);
+    indexOfBrowsingMeme++;
+    return 1;
+    }
+ }
 }
