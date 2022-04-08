@@ -30,7 +30,7 @@ import javax.swing.*;
  * 
  * 
  */
-public class MemeGenerator implements ActionListener
+public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 {
   JButton browse;
   JButton upload;
@@ -41,8 +41,10 @@ public class MemeGenerator implements ActionListener
   int x;
   int y;
   int z;
+  int indexOfBrowsingMeme;
 
   public MemeGenerator(){
+    
     JFrame memeFrame = new JFrame();
     JPanel memePanel = new JPanel();
 
@@ -92,9 +94,32 @@ public class MemeGenerator implements ActionListener
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == browse){
       //Do the browse method
-      x++;
+      indexOfBrowsingMeme++;
       System.out.println(277353);
       browseLable.setText("Browse" + String.valueOf(x));
+
+      //Pops up a blue pic
+      // JFrame oldMemesViewer = new JFrame();
+      // oldMemesViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      // oldMemesViewer.setPreferredSize(new Dimension(550, 300));
+      // oldMemesViewer.getContentPane().setBackground(Color.BLUE);
+      // oldMemesViewer.pack();
+      // oldMemesViewer.setVisible(true);
+      //Pops up a blue window
+
+      //Want to pop up window with picture
+        //This works kind of.  Window comes up but as
+        //of now it only has one pic.  Nothing is 
+        //indexed yet.
+      try {
+        BrowseWindow();  
+        
+      } catch (Exception BW) {
+        //TODO: handle exception
+        System.out.println("Window failed");
+      }
+      //Want to pop up window with picture
+
     }
     else if(e.getSource() == preset){
       //Do the preset meme method
@@ -111,4 +136,12 @@ public class MemeGenerator implements ActionListener
     else{System.out.println("");}
     
   }
+  public int BrowseWindow() throws IOException {
+    this.setContentPane(new JPanel() {
+    });
+    add(new JLabel(new ImageIcon("ezgif.com-gif-maker.jpg")));
+    pack();
+    setVisible(true);
+    return 1;
+ }
 }
