@@ -26,6 +26,7 @@ import javax.swing.*;
  * git status
  * git add .
  * git commit -m "comment"
+ * git push
  * 
  * 
  */
@@ -94,14 +95,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == browse){
       //Do the browse method
-<<<<<<< HEAD
       System.out.println(277353);
       browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
-=======
-      indexOfBrowsingMeme++;
-      System.out.println(277353);
-      browseLable.setText("Browse" + String.valueOf(x));
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
 
       //Pops up a blue pic
       // JFrame oldMemesViewer = new JFrame();
@@ -113,25 +108,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //Pops up a blue window
 
       //Want to pop up window with picture
-<<<<<<< HEAD
         //This works.  For now I added some memes to try.
         //For now lets say memes are saved in \Meme-Generator
         //and templates are saved somewhere else
-=======
-        //This works kind of.  I refrence my D drive but I want it to
-        //work on all PCs
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
       try {
         BrowseWindow();  
         browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
         
       } catch (Exception BW) {
         //TODO: handle exception
-<<<<<<< HEAD
         System.out.println(BW.getStackTrace());
-=======
-        System.out.println("Window failed");
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
       }
       //Want to pop up window with picture
 
@@ -152,7 +138,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     
   }
   public int BrowseWindow() throws IOException {
-<<<<<<< HEAD
     File file=new File(".");
     String directory = file.getAbsolutePath();
     System.out.println(directory);
@@ -165,11 +150,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       
       indexOfBrowsingMeme = 0;
     }
-=======
-    File generatedMemesDirectory = new File("D:\\Users\\dudeo\\Documents\\Meme-Generator");
-    String backgroundImage[] = generatedMemesDirectory.list();
-    int readyForReturn = 0;
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
     while(readyForReturn == 0){
       if(backgroundImage[indexOfBrowsingMeme].contains("jpg")){
         readyForReturn = 1;
@@ -177,22 +157,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       else if(backgroundImage[indexOfBrowsingMeme].contains("png")){
         readyForReturn = 1;
       }
-<<<<<<< HEAD
       else {
         System.out.println("inc");
-=======
-      else if((indexOfBrowsingMeme+1) == backgroundImage.length){
-        indexOfBrowsingMeme = 0;
-      }
-      else {
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
         indexOfBrowsingMeme = indexOfBrowsingMeme + 1;
       }
     }
     System.out.println(backgroundImage[indexOfBrowsingMeme]);
     this.setContentPane(new JPanel() {
     });
-<<<<<<< HEAD
     try {
       add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
       pack();
@@ -209,11 +181,5 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     indexOfBrowsingMeme++;
     return 1;
     }
-=======
-    add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
-    pack();
-    setVisible(true);
-    return 1;
->>>>>>> ebac022df3055f275e48264b25ba5940d2037df0
  }
 }
