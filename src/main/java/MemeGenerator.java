@@ -35,20 +35,22 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton browse;
   JButton upload;
   JButton preset;
+  JButton buildMeme;
   JLabel presetLable;
   JLabel browseLable;
   JLabel uploadLable;
+  JLabel buildMemeLable;
   int x;
   int y;
   int z;
+  int w;
   int indexOfBrowsingMeme;
+  int indexOfBrowsingPresteMeme;
   File memeFile = new File(".");
   String mainDirectory = memeFile.getAbsolutePath();
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
 
   public MemeGenerator(){
-    System.out.println(blankMemeTemplateFolder);
-    
     JFrame memeFrame = new JFrame();
     JPanel memePanel = new JPanel();
 
@@ -56,16 +58,19 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     browse = new JButton("Browse the memes");
     upload = new JButton("Upload your own meme template");
     preset = new JButton("Choose a meme");
+    buildMeme = new JButton("Begin Building");
 
     //wait for button pressed then perform action associated with that button
     browse.addActionListener(this);
     upload.addActionListener(this);
     preset.addActionListener(this);
+    buildMeme.addActionListener(this);
 
     //Final product might not need lable but if it does the lable exists
     browseLable = new JLabel("Browse " +String.valueOf(x));
     uploadLable = new JLabel("Upload " +String.valueOf(y));
     presetLable = new JLabel("Preset " +String.valueOf(z));
+    buildMemeLable = new JLabel("Preset " +String.valueOf(z));
 
 
 
@@ -76,9 +81,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(browse);
     memePanel.add(upload);
     memePanel.add(preset);
+    memePanel.add(buildMeme);
     memePanel.add(browseLable);
     memePanel.add(uploadLable);
     memePanel.add(presetLable);
+    memePanel.add(buildMemeLable);
 
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
@@ -116,8 +123,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //For now lets say memes are saved in \Meme-Generator
         //and templates are saved somewhere else
       try {
-        BrowseWindow();  
-        browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
+        BrowseWindow("Doesnt matter", "browse");  
+        browseLable.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
         
       } catch (Exception BW) {
         //TODO: handle exception
@@ -128,20 +135,35 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
     else if(e.getSource() == preset){
       //Do the preset meme method
+      try {
+        BrowseWindow(blankMemeTemplateFolder, "preset");
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
       y++;
       System.out.println(11037);
-      presetLable.setText("Preset" + String.valueOf(y));
+      presetLable.setText("Preset " + String.valueOf(indexOfBrowsingPresteMeme));
     }
     else if(e.getSource() == upload){
       //Do the upload a meme template method
       z++;
       System.out.println(177013);
-      uploadLable.setText("Upload" + String.valueOf(z));
+      uploadLable.setText("Upload " + String.valueOf(z));
+    }
+    else if(e.getSource() == buildMeme){
+      //Do the build a meme method
+        //Cycle through the choose meme button
+        //Once settled on one you like click the button.
+      w++;
+      System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
+      buildMemeLable.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
     }
     else{System.out.println("");}
     
   }
-  public int BrowseWindow() throws IOException {
+  public int BrowseWindow(String path, String option) throws IOException {
+    if(option == "browse"){
     File file=new File(".");
     String directory = file.getAbsolutePath();
     System.out.println(directory);
@@ -187,6 +209,54 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     setVisible(true);
     indexOfBrowsingMeme++;
     return 1;
+    }}
+    else if(option == "preset"){
+      String directory = path;
+      System.out.println(directory);
+      File generatedMemesDirectory = new File(directory);
+      String backgroundImage[] = generatedMemesDirectory.list();
+      System.out.println(backgroundImage.length);
+      System.out.println(indexOfBrowsingPresteMeme);
+      int readyForReturn = 0;
+      if(indexOfBrowsingPresteMeme == backgroundImage.length){
+        
+        indexOfBrowsingPresteMeme = 0;
+      }
+      while(readyForReturn == 0){
+        if(backgroundImage[indexOfBrowsingPresteMeme].contains(".jpg")){
+          readyForReturn = 1;
+        }
+        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".gif")){
+          readyForReturn = 1;
+        }
+        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".png")){
+          readyForReturn = 1;
+        }
+        else {
+          System.out.println("inc");
+          indexOfBrowsingPresteMeme = indexOfBrowsingPresteMeme + 1;
+        }
+      }
+      System.out.println(backgroundImage[indexOfBrowsingPresteMeme]);
+      this.setContentPane(new JPanel() {
+      });
+      try {
+        add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
+        pack();
+        setVisible(true);
+        indexOfBrowsingPresteMeme++;
+        return 1;
+        
+      } catch (Exception e) {
+        //TODO: handle exception
+        indexOfBrowsingPresteMeme = 0;
+      add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
+      pack();
+      setVisible(true);
+      indexOfBrowsingPresteMeme++;
+      return 1;
+      }
     }
+    else{return 3;}
  }
 }
