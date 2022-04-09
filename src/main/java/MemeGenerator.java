@@ -1,3 +1,4 @@
+import java.io.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractButton.*;
 import javax.swing.*;
@@ -157,6 +159,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //Once settled on one you like click the button.
       w++;
       System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
+      try {
+        createTheMeme();
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
       buildMemeLable.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
     }
     else{System.out.println("");}
@@ -258,5 +266,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
     else{return 3;}
+ }
+ public int createTheMeme() throws IOException{
+   //This method is what overlays text to the image
+    //Im thinking pop up a window and that window has a box for text, a box for x cooridinate, 
+    //a box for y, an enter button that takes the info and adds it to the image, and a save 
+    //button that saves the new meme, oh and a box for entering the name of the new meme
+    return 5;
  }
 }
