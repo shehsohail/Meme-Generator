@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.AbstractButton.*;
 import javax.swing.*;
 
+import javax.imageio.ImageIO;
+
 
 /**
  * The basic GUI is set up.  There is a button that when clicked browses the uploaded memes,
@@ -268,6 +270,19 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     else{return 3;}
  }
  public int createTheMeme() throws IOException{
+ 
+   //read the image
+    BufferedImage image = ImageIO.read(new File("imagebefore.jpg"));
+    //get the Graphics object
+    Graphics g = image.getGraphics();
+    //set font
+    g.setFont(g.getFont().deriveFont(25f));
+    //display the text at the coordinates(x=50, y=150)
+    g.drawString("Is this what we need?", 50, 150);
+    g.dispose();
+    //write the image
+    ImageIO.write(image, "png", new File("imageafter.png"));
+    
    //This method is what overlays text to the image
     //Im thinking pop up a window and that window has a box for text, a box for x cooridinate, 
     //a box for y, an enter button that takes the info and adds it to the image, and a save 
