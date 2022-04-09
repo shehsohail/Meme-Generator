@@ -42,8 +42,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int y;
   int z;
   int indexOfBrowsingMeme;
+  File memeFile = new File(".");
+  String mainDirectory = memeFile.getAbsolutePath();
+  String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
 
   public MemeGenerator(){
+    System.out.println(blankMemeTemplateFolder);
     
     JFrame memeFrame = new JFrame();
     JPanel memePanel = new JPanel();
@@ -151,10 +155,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       indexOfBrowsingMeme = 0;
     }
     while(readyForReturn == 0){
-      if(backgroundImage[indexOfBrowsingMeme].contains("jpg")){
+      if(backgroundImage[indexOfBrowsingMeme].contains(".jpg")){
         readyForReturn = 1;
       }
-      else if(backgroundImage[indexOfBrowsingMeme].contains("png")){
+      else if(backgroundImage[indexOfBrowsingMeme].contains(".gif")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingMeme].contains(".png")){
         readyForReturn = 1;
       }
       else {
