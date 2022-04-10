@@ -62,6 +62,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
   String memeTemplate;
   String memeText;
+  String newMemeFileName;
+  String newMemeFileFormat;
 
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
@@ -121,6 +123,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == browse){
+      //4/10/22 Found issue where memes that were created during the program are not shown while browsing
       //Do the browse method
       System.out.println(277353);
       browseLabel.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
@@ -364,7 +367,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    g.drawString(memeText, topX, topY);
    g.dispose();
    //write the image
-   ImageIO.write(image, "png", new File("imageafter.png"));
+   //Added variables for naming the new meme and file format
+     //For now lets limit to png and jpg
+     //Gif will technically work but will produce a static gif image
+   newMemeFileName = "imageafter";
+   newMemeFileFormat = "png";
+   ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
 
   //This method is what overlays text to the image
    //Im thinking pop up a window and that window has a box for text, a box for x cooridinate,
