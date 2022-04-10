@@ -342,6 +342,26 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
+  //Brings up the GUI for building the meme
+  JFrame memeBuildingFrame = new JFrame();
+  JPanel memeBuildingPanel = new JPanel();
+  //This is how you do text field.  Just like with buttons an action listener is needed
+  JTextField sizeOfFont = new JTextField("Type in the font size");
+  sizeOfFont.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){
+      String input = sizeOfFont.getText();
+      fontSize = Float.parseFloat(input);;
+    }
+  });
+  memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
+
+  memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
+  memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
+  memeBuildingFrame.setDefaultCloseOperation(memeBuildingFrame.EXIT_ON_CLOSE);
+  memeBuildingFrame.setTitle("Much Great Meme Builder");
+  memeBuildingFrame.pack();
+  memeBuildingFrame.setVisible(true);
+
 
   //read the image 
     //blankMemeTemplateFolder is where the meme templates are
@@ -355,7 +375,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    Graphics g = image.getGraphics();
    //set font
      //fontSize variable
-   fontSize = 25f;
+   System.out.println(fontSize);
+   //fontSize = 25f;
    g.setFont(g.getFont().deriveFont(fontSize));
    //display the text at the coordinates(x=50, y=150)
    //added color of text
