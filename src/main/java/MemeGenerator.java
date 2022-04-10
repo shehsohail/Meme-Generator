@@ -55,9 +55,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int Blue;
   int topX;
   int topY;
+  int memeHeight;
+  int memeWidth;
   int indexOfBrowsingMeme;
   int indexOfBrowsingPresteMeme;
   File memeFile = new File(".");
+  float fontSize;
   String mainDirectory = memeFile.getAbsolutePath();
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
   String memeTemplate;
@@ -344,10 +347,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     //blankMemeTemplateFolder is where the meme templates are
    System.out.println(blankMemeTemplateFolder + rawMeme);
    BufferedImage image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
+   memeHeight = image.getHeight();
+   memeWidth = image.getWidth();
+   System.out.println(memeHeight);
+   System.out.println(memeWidth);
    //get the Graphics object
    Graphics g = image.getGraphics();
    //set font
-   g.setFont(g.getFont().deriveFont(25f));
+     //fontSize variable
+   fontSize = 25f;
+   g.setFont(g.getFont().deriveFont(fontSize));
    //display the text at the coordinates(x=50, y=150)
    //added color of text
      //Added RGB variables
