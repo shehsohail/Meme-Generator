@@ -278,15 +278,17 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     //set font
     g.setFont(g.getFont().deriveFont(25f));
     //display the text at the coordinates(x=50, y=150)
+    //added color of text
+    g.setColor(Color.black);
     g.drawString("Is this what we need?", 50, 150);
     g.dispose();
     //write the image
-    ImageIO.write(image, "png", new File("imageafter.png"));
+    //ImageIO.write(image, "png", new File("imageafter.png"));
     
    //This method is what overlays text to the image
     //Im thinking pop up a window and that window has a box for text, a box for x cooridinate, 
     //a box for y, an enter button that takes the info and adds it to the image, and a save 
     //button that saves the new meme, oh and a box for entering the name of the new meme
-    return 5;
+    return ImageIO.write(image, "png", new File("imageafter.png"));
  }
 }
