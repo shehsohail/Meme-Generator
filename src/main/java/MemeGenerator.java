@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.nio.file.Files;
 
 import javax.swing.AbstractButton.*;
 import javax.swing.*;
@@ -40,10 +41,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton upload;
   JButton preset;
   JButton buildMeme;
-  JLabel presetLable;
-  JLabel browseLable;
-  JLabel uploadLable;
-  JLabel buildMemeLable;
+  JButton close;
+  JLabel presetLabel;
+  JLabel browseLabel;
+  JLabel uploadLabel;
+  JLabel buildMemeLabel;
   int x;
   int y;
   int z;
@@ -63,18 +65,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     upload = new JButton("Upload your own meme template");
     preset = new JButton("Choose a meme");
     buildMeme = new JButton("Begin Building");
+    close = new JButton("Exit Program");
 
     //wait for button pressed then perform action associated with that button
     browse.addActionListener(this);
     upload.addActionListener(this);
     preset.addActionListener(this);
     buildMeme.addActionListener(this);
+    close.addActionListener(this);
 
-    //Final product might not need lable but if it does the lable exists
-    browseLable = new JLabel("Browse " +String.valueOf(x));
-    uploadLable = new JLabel("Upload " +String.valueOf(y));
-    presetLable = new JLabel("Preset " +String.valueOf(z));
-    buildMemeLable = new JLabel("Preset " +String.valueOf(z));
+    //Final product might not need lable but if it does the label exists
+    browseLabel = new JLabel("Browse " +String.valueOf(x));
+    uploadLabel = new JLabel("Upload " +String.valueOf(y));
+    presetLabel = new JLabel("Preset " +String.valueOf(z));
+    buildMemeLabel = new JLabel("Preset " +String.valueOf(z));
 
 
 
@@ -86,10 +90,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(upload);
     memePanel.add(preset);
     memePanel.add(buildMeme);
-    memePanel.add(browseLable);
-    memePanel.add(uploadLable);
-    memePanel.add(presetLable);
-    memePanel.add(buildMemeLable);
+    memePanel.add(browseLabel);
+    memePanel.add(uploadLabel);
+    memePanel.add(presetLabel);
+    memePanel.add(buildMemeLabel);
+    memePanel.add(close);
 
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
@@ -111,7 +116,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     if(e.getSource() == browse){
       //Do the browse method
       System.out.println(277353);
-      browseLable.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
+      browseLabel.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
 
       //Pops up a blue pic
       // JFrame oldMemesViewer = new JFrame();
@@ -128,7 +133,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //and templates are saved somewhere else
       try {
         BrowseWindow("Doesnt matter", "browse");  
-        browseLable.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
+        browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
         
       } catch (Exception BW) {
         //TODO: handle exception
@@ -147,27 +152,36 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
       y++;
       System.out.println(11037);
-      presetLable.setText("Preset " + String.valueOf(indexOfBrowsingPresteMeme));
+      presetLabel.setText("Preset " + String.valueOf(indexOfBrowsingPresteMeme));
     }
     else if(e.getSource() == upload){
       //Do the upload a meme template method
       z++;
       System.out.println(177013);
-      uploadLable.setText("Upload " + String.valueOf(z));
-    }
-    else if(e.getSource() == buildMeme){
-      //Do the build a meme method
-        //Cycle through the choose meme button
-        //Once settled on one you like click the button.
-      w++;
-      System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
       try {
-        createTheMeme();
-      } catch (IOException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
+        UploadWindow();
+        uploadLabel.setText("Upload" + String.valueOf(z));
+      } catch (Exception BW) {
+        //TODO: handle exception
+        System.out.println(BW.getStackTrace());
       }
-      buildMemeLable.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
+    }
+//    else if(e.getSource() == buildMeme){
+//      //Do the build a meme method
+//        //Cycle through the choose meme button
+//        //Once settled on one you like click the button.
+//      w++;
+//      System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
+//      try {
+//        createTheMeme();
+//      } catch (IOException e1) {
+//        // TODO Auto-generated catch block
+//        e1.printStackTrace();
+//      }
+//      buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
+//    }
+    else if(e.getSource() == close){
+      System.exit(0);
     }
     else{System.out.println("");}
     
@@ -269,26 +283,69 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
     else{return 3;}
  }
- public int createTheMeme() throws IOException{
- 
-   //read the image
-    BufferedImage image = ImageIO.read(new File("imagebefore.jpg"));
-    //get the Graphics object
-    Graphics g = image.getGraphics();
-    //set font
-    g.setFont(g.getFont().deriveFont(25f));
-    //display the text at the coordinates(x=50, y=150)
-    //added color of text
-    g.setColor(Color.black);
-    g.drawString("Is this what we need?", 50, 150);
-    g.dispose();
-    //write the image
-    //ImageIO.write(image, "png", new File("imageafter.png"));
-    
-   //This method is what overlays text to the image
-    //Im thinking pop up a window and that window has a box for text, a box for x cooridinate, 
-    //a box for y, an enter button that takes the info and adds it to the image, and a save 
-    //button that saves the new meme, oh and a box for entering the name of the new meme
-    return ImageIO.write(image, "png", new File("imageafter.png"));
- }
+
+  public void UploadWindow() {
+    //Store current working directory of project
+    File workingDirectory = new File("");
+    String currentPath = workingDirectory.getAbsolutePath();
+
+    //Create directory (user_meme_templates) to store user uploaded meme templates if does not already exist
+    String userMemeTemplates = "user_meme_templates";
+    File newMemeDirectory = new File(userMemeTemplates);
+
+    if (!newMemeDirectory.exists()) {
+      newMemeDirectory.mkdirs();
+    }
+
+    //Let user choose file to upload, copy image to user_meme_templates directory
+    JFileChooser newTemplate = new JFileChooser();
+    int open = newTemplate.showOpenDialog(null);
+
+    if (open == JFileChooser.APPROVE_OPTION) {
+      File newMeme = newTemplate.getSelectedFile();
+      String newMemePath = newMeme.getAbsolutePath();
+
+      int index = newMemePath.lastIndexOf("\\");
+      String newMemeName = newMemePath.substring(index + 1);
+
+      String destinationPath = currentPath + "/user_meme_templates/";
+      File destinationFile = new File(destinationPath + newMemeName);
+
+      try {
+        Files.copy(newMeme.toPath(), destinationFile.toPath());
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+      this.setContentPane(new JPanel() {
+      });
+
+      add(new JLabel(new ImageIcon(destinationPath + newMemeName)));
+      pack();
+      setVisible(true);
+
+    }
+  }
+
+//    public int createTheMeme() throws IOException{
+//
+//   //read the image
+//    BufferedImage image = ImageIO.read(new File("imagebefore.jpg"));
+//    //get the Graphics object
+//    Graphics g = image.getGraphics();
+//    //set font
+//    g.setFont(g.getFont().deriveFont(25f));
+//    //display the text at the coordinates(x=50, y=150)
+//    //added color of text
+//    g.setColor(Color.black);
+//    g.drawString("Is this what we need?", 50, 150);
+//    g.dispose();
+//    //write the image
+//    //ImageIO.write(image, "png", new File("imageafter.png"));
+//
+//   //This method is what overlays text to the image
+//    //Im thinking pop up a window and that window has a box for text, a box for x cooridinate,
+//    //a box for y, an enter button that takes the info and adds it to the image, and a save
+//    //button that saves the new meme, oh and a box for entering the name of the new meme
+//    return ImageIO.write(image, "png", new File("imageafter.png"));
+// }
 }
