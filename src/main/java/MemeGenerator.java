@@ -67,6 +67,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String memeText;
   String newMemeFileName;
   String newMemeFileFormat;
+  String TextCaption;
 
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
@@ -347,13 +348,24 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JPanel memeBuildingPanel = new JPanel();
   //This is how you do text field.  Just like with buttons an action listener is needed
   JTextField sizeOfFont = new JTextField("Type in the font size");
+  JTextField caption= new JTextField("Type in Caption");
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
       String input = sizeOfFont.getText();
-      fontSize = Float.parseFloat(input);;
+     fontSize = Float.parseFloat(input);
+     
     }
   });
+
+  caption.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      String text=caption.getText();
+      TextCaption=text;;
+    }
+  });
+
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
   memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
