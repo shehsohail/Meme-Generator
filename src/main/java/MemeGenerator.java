@@ -1,13 +1,6 @@
 import java.io.*;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +37,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton buildMeme;
   JButton close;
   JButton Submit;
+  JFrame PreMeme;
   JLabel presetLabel;
   JLabel browseLabel;
   JLabel uploadLabel;
@@ -54,6 +48,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int y;
   int z;
   int w;
+  int previewing = 0;
   int Red;
   int Green;
   int Blue;
@@ -386,7 +381,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
       String GString = greenBox.getText();
-      Red = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
+      Green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
     }
   });
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the lable
@@ -400,7 +395,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the lable
 
-  JTextField xBox= new JTextField("Type in x value of text location less than " + String.valueOf(memeWidth));
+  JTextField xBox= new JTextField("Type in x value < " + String.valueOf(memeWidth));
   xBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent x){
       String XString = xBox.getText();
@@ -409,7 +404,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
 
-  JTextField yBox= new JTextField("Type in y value of text location less than " + String.valueOf(memeHeight));
+  JTextField yBox= new JTextField("Type in y value < " + String.valueOf(memeHeight));
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
       String YString = yBox.getText();
@@ -418,7 +413,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the lable
 
-  JTextField Title= new JTextField("Type in the name of the new meme");
+  JTextField Title= new JTextField("Type in the name of the meme");
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent t){
       newMemeFileName = Title.getText();
@@ -426,7 +421,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the lable
 
-  JTextField File= new JTextField("Type in the file format png or jpg");
+  JTextField File= new JTextField("File format png or jpg");
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       newMemeFileFormat = File.getText();
@@ -456,7 +451,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
 
   
-  JButton save=new JButton("Store Partial");
+  JButton save = new JButton("Store Partial");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       Graphics g = image.getGraphics();
@@ -474,10 +469,27 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
+
+  
+  JButton preview=new JButton("Preview the Meme");
+  preview.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      if(previewing == 1){
+        PreMeme.dispose();
+      }
+      PreMeme = new JFrame();
+      previewing = 1;
+      PreMeme.setContentPane(new JPanel());
+      add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat)));
+      pack();
+      setVisible(true);
+    }
+  });
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(select);  // add submit button
   memeBuildingPanel.add(save);  // add submit button
+  memeBuildingPanel.add(preview);  // add submit button
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
   memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
