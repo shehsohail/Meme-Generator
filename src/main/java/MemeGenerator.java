@@ -361,10 +361,28 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
-      String text=caption.getText();
-      TextCaption=text;;
+      memeText=caption.getText();
+      System.out.println(memeText);
     }
   });
+
+  JTextField redBox= new JTextField("Type in R value [0,255]");
+  redBox.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent r){
+      String RString = redBox.getText();
+      Red = Integer.parseInt(RString);
+    }
+  });
+  memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the lable
+
+  JTextField greenBox= new JTextField("Type in R value [0,255]");
+  redBox.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent g){
+      String GString = greenBox.getText();
+      Red = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
+    }
+  });
+  memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the lable
 
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
@@ -397,7 +415,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    //added color of text
      //Added RGB variables
      //GUI should have input field for them
-   Red = 204;
+   //Red = 204;
    Green = 204;
    Blue = 255;
    //Added coordinents of XY for text box corner
@@ -408,7 +426,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    g.setColor(fontColor);
    //Added variable for the text
      //GUI should have input field for it
-   memeText = "Is this what we need? Yeah pretty much";
+   //memeText = "Is this what we need? Yeah pretty much";
    g.drawString(memeText, topX, topY);
    g.dispose();
    //write the image
