@@ -37,6 +37,7 @@ import javax.imageio.ImageIO;
  */
 public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 {
+  BufferedImage image;
   JButton browse;
   JButton upload;
   JButton preset;
@@ -47,6 +48,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel browseLabel;
   JLabel uploadLabel;
   JLabel buildMemeLabel;
+  JLabel widthLabel;
+  JLabel heightLabel;
   int x;
   int y;
   int z;
@@ -344,13 +347,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
+    image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
+    memeHeight = image.getHeight();
+    memeWidth = image.getWidth();
+
   //Brings up the GUI for building the meme
   JFrame memeBuildingFrame = new JFrame();
   JPanel memeBuildingPanel = new JPanel();
   //This is how you do text field.  Just like with buttons an action listener is needed
   JTextField sizeOfFont = new JTextField("Type in the font size");
   JTextField caption= new JTextField("Type in Caption");
-  JButton select=new JButton("Submit");
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
       String input = sizeOfFont.getText();
@@ -393,7 +399,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the lable
 
-  JTextField xBox= new JTextField("Type in x value of text location");
+  JTextField xBox= new JTextField("Type in x value of text location less than " + String.valueOf(memeWidth));
   xBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent x){
       String XString = xBox.getText();
@@ -402,14 +408,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
 
-  JTextField yBox= new JTextField("Type in y value of text location");
+  JTextField yBox= new JTextField("Type in y value of text location less than " + String.valueOf(memeHeight));
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
       String YString = yBox.getText();
       topY = Integer.parseInt(YString);
     }
   });
-  memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the lable
 
   JTextField Title= new JTextField("Type in the name of the new meme");
   caption.addActionListener(new ActionListener(){
@@ -427,10 +433,48 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(File); //Each button/textbox needs to be added to the lable
 
+  
+  JButton select=new JButton("Submit");
+  select.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      Graphics g = image.getGraphics();
+      g.setFont(g.getFont().deriveFont(fontSize));
+      Color fontColor = new Color(Red, Green, Blue);
+      g.setColor(fontColor);
+      g.drawString(memeText, topX, topY);
+      g.dispose();
+      try {
+        ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  });
 
+  
+  JButton save=new JButton("Store Partial");
+  save.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      Graphics g = image.getGraphics();
+      g.setFont(g.getFont().deriveFont(fontSize));
+      Color fontColor = new Color(Red, Green, Blue);
+      g.setColor(fontColor);
+      g.drawString(memeText, topX, topY);
+      g.dispose();
+      try {
+        ImageIO.write(image, newMemeFileFormat, new File(blankMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        image = ImageIO.read(new File(blankMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  });
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(select);  // add submit button
+  memeBuildingPanel.add(save);  // add submit button
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
   memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
@@ -442,19 +486,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   //read the image 
     //blankMemeTemplateFolder is where the meme templates are
-   System.out.println(blankMemeTemplateFolder + rawMeme);
-   BufferedImage image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
-   memeHeight = image.getHeight();
-   memeWidth = image.getWidth();
-   System.out.println(memeHeight);
-   System.out.println(memeWidth);
+   //System.out.println(memeHeight);
+   //System.out.println(memeWidth);
    //get the Graphics object
-   Graphics g = image.getGraphics();
    //set font
      //fontSize variable
-   System.out.println(fontSize);
+   //System.out.println(fontSize);
    //fontSize = 25f;
-   g.setFont(g.getFont().deriveFont(fontSize));
    //display the text at the coordinates(x=50, y=150)
    //added color of text
      //Added RGB variables
@@ -466,20 +504,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      //GUI should have input field for them
    //topX = 50;
    //topY = 150;
-   Color fontColor = new Color(Red, Green, Blue);
-   g.setColor(fontColor);
    //Added variable for the text
      //GUI should have input field for it
    //memeText = "Is this what we need? Yeah pretty much";
-   g.drawString(memeText, topX, topY);
-   g.dispose();
    //write the image
    //Added variables for naming the new meme and file format
      //For now lets limit to png and jpg
      //Gif will technically work but will produce a static gif image
    //newMemeFileName = "imageafter";
    //newMemeFileFormat = "png";
-   ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
 
   //This method is what overlays text to the image
    //Im thinking pop up a window and that window has a box for text, a box for x cooridinate,
