@@ -67,6 +67,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   float fontSize;
   String mainDirectory = memeFile.getAbsolutePath();
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
+  String tempMemeTemplateFolder = mainDirectory.replace(".", "") + "temp\\";
   String memeTemplate;
   String memeText;
   String newMemeFileName;
@@ -449,6 +450,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat);
+      tempMemeToBeDeleted.delete();
     }
   });
 
@@ -463,8 +466,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.drawString(memeText, topX, topY);
       g.dispose();
       try {
-        ImageIO.write(image, newMemeFileFormat, new File(blankMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
-        image = ImageIO.read(new File(blankMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
