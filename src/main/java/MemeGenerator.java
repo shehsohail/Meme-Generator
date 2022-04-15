@@ -358,7 +358,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      
     }
   });
-
+  
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       memeText=caption.getText();
@@ -375,14 +375,58 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the lable
 
-  JTextField greenBox= new JTextField("Type in R value [0,255]");
-  redBox.addActionListener(new ActionListener(){
+  JTextField greenBox= new JTextField("Type in G value [0,255]");
+  greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
       String GString = greenBox.getText();
       Red = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
     }
   });
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the lable
+
+  JTextField blueBox= new JTextField("Type in B value [0,255]");
+  blueBox.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent b){
+      String BString = blueBox.getText();
+      Blue = Integer.parseInt(BString);
+    }
+  });
+  memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the lable
+
+  JTextField xBox= new JTextField("Type in x value of text location");
+  xBox.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent x){
+      String XString = xBox.getText();
+      topX = Integer.parseInt(XString);
+    }
+  });
+  memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
+
+  JTextField yBox= new JTextField("Type in y value of text location");
+  yBox.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent y){
+      String YString = yBox.getText();
+      topY = Integer.parseInt(YString);
+    }
+  });
+  memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
+
+  JTextField Title= new JTextField("Type in the name of the new meme");
+  caption.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent t){
+      newMemeFileName = Title.getText();
+    }
+  });
+  memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the lable
+
+  JTextField File= new JTextField("Type in the file format png or jpg");
+  caption.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      newMemeFileFormat = File.getText();
+    }
+  });
+  memeBuildingPanel.add(File); //Each button/textbox needs to be added to the lable
+
 
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
@@ -416,12 +460,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      //Added RGB variables
      //GUI should have input field for them
    //Red = 204;
-   Green = 204;
-   Blue = 255;
+   //Green = 204;
+   //Blue = 255;
    //Added coordinents of XY for text box corner
      //GUI should have input field for them
-   topX = 50;
-   topY = 150;
+   //topX = 50;
+   //topY = 150;
    Color fontColor = new Color(Red, Green, Blue);
    g.setColor(fontColor);
    //Added variable for the text
@@ -433,8 +477,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    //Added variables for naming the new meme and file format
      //For now lets limit to png and jpg
      //Gif will technically work but will produce a static gif image
-   newMemeFileName = "imageafter";
-   newMemeFileFormat = "png";
+   //newMemeFileName = "imageafter";
+   //newMemeFileFormat = "png";
    ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
 
   //This method is what overlays text to the image
