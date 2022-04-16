@@ -49,26 +49,25 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int z;
   int w;
   int previewing = 0;
-  int Red = 1;
-  int Green = 2;
-  int Blue = 3;;
-  int topX = 1;
-  int topY = 1;
+  int Red;
+  int Green;
+  int Blue;
+  int topX;
+  int topY;
   int memeHeight;
   int memeWidth;
   int indexOfBrowsingMeme;
   int indexOfBrowsingPresteMeme;
-  int previewIndex = 0;
   File memeFile = new File(".");
-  float fontSize = 1;
+  float fontSize;
   String mainDirectory = memeFile.getAbsolutePath();
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
   String tempMemeTemplateFolder = mainDirectory.replace(".", "") + "t3mp\\";
   String memeTemplate;
-  String memeText = "";
-  String newMemeFileName = "default-name";
-  String newMemeFileFormat = "jpg";
-  String TextCaption = "";
+  String memeText;
+  String newMemeFileName;
+  String newMemeFileFormat;
+  String TextCaption;
 
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
@@ -296,31 +295,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       return backgroundImage[indexOfBrowsingPresteMeme-1];
       }
     }
-    else if(option == "preview"){
-      String directory = path;
-      System.out.println(directory);
-      File generatedMemesDirectory = new File(directory);
-      String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println(backgroundImage.length);
-      //System.out.println(indexOfBrowsingPresteMeme);
-      System.out.println(backgroundImage[indexOfBrowsingPresteMeme]);
-      this.setContentPane(new JPanel() {
-      });
-      try {
-        add(new JLabel(new ImageIcon(path + backgroundImage[0])));
-        pack();
-        setVisible(true);
-        return backgroundImage[1-1];
-        
-      } catch (Exception e) {
-        //TODO: handle exception
-        
-      add(new JLabel(new ImageIcon(path + backgroundImage[0])));
-      pack();
-      setVisible(true);
-      return backgroundImage[1-1];
-      }
-    }
     else{return "else";}
  }
 
@@ -488,15 +462,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.dispose();
       previewing = 0;
       try {
-        String file = tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewIndex) + "." + newMemeFileFormat;
-        ImageIO.write(image, newMemeFileFormat, new File(file));
-        image = ImageIO.read(new File(file));
-        if(previewIndex > 0){
-          file = tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewIndex-1) + "." + newMemeFileFormat;
-          File tempMemeToBeDeleted = new File(file);
-          tempMemeToBeDeleted.delete();
-        }
-        previewIndex = previewIndex + 1;
+        ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
@@ -522,7 +489,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       // pack();
       // setVisible(true);
       try {
-        BrowseWindow(tempMemeTemplateFolder, "preview");
+        BrowseWindow(tempMemeTemplateFolder, "preset");
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
