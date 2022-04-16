@@ -58,6 +58,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int memeWidth;
   int indexOfBrowsingMeme;
   int indexOfBrowsingPresteMeme;
+  int previewIndex = 0;
   File memeFile = new File(".");
   float fontSize = 1;
   String mainDirectory = memeFile.getAbsolutePath();
@@ -462,8 +463,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.dispose();
       previewing = 0;
       try {
-        ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
-        image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        String file = tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewIndex) + "." + newMemeFileFormat;
+        ImageIO.write(image, newMemeFileFormat, new File(file));
+        image = ImageIO.read(new File(file));
+        if(previewIndex > 0){
+          file = tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewIndex-1) + "." + newMemeFileFormat;
+          File tempMemeToBeDeleted = new File(file);
+          tempMemeToBeDeleted.delete();
+        }
+        previewIndex = previewIndex + 1;
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
