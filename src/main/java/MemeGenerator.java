@@ -460,6 +460,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.setColor(fontColor);
       g.drawString(memeText, topX, topY);
       g.dispose();
+      previewing = 0;
       try {
         ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
         image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
@@ -475,14 +476,24 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   preview.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       if(previewing == 1){
+        //setVisible(false);
+        //remove(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat)));
         PreMeme.dispose();
+        System.out.println(previewing);
       }
       PreMeme = new JFrame();
+      PreMeme.setDefaultCloseOperation(PreMeme.DISPOSE_ON_CLOSE);
       previewing = 1;
       PreMeme.setContentPane(new JPanel());
       add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat)));
       pack();
       setVisible(true);
+      // try {
+      //   BrowseWindow(tempMemeTemplateFolder, "preset");
+      // } catch (IOException e) {
+      //   // TODO Auto-generated catch block
+      //   e.printStackTrace();
+      // }
     }
   });
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
