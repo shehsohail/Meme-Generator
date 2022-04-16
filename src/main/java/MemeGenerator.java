@@ -484,10 +484,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.setColor(fontColor);
       g.drawString(memeText, topX, topY);
       g.dispose();
-      previewing = 0;
+      previewing = previewing + 1;
       try {
-        ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
-        image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat));
+        ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+        image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
