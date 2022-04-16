@@ -12,6 +12,8 @@ import javax.swing.*;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
+
 
 /**
  * The basic GUI is set up.  There is a button that when clicked browses the uploaded memes,
@@ -469,8 +471,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder + newMemeFileName + "." + newMemeFileFormat);
-      tempMemeToBeDeleted.delete();
+      //clear out t3mp directory
+
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      try {
+        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
   });
 
@@ -491,6 +500,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
+        previewing = previewing - 1;
       }
     }
   });
