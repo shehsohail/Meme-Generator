@@ -49,25 +49,25 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int z;
   int w;
   int previewing = 0;
-  int Red;
-  int Green;
-  int Blue;
-  int topX;
-  int topY;
+  int Red = 1;
+  int Green = 2;
+  int Blue = 3;;
+  int topX = 1;
+  int topY = 1;
   int memeHeight;
   int memeWidth;
   int indexOfBrowsingMeme;
   int indexOfBrowsingPresteMeme;
   File memeFile = new File(".");
-  float fontSize;
+  float fontSize = 1;
   String mainDirectory = memeFile.getAbsolutePath();
   String blankMemeTemplateFolder = mainDirectory.replace(".", "") + "Blank-Templates\\";
   String tempMemeTemplateFolder = mainDirectory.replace(".", "") + "t3mp\\";
   String memeTemplate;
-  String memeText;
-  String newMemeFileName;
-  String newMemeFileFormat;
-  String TextCaption;
+  String memeText = "";
+  String newMemeFileName = "default-name";
+  String newMemeFileFormat = "jpg";
+  String TextCaption = "";
 
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
