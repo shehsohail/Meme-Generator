@@ -186,6 +186,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      //Do the build a meme method
        //Cycle through the choose meme button
        //Once settled on one you like click the button.
+      //clear out t3mp directory
+
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      try {
+        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+
+      } catch (IOException ejn) {
+        // TODO Auto-generated catch block
+        ejn.printStackTrace();
+      }
      w++;
      System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
      try {
@@ -382,7 +392,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
       String input = sizeOfFont.getText();
-     fontSize = Float.parseFloat(input);
+     try {
+      fontSize = Float.parseFloat(input);
+     } catch (Exception fonts) {
+       //TODO: handle exception
+       fontSize = 1;
+     }
      
     }
   });
@@ -398,7 +413,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   redBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent r){
       String RString = redBox.getText();
-      Red = Integer.parseInt(RString);
+      try {
+        Red = Integer.parseInt(RString);
+      } catch (Exception fonts) {
+        //TODO: handle exception
+        Red = 4;
+      }
     }
   });
   memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the lable
@@ -407,7 +427,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
       String GString = greenBox.getText();
-      Green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
+      try {
+        Green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
+      } catch (Exception e) {
+        //TODO: handle exception
+        Green = 2;
+      }
     }
   });
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the lable
@@ -416,7 +441,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   blueBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent b){
       String BString = blueBox.getText();
-      Blue = Integer.parseInt(BString);
+      try {
+        Blue = Integer.parseInt(BString);
+      } catch (Exception e) {
+        //TODO: handle exception
+      Blue = 0;
+      }
     }
   });
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the lable
@@ -425,7 +455,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   xBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent x){
       String XString = xBox.getText();
-      topX = Integer.parseInt(XString);
+      try {
+        topX = Integer.parseInt(XString);
+      } catch (Exception e) {
+        //TODO: handle exception
+      topX = 1;
+      }
     }
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
@@ -434,7 +469,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
       String YString = yBox.getText();
-      topY = Integer.parseInt(YString);
+      try {
+        topY = Integer.parseInt(YString);
+      } catch (Exception e) {
+        //TODO: handle exception
+      topY = 1;
+      }
     }
   });
   memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the lable
@@ -493,6 +533,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton save = new JButton("Store Partial");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
+      if(memeText == null){memeText = "";}
+      if(newMemeFileName == null){newMemeFileName = "default";}
+      if(newMemeFileFormat == null){newMemeFileFormat = "png";}
+      if(Red > 255){Red = 255;}
+      if(Red < 255){Red = 0;}
+      if(Green > 255){Green = 255;}
+      if(Green < 255){Green = 0;}
+      if(Blue > 255){Blue = 255;}
+      if(Blue < 255){Blue = 0;}
+      if(topX > memeWidth){topX = memeWidth / 2;}
+      if(topX < 0){topX = 1;}
+      if(topY > memeHeight){topY = memeHeight / 2;}
+      if(topY < 0){topY = 1;}
+      if(fontSize <= 0){fontSize = 1;}
       Graphics g = image.getGraphics();
       g.setFont(g.getFont().deriveFont(fontSize));
       Color fontColor = new Color(Red, Green, Blue);
@@ -505,8 +559,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
-        previewing = previewing - 1;
+        try {
+          ImageIO.write(image, "png", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "png"));
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "png"));
+        } catch (Exception e2) {
+          //TODO: handle exception
+          try {
+            ImageIO.write(image, "jpg", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
+            image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
+          } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+            previewing = previewing - 1;
+          }
+        }
       }
     }
   });
