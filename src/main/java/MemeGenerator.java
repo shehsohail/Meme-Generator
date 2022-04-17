@@ -77,9 +77,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     JPanel memePanel = new JPanel();
 
     //Created buttons
-    browse = new JButton("Browse the memes");
-    upload = new JButton("Upload your own meme template");
-    preset = new JButton("Choose a meme");
+    browse = new JButton("Browse the Memes");
+    upload = new JButton("Upload your own Meme Template");
+    preset = new JButton("Choose a Meme");
     buildMeme = new JButton("Begin Building");
     close = new JButton("Exit Program");
 
@@ -118,6 +118,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
     memeFrame.setSize(850,200);
     memePanel.setSize(850,200);
+    memeFrame.setLocationRelativeTo(null);
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
     memeFrame.setDefaultCloseOperation(memeFrame.EXIT_ON_CLOSE);
