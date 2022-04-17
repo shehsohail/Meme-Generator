@@ -78,7 +78,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
     //Created buttons
     browse = new JButton("Browse the Memes");
-    upload = new JButton("Upload your own Meme Template");
+    upload = new JButton("Upload Your Own Meme Template");
     preset = new JButton("Choose a Meme");
     buildMeme = new JButton("Begin Building");
     close = new JButton("Exit Program");
@@ -90,7 +90,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme.addActionListener(this);
     close.addActionListener(this);
 
-    //Final product might not need lable but if it does the label exists
+    //Final product might not need label but if it does the label exists
     browseLabel = new JLabel("Browse " +String.valueOf(x));
     uploadLabel = new JLabel("Upload " +String.valueOf(y));
     presetLabel = new JLabel("Preset " +String.valueOf(z));
@@ -451,7 +451,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the label
 
   JTextField greenBox= new JTextField("Type in G value [0,255]");
   greenBox.addActionListener(new ActionListener(){
@@ -465,7 +465,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the label
 
   JTextField blueBox= new JTextField("Type in B value [0,255]");
   blueBox.addActionListener(new ActionListener(){
@@ -479,7 +479,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the label
 
   JTextField xBox= new JTextField("Type in x value < " + String.valueOf(memeWidth));
   xBox.addActionListener(new ActionListener(){
@@ -493,7 +493,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the label
 
   JTextField yBox= new JTextField("Type in y value < " + String.valueOf(memeHeight));
   yBox.addActionListener(new ActionListener(){
@@ -507,7 +507,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the label
 
   JTextField Title= new JTextField("Type in the name of the meme");
   caption.addActionListener(new ActionListener(){
@@ -515,7 +515,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       newMemeFileName = Title.getText();
     }
   });
-  memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the label
 
   JTextField File= new JTextField("File format png or jpg");
   caption.addActionListener(new ActionListener(){
@@ -523,7 +523,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       newMemeFileFormat = File.getText();
     }
   });
-  memeBuildingPanel.add(File); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(File); //Each button/textbox needs to be added to the label
 
   
   JButton select=new JButton("Submit");
@@ -678,8 +678,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
-  memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
-  memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
+  memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the label
+  memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the label
   memeBuildingPanel.add(select);  // add submit button
   memeBuildingPanel.add(save);  // add submit button
   memeBuildingPanel.add(preview);  // add submit button
