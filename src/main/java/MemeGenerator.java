@@ -153,7 +153,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         
       } catch (Exception BW) {
         //TODO: handle exception
-        System.out.println(BW.getStackTrace());
+        try {
+          indexOfBrowsingMeme = 0;
+          BrowseWindow("Doesnt matter", "browse");
+          browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
+        } catch (IOException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }  
       }
       //Want to pop up window with picture
 
@@ -253,7 +260,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       
     } catch (Exception e) {
       //TODO: handle exception
-      indexOfBrowsingMeme = 0;
+      indexOfBrowsingMeme = 6;
     add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
     pack();
     setVisible(true);
@@ -505,6 +512,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       g.setColor(fontColor);
       g.drawString(memeText, topX, topY);
       g.dispose();
+      previewing = 0;
       try {
         ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
       } catch (IOException e) {
@@ -537,11 +545,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if(newMemeFileName == null){newMemeFileName = "default";}
       if(newMemeFileFormat == null){newMemeFileFormat = "png";}
       if(Red > 255){Red = 255;}
-      if(Red < 255){Red = 0;}
+      if(Red < 0){Red = 0;}
       if(Green > 255){Green = 255;}
-      if(Green < 255){Green = 0;}
+      if(Green < 0){Green = 0;}
       if(Blue > 255){Blue = 255;}
-      if(Blue < 255){Blue = 0;}
+      if(Blue < 0){Blue = 0;}
       if(topX > memeWidth){topX = memeWidth / 2;}
       if(topX < 0){topX = 1;}
       if(topY > memeHeight){topY = memeHeight / 2;}
@@ -602,11 +610,57 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
   });
+
+  
+  JButton undo=new JButton("Undo");
+  undo.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      System.out.println("undo");
+      //Get length of files in t3mp directory
+      File generatedMemesDirectory = new File(tempMemeTemplateFolder);
+      String tempMeme[] = generatedMemesDirectory.list();
+      //If 0 do nothing
+      if(tempMeme.length == 0){
+        System.out.println("Nothing to undo");
+      }
+      //If one copy meme from upload folder
+      else if(tempMeme.length == 1){
+        try {
+          previewing = previewing + 1;
+          image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
+          System.out.println("writing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+          System.out.println("read: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+      //If more than one take second most recent and name it most recent
+        //Seems to work but you cant undo twice
+      else if(tempMeme.length > 1){
+        try {
+          previewing = previewing + 1;
+          System.out.println(previewing);
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-2) + "." + newMemeFileFormat));
+          System.out.println("writing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-2) + "." + newMemeFileFormat);
+          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat));
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat));
+          System.out.println("read: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat);
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    }
+  });
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the lable
   memeBuildingPanel.add(select);  // add submit button
   memeBuildingPanel.add(save);  // add submit button
   memeBuildingPanel.add(preview);  // add submit button
+  memeBuildingPanel.add(undo);  // add submit button
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
   memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
