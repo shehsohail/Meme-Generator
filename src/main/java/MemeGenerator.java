@@ -43,6 +43,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel presetLabel;
   JLabel browseLabel;
   JLabel uploadLabel;
+  JLabel welcomeLabel;
   JLabel buildMemeLabel;
   JLabel widthLabel;
   JLabel heightLabel;
@@ -94,13 +95,17 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     uploadLabel = new JLabel("Upload " +String.valueOf(y));
     presetLabel = new JLabel("Preset " +String.valueOf(z));
     buildMemeLabel = new JLabel("Preset " +String.valueOf(z));
+    welcomeLabel = new JLabel("Please Select from the Following Options Below:");
 
 
 
-    memePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+//    memePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+    memePanel.setBorder(BorderFactory.createTitledBorder("Meme Generation"));
+    memePanel.setLayout(null);
     //I like it better without the gridlayout
     //memePanel.setLayout(new GridLayout());
 
+    memePanel.add(welcomeLabel);
     memePanel.add(browse);
     memePanel.add(upload);
     memePanel.add(preset);
@@ -111,11 +116,28 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(buildMemeLabel);
     memePanel.add(close);
 
+    memeFrame.setSize(850,200);
+    memePanel.setSize(850,200);
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
     memeFrame.setDefaultCloseOperation(memeFrame.EXIT_ON_CLOSE);
     memeFrame.setTitle("Much Great Meme Generator");
-    memeFrame.pack();
+
+    //Set  Location
+    welcomeLabel.setBounds(285,20,570,15);
+    browse.setBounds(30,60,150,30);
+    upload.setBounds(220,60,245,30);
+    preset.setBounds(505,60,130,30);
+    buildMeme.setBounds(675,60,120,30);
+    close.setBounds(675,120,120,30);
+
+    //Set Border
+    browse.setBorder(BorderFactory.createLineBorder(Color.black));
+    upload.setBorder(BorderFactory.createLineBorder(Color.black));
+    preset.setBorder(BorderFactory.createLineBorder(Color.black));
+    buildMeme.setBorder(BorderFactory.createLineBorder(Color.black));
+    close.setBorder(BorderFactory.createLineBorder(Color.black));
+//    memeFrame.pack();
     memeFrame.setVisible(true);
   }
 
