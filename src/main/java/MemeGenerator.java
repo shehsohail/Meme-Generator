@@ -496,7 +496,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the label
 
   JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":");
-  JTextField xBox= new JTextField("Enter in Y value < " + String.valueOf(memeWidth) + ":");
+  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth) + ":");
   xBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent x){
       String XString = xBox.getText();
@@ -510,8 +510,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the label
 
-  JLabel yBoxLabel = new JLabel("Enter in y value < " + String.valueOf(memeHeight) +":");
-  JTextField yBox= new JTextField("Enter in y value < " + String.valueOf(memeHeight) +":");
+  JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":");
+  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight) +":");
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
       String YString = yBox.getText();
@@ -764,6 +764,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   preview.setBounds(55,460,150,30);
   undo.setBounds(220,460,150,30);
   close.setBounds(55,500,315,30);
+
+  //Set Border
+  select.setBorder(BorderFactory.createLineBorder(Color.black));
+  save.setBorder(BorderFactory.createLineBorder(Color.black));
+  preview.setBorder(BorderFactory.createLineBorder(Color.black));
+  undo.setBorder(BorderFactory.createLineBorder(Color.black));
+  close.setBorder(BorderFactory.createLineBorder(Color.black));
 
   //read the image
     //blankMemeTemplateFolder is where the meme templates are
