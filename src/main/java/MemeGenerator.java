@@ -409,6 +409,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
+    System.out.println("raw = " + rawMeme);
+    String[] format = rawMeme.split("\\.");
+    newMemeFileFormat = format[0];
     image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
     memeHeight = image.getHeight();
     memeWidth = image.getWidth();
@@ -534,14 +537,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the label
 
-  JLabel FileLabel = new JLabel("Enter File Format png or jpg:");
-  JTextField File= new JTextField("File Format png or jpg:");
-  caption.addActionListener(new ActionListener(){
-    public void actionPerformed(ActionEvent f){
-      newMemeFileFormat = File.getText();
-    }
-  });
-  memeBuildingPanel.add(File); //Each button/textbox needs to be added to the label
+  // JLabel FileLabel = new JLabel("Enter File Format png or jpg:");
+  // JTextField File= new JTextField("File Format png or jpg:");
+  // caption.addActionListener(new ActionListener(){
+  //   public void actionPerformed(ActionEvent f){
+  //     System.out.println(newMemeFileFormat);
+  //   }
+  // });
+  // memeBuildingPanel.add(File); //Each button/textbox needs to be added to the label
 
   
   JButton select=new JButton("Submit");
@@ -728,7 +731,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(xBoxLabel);
   memeBuildingPanel.add(yBoxLabel);
   memeBuildingPanel.add(TitleLabel);
-  memeBuildingPanel.add(FileLabel);
+  //memeBuildingPanel.add(FileLabel);
   memeBuildingPanel.add(sizeOfFontLabel);
   memeBuildingPanel.add(captionLabel);
   memeBuildingPanel.add(close);
@@ -761,8 +764,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   TitleLabel.setBounds(30,260,200,30);
   Title.setBounds(225,260,150,30);
 
-  FileLabel.setBounds(30,300,200,30);
-  File.setBounds(225,300,150,30);
+  // FileLabel.setBounds(30,300,200,30);
+  // File.setBounds(225,300,150,30);
 
   sizeOfFontLabel.setBounds(30,340,200,30);
   sizeOfFont.setBounds(225,340,150,30);
