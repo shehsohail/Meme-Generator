@@ -411,7 +411,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    public int createTheMeme(String rawMeme) throws IOException{
     System.out.println("raw = " + rawMeme);
     String[] format = rawMeme.split("\\.");
-    newMemeFileFormat = format[0];
+    newMemeFileFormat = format[1];
+    System.out.println(newMemeFileFormat);
     image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
     memeHeight = image.getHeight();
     memeWidth = image.getWidth();
@@ -749,11 +750,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   redBoxLabel.setBounds(30,60,200,30);
   redBox.setBounds(225,60,150,30);
 
-  blueBoxLabel.setBounds(30,100,200,30);
-  blueBox.setBounds(225,100,150,30);
+  greenBoxLabel.setBounds(30,100,200,30);
+  greenBox.setBounds(225,100,150,30);
 
-  greenBoxLabel.setBounds(30,140,200,30);
-  greenBox.setBounds(225,140,150,30);
+  blueBoxLabel.setBounds(30,140,200,30);
+  blueBox.setBounds(225,140,150,30);
 
   xBoxLabel.setBounds(30,180,200,30);
   xBox.setBounds(225,180,150,30);
