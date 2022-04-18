@@ -582,6 +582,17 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton save = new JButton("Store Partial");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
+      if(previewing == 0){
+        //Delete all files in t3mp if this is the first attemot of memeing
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      try {
+        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+      }
       if(memeText == null){memeText = "";}
       if(newMemeFileName == null){newMemeFileName = "default";}
       if(newMemeFileFormat == null){newMemeFileFormat = "png";}
