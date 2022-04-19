@@ -71,6 +71,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String newMemeFileName;
   String newMemeFileFormat;
   String TextCaption;
+  File blankmemet3mpFile = new File(tempMemeTemplateFolder);
 
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
@@ -343,7 +344,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       File generatedMemesDirectory = new File(directory);
       String backgroundImage[] = generatedMemesDirectory.list();
       System.out.println(backgroundImage.length);
-      System.out.println(backgroundImage[backgroundImage.length - 1]);
+      System.out.println("previewing: " + backgroundImage[backgroundImage.length - 1]);
       this.setContentPane(new JPanel() {
       });
       try {
@@ -354,6 +355,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         
       } catch (Exception e) {
         //TODO: handle exception
+        System.out.println("preview error");
         indexOfBrowsingPresteMeme = 0;
       add(new JLabel(new ImageIcon(path + backgroundImage[backgroundImage.length - 1])));
       pack();
@@ -696,18 +698,28 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //If more than one take second most recent and name it most recent
         //Seems to work but you cant undo twice
       else if(tempMeme.length > 1){
+        //Get list of all files in directory 
+        String[] partialMemes = blankmemet3mpFile.list();
+        System.out.println(partialMemes[partialMemes.length-1]); //The newest file (You dont want that)
+        System.out.println(partialMemes[partialMemes.length-2]); //The newest file (You want to undo back to this)
+        //Make image = second most recent file
         try {
+          image = ImageIO.read(new File(tempMemeTemplateFolder + partialMemes[partialMemes.length-2]));
+          File undidMeme = new File(partialMemes[partialMemes.length-1]);
+          undidMeme.delete();
           previewing = previewing + 1;
-          System.out.println(previewing);
-          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-2) + "." + newMemeFileFormat));
-          System.out.println("writing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-2) + "." + newMemeFileFormat);
-          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat));
-          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat));
-          System.out.println("read: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing+1) + "." + newMemeFileFormat);
+          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+
         } catch (IOException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
+
+        //Delete most recent file
+
+        //Increment previewing
+        previewing = previewing + 1;
+        //System.out.println("This feature is not working");
       }
     }
   });
