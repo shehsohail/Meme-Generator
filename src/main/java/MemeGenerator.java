@@ -71,6 +71,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String newMemeFileName;
   String newMemeFileFormat;
   String TextCaption;
+  String previewedMeme;
   File blankmemet3mpFile = new File(tempMemeTemplateFolder);
 
   public MemeGenerator(){
@@ -730,6 +731,31 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       memeBuildingFrame.dispose();
     }
   });
+
+  JButton startFromScratch = new JButton("Restart meme building");
+  startFromScratch.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent f){
+      previewing = 0;
+      Red = 255;
+      Green = 255;
+      Blue = 255;
+      topX = 1;
+      topY = 1;
+      indexOfBrowsingMeme = 0;
+      indexOfBrowsingPresteMeme = 0;
+      fontSize = 1;
+      memeText = "";
+      newMemeFileName = "default";
+      TextCaption = "";
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      try {
+        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+      } catch (IOException tmtbd) {
+        // TODO Auto-generated catch block
+        tmtbd.printStackTrace();
+      }
+    }
+  });
   memeBuildingPanel.add(typingInstructions); //add instructions to type in text fields
   memeBuildingPanel.add(sizeOfFont); //Each button/textbox needs to be added to the label
   memeBuildingPanel.add(caption); //Each button/textbox needs to be added to the label
@@ -747,6 +773,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   //memeBuildingPanel.add(FileLabel);
   memeBuildingPanel.add(sizeOfFontLabel);
   memeBuildingPanel.add(captionLabel);
+  memeBuildingPanel.add(startFromScratch);
   memeBuildingPanel.add(close);
 
 
@@ -778,7 +805,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   Title.setBounds(225,260,150,30);
 
   // FileLabel.setBounds(30,300,200,30);
-  // File.setBounds(225,300,150,30);
+  startFromScratch.setBounds(225,300,150,30);
 
   sizeOfFontLabel.setBounds(30,340,200,30);
   sizeOfFont.setBounds(225,340,150,30);
@@ -797,6 +824,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   save.setBorder(BorderFactory.createLineBorder(Color.black));
   preview.setBorder(BorderFactory.createLineBorder(Color.black));
   undo.setBorder(BorderFactory.createLineBorder(Color.black));
+  startFromScratch.setBorder(BorderFactory.createLineBorder(Color.black));
   close.setBorder(BorderFactory.createLineBorder(Color.black));
 
   //read the image
