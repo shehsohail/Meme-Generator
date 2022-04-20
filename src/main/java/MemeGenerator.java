@@ -822,10 +822,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   close.setBounds(55,500,315,30);
 
   //Set Border
-  select.setBorder(BorderFactory.createLineBorder(Color.black));
+  undo.setBorder(BorderFactory.createLineBorder(Color.black));
   save.setBorder(BorderFactory.createLineBorder(Color.black));
   preview.setBorder(BorderFactory.createLineBorder(Color.black));
-  undo.setBorder(BorderFactory.createLineBorder(Color.black));
+  select.setBorder(BorderFactory.createLineBorder(Color.black));
   startFromScratch.setBorder(BorderFactory.createLineBorder(Color.black));
   close.setBorder(BorderFactory.createLineBorder(Color.black));
 
