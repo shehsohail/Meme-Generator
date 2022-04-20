@@ -14,3 +14,4 @@
 #    Click store
 #    Click preview
 #  Submit the meme if you like the preview
+#  Starting from scratch clears all indexes and the t3mp folder clears out
