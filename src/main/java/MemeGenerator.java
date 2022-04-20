@@ -429,8 +429,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingFrame.setLocationRelativeTo(null);
   memeBuildingPanel.setLayout(null);
 
-  JLabel typingInstructions = new JLabel("<html><strong>" + 
-  "Type in Requested Information in the Text Fields Below<br> (Hit Enter for each Field Entry</strong></html>",JLabel.LEFT);
+  JLabel typingInstructions = new JLabel("<html><strong>" +
+          "Type in Requested Information in the Text Fields Below<br> (Press Enter After Inputting Information in each Field Entry)</strong></html>",JLabel.LEFT);
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
