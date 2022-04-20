@@ -815,10 +815,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   captionLabel.setBounds(30,380,200,30);
   caption.setBounds(225,380,150,30);
 
-  select.setBounds(55,420,150,30);
+  undo.setBounds(55,420,150,30);
   save.setBounds(220,420,150,30);
   preview.setBounds(55,460,150,30);
-  undo.setBounds(220,460,150,30);
+  select.setBounds(220,460,150,30);
   close.setBounds(55,500,315,30);
 
   //Set Border
