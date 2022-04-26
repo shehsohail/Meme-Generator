@@ -769,6 +769,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       memeBuildingFrame.dispose();
       try {
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
+        memeBuildingFrame.dispose();
       } catch (IOException tmtbd) {
         // TODO Auto-generated catch block
         tmtbd.printStackTrace();
