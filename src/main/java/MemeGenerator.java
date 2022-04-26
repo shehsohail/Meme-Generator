@@ -37,6 +37,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton upload;
   JButton preset;
   JButton buildMeme;
+  JButton delete;
   JButton close;
   JButton Submit;
   JFrame PreMeme;
@@ -72,6 +73,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String newMemeFileFormat;
   String TextCaption;
   String previewedMeme;
+  String browsedFile;
   File blankmemet3mpFile = new File(tempMemeTemplateFolder);
 
   public MemeGenerator(){
@@ -83,6 +85,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     upload = new JButton("Upload Your Own Meme Template");
     preset = new JButton("Choose a Meme");
     buildMeme = new JButton("Begin Building");
+    delete = new JButton("Delete this meme");
     close = new JButton("Exit Program");
 
     //wait for button pressed then perform action associated with that button
@@ -91,6 +94,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     preset.addActionListener(this);
     buildMeme.addActionListener(this);
     close.addActionListener(this);
+    delete.addActionListener(this);
 
     //Final product might not need label but if it does the label exists
     browseLabel = new JLabel("Browse " +String.valueOf(x));
@@ -117,6 +121,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(presetLabel);
     memePanel.add(buildMemeLabel);
     memePanel.add(close);
+    memePanel.add(delete);
 
     memeFrame.setSize(850,200);
     memePanel.setSize(850,200);
@@ -133,6 +138,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     preset.setBounds(505,60,130,30);
     buildMeme.setBounds(675,60,120,30);
     close.setBounds(675,120,120,30);
+    delete.setBounds(505,120,120,30);
 
     //Set Border
     browse.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -140,6 +146,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     preset.setBorder(BorderFactory.createLineBorder(Color.black));
     buildMeme.setBorder(BorderFactory.createLineBorder(Color.black));
     close.setBorder(BorderFactory.createLineBorder(Color.black));
+    delete.setBorder(BorderFactory.createLineBorder(Color.black));
 //    memeFrame.pack();
     memeFrame.setVisible(true);
   }
@@ -157,7 +164,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //4/10/22 Found issue where memes that were created during the program are not shown while browsing
       //Do the browse method
       System.out.println(277353);
-      browseLabel.setText("Browse" + String.valueOf(indexOfBrowsingMeme));
+      browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
 
       //Pops up a blue pic
       // JFrame oldMemesViewer = new JFrame();
@@ -173,14 +180,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //For now lets say memes are saved in \Meme-Generator
         //and templates are saved somewhere else
       try {
-        BrowseWindow("Doesnt matter", "browse");  
+        browsedFile = BrowseWindow("Doesnt matter", "browse");  
         browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
         
       } catch (Exception BW) {
         //TODO: handle exception
         try {
           indexOfBrowsingMeme = 0;
-          BrowseWindow("Doesnt matter", "browse");
+          browsedFile = BrowseWindow("Doesnt matter", "browse");
           browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
         } catch (IOException e1) {
           // TODO Auto-generated catch block
@@ -238,9 +245,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      }
      buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
    }
-    else if(e.getSource() == close){
-      System.exit(0);
-    }
+   else if(e.getSource() == close){
+     System.exit(0);
+   }
+   else if(e.getSource() == delete){
+     //System.exit(0);
+     //Delete the meme that you browsed to 
+     File deletedFile = new File(mainDirectory + "\\" + browsedFile);
+     deletedFile.delete();
+     System.out.println("Deleted file iz: " + browsedFile);
+   }
     else{System.out.println("");}
     
   }
@@ -572,6 +586,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //clear out t3mp directory
 
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      memeBuildingFrame.dispose();
       try {
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
         File readMe = new File(tempMemeTemplateFolder + "ReadMe.txt");
@@ -585,6 +600,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         e.printStackTrace();
       }
     }
+    
   });
 
   
@@ -750,6 +766,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       newMemeFileName = "default";
       TextCaption = "";
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      memeBuildingFrame.dispose();
       try {
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
       } catch (IOException tmtbd) {
