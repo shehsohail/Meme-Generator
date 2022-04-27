@@ -449,11 +449,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
   JTextField sizeOfFont = new JTextField("Enter in the Font Size:");
+  sizeOfFont.setBackground(Color.YELLOW);
   JLabel captionLabel = new JLabel("Enter in Caption:");
   JTextField caption= new JTextField("Enter in Caption:");
+  caption.setBackground(Color.YELLOW);
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
       String input = sizeOfFont.getText();
+      sizeOfFont.setBackground(Color.WHITE);
+      
      try {
       fontSize = Float.parseFloat(input);
      } catch (Exception fonts) {
@@ -467,16 +471,19 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       memeText=caption.getText();
+      caption.setBackground(Color.WHITE);
       System.out.println(memeText);
     }
   });
 
   JLabel redBoxLabel = new JLabel("Enter in R value [0,255]:");
   JTextField redBox= new JTextField("Enter in R value [0,255]:");
+  redBox.setBackground(Color.YELLOW);
 
   redBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent r){
       String RString = redBox.getText();
+      redBox.setBackground(Color.WHITE);
       try {
         Red = Integer.parseInt(RString);
       } catch (Exception fonts) {
@@ -490,9 +497,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel greenBoxLabel = new JLabel("Enter in G value [0,255]:");
   JTextField greenBox= new JTextField("Enter in G value [0,255]:");
+  greenBox.setBackground(Color.YELLOW);
   greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
       String GString = greenBox.getText();
+      greenBox.setBackground(Color.WHITE);
       try {
         Green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
       } catch (Exception e) {
@@ -505,9 +514,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel blueBoxLabel = new JLabel("Enter in B value [0,255]:");
   JTextField blueBox= new JTextField("Enter in B value [0,255]:");
+  blueBox.setBackground(Color.YELLOW);
   blueBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent b){
       String BString = blueBox.getText();
+      blueBox.setBackground(Color.WHITE);
       try {
         Blue = Integer.parseInt(BString);
       } catch (Exception e) {
@@ -520,9 +531,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":");
   JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth) + ":");
+  xBox.setBackground(Color.YELLOW);
+ 
   xBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent x){
       String XString = xBox.getText();
+      xBox.setBackground(Color.WHITE);
+      
       try {
         topX = Integer.parseInt(XString);
       } catch (Exception e) {
@@ -535,9 +550,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":");
   JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight) +":");
+  yBox.setBackground(Color.YELLOW);
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
       String YString = yBox.getText();
+      yBox.setBackground(Color.WHITE);
       try {
         topY = Integer.parseInt(YString);
       } catch (Exception e) {
@@ -550,9 +567,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel TitleLabel = new JLabel("Enter in the Name of the Meme:");
   JTextField Title= new JTextField("Enter in the Name of the Meme:");
+  Title.setBackground(Color.YELLOW);
   caption.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent t){
       newMemeFileName = Title.getText();
+      Title.setBackground(Color.WHITE);
     }
   });
   memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the label
