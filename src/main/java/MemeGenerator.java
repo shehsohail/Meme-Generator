@@ -725,6 +725,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   undo.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       System.out.println("undo");
+      sizeOfFont.setBackground(Color.YELLOW);
+      redBox.setBackground(Color.YELLOW);
+      greenBox.setBackground(Color.YELLOW);
+      blueBox.setBackground(Color.YELLOW);
+      xBox.setBackground(Color.YELLOW);
+      yBox.setBackground(Color.YELLOW);
+      Title.setBackground(Color.YELLOW);
+      caption.setBackground(Color.YELLOW);
       //Get length of files in t3mp directory
       File generatedMemesDirectory = new File(tempMemeTemplateFolder);
       String tempMeme[] = generatedMemesDirectory.list();
