@@ -457,7 +457,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.setLayout(null);
 
   JLabel typingInstructions = new JLabel("<html><strong>" +
-          "Type in Requested Information in the Text Fields Below<br> (Press Enter After Inputting Information in Each Field Entry)</strong></html>",JLabel.LEFT);
+          "Type in Requested Information in the Text Fields Below<br> (Press Enter After Inputting Information in Each Field Entry)<br>  yellow will disapear when a value entered </strong></html>",JLabel.LEFT);
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
@@ -581,7 +581,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel TitleLabel = new JLabel("Enter in the Name of the Meme:");
   JTextField Title= new JTextField("Enter in the Name of the Meme:");
   Title.setBackground(Color.YELLOW);
-  caption.addActionListener(new ActionListener(){
+  // changed line 573 below from caption to Title.
+  Title.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent t){
       newMemeFileName = Title.getText();
       Title.setBackground(Color.WHITE);
@@ -858,7 +859,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingFrame.setVisible(true);
 
   //Set Location
-  typingInstructions.setBounds(30,20,570,35);
+  typingInstructions.setBounds(30,10,570,45);
   redBoxLabel.setBounds(30,60,200,30);
   redBox.setBounds(225,60,150,30);
 
