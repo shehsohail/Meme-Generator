@@ -38,6 +38,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton preset;
   JButton buildMeme;
   JButton delete;
+  JButton deleteTemplate;
   JButton close;
   JButton Submit;
   JFrame PreMeme;
@@ -86,6 +87,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     preset = new JButton("Choose a Meme");
     buildMeme = new JButton("Begin Building");
     delete = new JButton("Delete this meme");
+    deleteTemplate = new JButton("Delete this template");
     close = new JButton("Exit Program");
 
     //wait for button pressed then perform action associated with that button
@@ -95,6 +97,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme.addActionListener(this);
     close.addActionListener(this);
     delete.addActionListener(this);
+    deleteTemplate.addActionListener(this);
 
     //Final product might not need label but if it does the label exists
     browseLabel = new JLabel("Browse " +String.valueOf(x));
@@ -122,6 +125,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(buildMemeLabel);
     memePanel.add(close);
     memePanel.add(delete);
+    memePanel.add(deleteTemplate);
 
     memeFrame.setSize(850,200);
     memePanel.setSize(850,200);
@@ -139,6 +143,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme.setBounds(675,60,120,30);
     close.setBounds(675,120,120,30);
     delete.setBounds(505,120,120,30);
+    deleteTemplate.setBounds(220,120,245,30);
 
     //Set Border
     browse.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -147,6 +152,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme.setBorder(BorderFactory.createLineBorder(Color.black));
     close.setBorder(BorderFactory.createLineBorder(Color.black));
     delete.setBorder(BorderFactory.createLineBorder(Color.black));
+    deleteTemplate.setBorder(BorderFactory.createLineBorder(Color.black));
 //    memeFrame.pack();
     memeFrame.setVisible(true);
   }
@@ -254,6 +260,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      File deletedFile = new File(mainDirectory + "\\" + browsedFile);
      deletedFile.delete();
      System.out.println("Deleted file iz: " + browsedFile);
+   }
+   else if(e.getSource() == deleteTemplate){
+     //System.exit(0);
+     //Delete the meme that you browsed to 
+     File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
+     deletedFile.delete();
+     System.out.println("Deleted file iz: " + memeTemplate);
    }
     else{System.out.println("");}
     
