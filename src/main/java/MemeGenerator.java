@@ -292,6 +292,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       else if(backgroundImage[indexOfBrowsingMeme].contains(".gif")){
         readyForReturn = 1;
       }
+      else if(backgroundImage[indexOfBrowsingMeme].contains(".JPG")){
+        readyForReturn = 1;
+      }
       else if(backgroundImage[indexOfBrowsingMeme].contains(".png")){
         readyForReturn = 1;
       }
@@ -336,6 +339,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           readyForReturn = 1;
         }
         else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".gif")){
+          readyForReturn = 1;
+        }
+        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".JPG")){
           readyForReturn = 1;
         }
         else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".png")){
@@ -686,13 +692,26 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
             ImageIO.write(image, "jpg", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
             image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
           } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            try {
+              ImageIO.write(image, "JPG", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "JPG"));
+              image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "JPG"));
+            } catch (Exception e8) {
+              //TODO: handle exception
+            e8.printStackTrace();
             previewing = previewing - 1;
+            }
+            // TODO Auto-generated catch block
           }
         }
       }
+      try {
+        BrowseWindow(tempMemeTemplateFolder, "preview");
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
+    //The previewing function
   });
 
   
