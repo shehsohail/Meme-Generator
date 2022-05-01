@@ -487,8 +487,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JFrame memeBuildingFrame = new JFrame();
   JPanel memeBuildingPanel = new JPanel();
 
-  memeBuildingFrame.setSize(425,580);
-  memeBuildingPanel.setSize(425,580);
+  memeBuildingFrame.setSize(425,600);
+  memeBuildingPanel.setSize(425,600);
   memeBuildingFrame.setLocationRelativeTo(null);
   memeBuildingPanel.setLayout(null);
 
@@ -497,10 +497,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
-  JTextField sizeOfFont = new JTextField("Enter in the Font Size:");
+  JTextField sizeOfFont = new JTextField("Enter in the Font Size");
   sizeOfFont.setBackground(Color.YELLOW);
   JLabel captionLabel = new JLabel("Enter in Caption:");
-  JTextField caption= new JTextField("Enter in Caption:");
+  JTextField caption= new JTextField("Enter in Caption");
   caption.setBackground(Color.YELLOW);
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
@@ -526,7 +526,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
 
   JLabel redBoxLabel = new JLabel("Enter in R value [0,255]:");
-  JTextField redBox= new JTextField("Enter in R value [0,255]:");
+  JTextField redBox= new JTextField("Enter in R value [0,255]");
   redBox.setBackground(Color.YELLOW);
 
   redBox.addActionListener(new ActionListener(){
@@ -545,7 +545,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the label
 
   JLabel greenBoxLabel = new JLabel("Enter in G value [0,255]:");
-  JTextField greenBox= new JTextField("Enter in G value [0,255]:");
+  JTextField greenBox= new JTextField("Enter in G value [0,255]");
   greenBox.setBackground(Color.YELLOW);
   greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
@@ -562,7 +562,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the label
 
   JLabel blueBoxLabel = new JLabel("Enter in B value [0,255]:");
-  JTextField blueBox= new JTextField("Enter in B value [0,255]:");
+  JTextField blueBox= new JTextField("Enter in B value [0,255]");
   blueBox.setBackground(Color.YELLOW);
   blueBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent b){
@@ -579,7 +579,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the label
 
   JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":");
-  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth) + ":");
+  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth));
   xBox.setBackground(Color.YELLOW);
  
   xBox.addActionListener(new ActionListener(){
@@ -598,7 +598,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the label
 
   JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":");
-  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight) +":");
+  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight));
   yBox.setBackground(Color.YELLOW);
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
@@ -614,9 +614,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the label
 
-  JLabel TitleLabel = new JLabel("Enter the name of the Meme");
+  JLabel TitleLabel = new JLabel("Enter the Name of the Meme:");
   //JTextField Title= new JTextField("Enter in the Name of the Meme:");
-  JTextField Title= new JTextField("Enter the name of the Meme");
+  JTextField Title= new JTextField("Enter the Name of the Meme");
   Title.setBackground(Color.YELLOW);
   // changed line 573 below from caption to Title.
   Title.addActionListener(new ActionListener(){
@@ -916,38 +916,38 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   //Set Locations
   typingInstructions.setBounds(30,10,570,45);
-  redBoxLabel.setBounds(30,60,200,30);
-  redBox.setBounds(220,60,155,30);
+  redBoxLabel.setBounds(30,75,200,30);
+  redBox.setBounds(220,75,175,30);
 
-  greenBoxLabel.setBounds(30,100,200,30);
-  greenBox.setBounds(220,100,155,30);
+  greenBoxLabel.setBounds(30,115,200,30);
+  greenBox.setBounds(220,115,175,30);
 
-  blueBoxLabel.setBounds(30,140,200,30);
-  blueBox.setBounds(220,140,155,30);
+  blueBoxLabel.setBounds(30,155,200,30);
+  blueBox.setBounds(220,155,175,30);
 
-  xBoxLabel.setBounds(30,180,200,30);
-  xBox.setBounds(220,180,155,30);
+  xBoxLabel.setBounds(30,195,200,30);
+  xBox.setBounds(220,195,175,30);
 
-  yBoxLabel.setBounds(30,220,200,30);
-  yBox.setBounds(220,220,155,30);
+  yBoxLabel.setBounds(30,235,200,30);
+  yBox.setBounds(220,235,175,30);
 
-  TitleLabel.setBounds(30,260,200,30);
-  Title.setBounds(220,260,155,30);
+  TitleLabel.setBounds(30,275,200,30);
+  Title.setBounds(220,275,175,30);
 
   // FileLabel.setBounds(30,300,200,30);
-  startFromScratch.setBounds(220,300,155,30);
+  startFromScratch.setBounds(220,315,155,30);
 
-  sizeOfFontLabel.setBounds(30,340,200,30);
-  sizeOfFont.setBounds(220,340,155,30);
+  sizeOfFontLabel.setBounds(30,355,200,30);
+  sizeOfFont.setBounds(220,355,175,30);
 
-  captionLabel.setBounds(30,380,200,30);
-  caption.setBounds(220,380,155,30);
+  captionLabel.setBounds(30,395,200,30);
+  caption.setBounds(220,395,175,30);
 
-  undo.setBounds(55,420,150,30);
-  save.setBounds(220,420,150,30);
-  preview.setBounds(55,460,150,30);
-  select.setBounds(220,460,150,30);
-  close.setBounds(55,500,315,30);
+  undo.setBounds(55,435,150,30);
+  save.setBounds(220,435,150,30);
+  preview.setBounds(55,475,150,30);
+  select.setBounds(220,475,150,30);
+  close.setBounds(55,515,315,30);
 
   //Set Border
   undo.setBorder(BorderFactory.createLineBorder(Color.black));
