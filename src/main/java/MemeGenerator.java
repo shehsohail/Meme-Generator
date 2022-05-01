@@ -86,8 +86,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     upload = new JButton("Upload Your Own Meme Template");
     preset = new JButton("Choose a Meme");
     buildMeme = new JButton("Begin Building");
-    delete = new JButton("Delete this meme");
-    deleteTemplate = new JButton("Delete this template");
+    delete = new JButton("Delete This Meme");
+    deleteTemplate = new JButton("Delete This Template");
     close = new JButton("Exit (unused)");
 
     //wait for button pressed then perform action associated with that button
@@ -142,7 +142,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     preset.setBounds(505,60,130,30);
     buildMeme.setBounds(675,60,120,30);
     close.setBounds(675,120,120,30);
-    delete.setBounds(505,120,120,30);
+    delete.setBounds(505,120,130,30);
     deleteTemplate.setBounds(220,120,245,30);
 
     //Set Border
