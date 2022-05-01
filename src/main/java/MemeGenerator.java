@@ -127,8 +127,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(delete);
     memePanel.add(deleteTemplate);
 
-    memeFrame.setSize(850,200);
-    memePanel.setSize(850,200);
+    memeFrame.setSize(850,220);
+    memePanel.setSize(850,220);
     memeFrame.setLocationRelativeTo(null);
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
