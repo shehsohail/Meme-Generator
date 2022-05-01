@@ -88,7 +88,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme = new JButton("Begin Building");
     delete = new JButton("Delete this meme");
     deleteTemplate = new JButton("Delete this template");
-    close = new JButton("Exit Program");
+    close = new JButton("Exit (unused)");
 
     //wait for button pressed then perform action associated with that button
     browse.addActionListener(this);
@@ -292,10 +292,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       else if(backgroundImage[indexOfBrowsingMeme].contains(".gif")){
         readyForReturn = 1;
       }
+      else if(backgroundImage[indexOfBrowsingMeme].contains(".GIF")){
+        readyForReturn = 1;
+      }
       else if(backgroundImage[indexOfBrowsingMeme].contains(".JPG")){
         readyForReturn = 1;
       }
       else if(backgroundImage[indexOfBrowsingMeme].contains(".png")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingMeme].contains(".PNG")){
         readyForReturn = 1;
       }
       else {
@@ -347,6 +353,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".png")){
           readyForReturn = 1;
         }
+        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".PNG")){
+          readyForReturn = 1;
+        }
+        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".GIF")){
+          readyForReturn = 1;
+        }
         else {
           System.out.println("inc");
           indexOfBrowsingPresteMeme = indexOfBrowsingPresteMeme + 1;
@@ -373,6 +385,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
     else if(option == "preview"){
+      // if(previewing > 4){
+      //   fileDeleter(tempMemeTemplateFolder, 0);
+      // }
       String directory = path;
       System.out.println(directory);
       File generatedMemesDirectory = new File(directory);
@@ -382,7 +397,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       this.setContentPane(new JPanel() {
       });
       try {
-        add(new JLabel(new ImageIcon(path + backgroundImage[backgroundImage.length - 1])));
+        //add(new JLabel(new ImageIcon(path + backgroundImage[backgroundImage.length - 1])));
+        add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
         pack();
         setVisible(true);
         return backgroundImage[backgroundImage.length-1];
@@ -398,6 +414,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     }
     else{return "else";}
+ }
+
+ public void fileDeleter(String dir, int index){
+   File theDirectory = new File(dir);
+   String listOfFiles[] = theDirectory.list();
+   String theDeletedFileString = dir + listOfFiles[0];
+   File theDeletedFile = new File(theDeletedFileString);
+   System.out.println("The deleted file is " + theDeletedFileString);
+   try {
+    theDeletedFile.delete();
+   } catch (Exception e) {
+     //TODO: handle exception
+     System.out.println("I couldn't delete it");
+   }
  }
 
   public void UploadWindow() {
@@ -698,8 +728,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
               image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "JPG"));
             } catch (Exception e8) {
               //TODO: handle exception
+              try {
+                ImageIO.write(image, "PNG", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "PNG"));
+                image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "PNG"));
+              } catch (Exception e12) {
+                //TODO: handle exception
             e8.printStackTrace();
             previewing = previewing - 1;
+              }
             }
             // TODO Auto-generated catch block
           }
@@ -716,7 +752,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
 
   
-  JButton preview=new JButton("Preview the Meme");
+  JButton preview=new JButton("Preview (Unused)");
   preview.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       // if(previewing == 1){
@@ -752,7 +788,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       blueBox.setBackground(Color.YELLOW);
       xBox.setBackground(Color.YELLOW);
       yBox.setBackground(Color.YELLOW);
-      Title.setBackground(Color.YELLOW);
+      //Title.setBackground(Color.YELLOW); //Title should be set once 
       caption.setBackground(Color.YELLOW);
       //Get length of files in t3mp directory
       File generatedMemesDirectory = new File(tempMemeTemplateFolder);
@@ -784,8 +820,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         System.out.println(partialMemes[partialMemes.length-2]); //The newest file (You want to undo back to this)
         //Make image = second most recent file
         try {
-          image = ImageIO.read(new File(tempMemeTemplateFolder + partialMemes[partialMemes.length-2]));
-          File undidMeme = new File(partialMemes[partialMemes.length-1]);
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat));
+          File undidMeme = new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
           undidMeme.delete();
           previewing = previewing + 1;
           ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
@@ -798,7 +834,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //Delete most recent file
 
         //Increment previewing
-        previewing = previewing + 1;
+        //previewing = previewing + 1;
         //System.out.println("This feature is not working");
       }
     }
