@@ -584,8 +584,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the label
 
-  JLabel TitleLabel = new JLabel("Enter in the Name of the Meme:");
-  JTextField Title= new JTextField("Enter in the Name of the Meme:");
+  JLabel TitleLabel = new JLabel("Enter the name of the Meme");
+  //JTextField Title= new JTextField("Enter in the Name of the Meme:");
+  JTextField Title= new JTextField("Enter the name of the Meme");
   Title.setBackground(Color.YELLOW);
   // changed line 573 below from caption to Title.
   Title.addActionListener(new ActionListener(){
@@ -877,34 +878,34 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 //  memeBuildingFrame.pack();
   memeBuildingFrame.setVisible(true);
 
-  //Set Location
+  //Set Locations
   typingInstructions.setBounds(30,10,570,45);
   redBoxLabel.setBounds(30,60,200,30);
-  redBox.setBounds(225,60,150,30);
+  redBox.setBounds(220,60,155,30);
 
   greenBoxLabel.setBounds(30,100,200,30);
-  greenBox.setBounds(225,100,150,30);
+  greenBox.setBounds(220,100,155,30);
 
   blueBoxLabel.setBounds(30,140,200,30);
-  blueBox.setBounds(225,140,150,30);
+  blueBox.setBounds(220,140,155,30);
 
   xBoxLabel.setBounds(30,180,200,30);
-  xBox.setBounds(225,180,150,30);
+  xBox.setBounds(220,180,155,30);
 
   yBoxLabel.setBounds(30,220,200,30);
-  yBox.setBounds(225,220,150,30);
+  yBox.setBounds(220,220,155,30);
 
   TitleLabel.setBounds(30,260,200,30);
-  Title.setBounds(225,260,150,30);
+  Title.setBounds(220,260,155,30);
 
   // FileLabel.setBounds(30,300,200,30);
-  startFromScratch.setBounds(225,300,150,30);
+  startFromScratch.setBounds(220,300,155,30);
 
   sizeOfFontLabel.setBounds(30,340,200,30);
-  sizeOfFont.setBounds(225,340,150,30);
+  sizeOfFont.setBounds(220,340,155,30);
 
   captionLabel.setBounds(30,380,200,30);
-  caption.setBounds(225,380,150,30);
+  caption.setBounds(220,380,155,30);
 
   undo.setBounds(55,420,150,30);
   save.setBounds(220,420,150,30);
