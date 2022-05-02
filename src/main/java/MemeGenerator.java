@@ -88,7 +88,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme = new JButton("Begin Building");
     delete = new JButton("Delete This Meme");
     deleteTemplate = new JButton("Delete This Template");
-    close = new JButton("Exit (unused)");
+    close = new JButton("Exit Program");
 
     //wait for button pressed then perform action associated with that button
     browse.addActionListener(this);
@@ -253,6 +253,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    }
    else if(e.getSource() == close){
      System.exit(0);
+     dispose();
+     setVisible(false);
    }
    else if(e.getSource() == delete){
      //System.exit(0);
@@ -840,8 +842,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
   });
 
-  close = new JButton("Exit Window");
-  close.addActionListener(new ActionListener(){
+  JButton closeWindow = new JButton("Exit Window");
+  closeWindow.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       memeBuildingFrame.dispose();
     }
@@ -904,7 +906,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(sizeOfFontLabel);
   memeBuildingPanel.add(captionLabel);
   memeBuildingPanel.add(startFromScratch);
-  memeBuildingPanel.add(close);
+  memeBuildingPanel.add(closeWindow);
 
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
@@ -947,7 +949,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   save.setBounds(220,435,150,30);
   preview.setBounds(55,475,150,30);
   select.setBounds(220,475,150,30);
-  close.setBounds(55,515,315,30);
+  closeWindow.setBounds(55,515,315,30);
 
   //Set Border
   undo.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -955,7 +957,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   preview.setBorder(BorderFactory.createLineBorder(Color.black));
   select.setBorder(BorderFactory.createLineBorder(Color.black));
   startFromScratch.setBorder(BorderFactory.createLineBorder(Color.black));
-  close.setBorder(BorderFactory.createLineBorder(Color.black));
+  closeWindow.setBorder(BorderFactory.createLineBorder(Color.black));
 
   //read the image
     //blankMemeTemplateFolder is where the meme templates are
