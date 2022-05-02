@@ -849,7 +849,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
   });
 
-  JButton startFromScratch = new JButton("Restart meme building");
+  JButton startFromScratch = new JButton("Restart Meme Building");
   startFromScratch.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       previewing = 0;
