@@ -498,11 +498,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. </strong></html>",JLabel.LEFT);
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
-  JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
-  JTextField sizeOfFont = new JTextField("Enter in the Font Size");
+  JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:",JLabel.CENTER);
+  JTextField sizeOfFont = new JTextField("Enter in the Font Size",JTextField.CENTER);
+  sizeOfFont.setHorizontalAlignment(SwingConstants.CENTER);
+
   sizeOfFont.setBackground(Color.YELLOW);
-  JLabel captionLabel = new JLabel("Enter in Caption:");
-  JTextField caption= new JTextField("Enter in Caption");
+  JLabel captionLabel = new JLabel("Enter in Caption:",JLabel.CENTER);
+  JTextField caption= new JTextField("Enter in Caption",JTextField.CENTER);
+  caption.setHorizontalAlignment(SwingConstants.CENTER);
+
   caption.setBackground(Color.YELLOW);
   sizeOfFont.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
@@ -527,8 +531,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
   });
 
-  JLabel redBoxLabel = new JLabel("Enter in R value [0,255]:");
-  JTextField redBox= new JTextField("Enter in R value [0,255]");
+  JLabel redBoxLabel = new JLabel("Enter in R value [0,255]:",JLabel.CENTER);
+  JTextField redBox= new JTextField("Enter in R value [0,255]",JTextField.CENTER);
+  redBox.setHorizontalAlignment(SwingConstants.CENTER);
+
   redBox.setBackground(Color.YELLOW);
 
   redBox.addActionListener(new ActionListener(){
@@ -546,8 +552,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   memeBuildingPanel.add(redBox); //Each button/textbox needs to be added to the label
 
-  JLabel greenBoxLabel = new JLabel("Enter in G value [0,255]:");
-  JTextField greenBox= new JTextField("Enter in G value [0,255]");
+  JLabel greenBoxLabel = new JLabel("Enter in G value [0,255]:",JLabel.CENTER);
+  JTextField greenBox= new JTextField("Enter in G value [0,255]",JTextField.CENTER);
+  greenBox.setHorizontalAlignment(SwingConstants.CENTER);
+
   greenBox.setBackground(Color.YELLOW);
   greenBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent g){
@@ -563,8 +571,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the label
 
-  JLabel blueBoxLabel = new JLabel("Enter in B value [0,255]:");
-  JTextField blueBox= new JTextField("Enter in B value [0,255]");
+  JLabel blueBoxLabel = new JLabel("Enter in B value [0,255]:",JLabel.CENTER);
+  JTextField blueBox= new JTextField("Enter in B value [0,255]",JTextField.CENTER);
+  blueBox.setHorizontalAlignment(SwingConstants.CENTER);
+
   blueBox.setBackground(Color.YELLOW);
   blueBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent b){
@@ -580,8 +590,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the label
 
-  JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":");
-  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth));
+  JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":",JLabel.CENTER);
+  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth),JTextField.CENTER);
+  xBox.setHorizontalAlignment(SwingConstants.CENTER);
+
   xBox.setBackground(Color.YELLOW);
  
   xBox.addActionListener(new ActionListener(){
@@ -599,8 +611,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the label
 
-  JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":");
-  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight));
+  JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":",JLabel.CENTER);
+  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight),JTextField.CENTER);
+  yBox.setHorizontalAlignment(SwingConstants.CENTER);
+
   yBox.setBackground(Color.YELLOW);
   yBox.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent y){
@@ -616,9 +630,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(yBox); //Each button/textbox needs to be added to the label
 
-  JLabel TitleLabel = new JLabel("Enter the Name of the Meme:");
+  JLabel TitleLabel = new JLabel("Enter the Name of the Meme:",JLabel.CENTER);
   //JTextField Title= new JTextField("Enter in the Name of the Meme:");
-  JTextField Title= new JTextField("Enter the Name of the Meme");
+  JTextField Title= new JTextField("Enter the Name of the Meme",JTextField.CENTER);
+  Title.setHorizontalAlignment(SwingConstants.CENTER);
+
   Title.setBackground(Color.YELLOW);
   // changed line 573 below from caption to Title.
   Title.addActionListener(new ActionListener(){
