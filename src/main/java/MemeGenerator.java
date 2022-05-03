@@ -233,14 +233,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        //Once settled on one you like click the button.
       //clear out t3mp directory
 
-      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
-      try {
-        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+      // File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      // try {
+      //   FileUtils.cleanDirectory(tempMemeToBeDeleted);
 
-      } catch (IOException ejn) {
-        // TODO Auto-generated catch block
-        ejn.printStackTrace();
-      }
+      // } catch (IOException ejn) {
+      //   // TODO Auto-generated catch block
+      //   ejn.printStackTrace();
+      // }
      w++;
      System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
      try {
@@ -252,6 +252,21 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
    }
    else if(e.getSource() == close){
+    //clear out t3mp directory
+
+    File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+    try {
+      FileUtils.cleanDirectory(tempMemeToBeDeleted);
+      File readMe = new File(tempMemeTemplateFolder + "ReadMe.txt");
+      readMe.createNewFile();
+      FileWriter readMeWriter = new FileWriter(tempMemeTemplateFolder + "filename.txt");
+      readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty");
+      readMeWriter.close();
+
+    } catch (IOException le) {
+      // TODO Auto-generated catch block
+      le.printStackTrace();
+    }
      System.exit(0);
      dispose();
      setVisible(false);
@@ -861,6 +876,22 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton closeWindow = new JButton("Exit Window");
   closeWindow.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
+      //clear out t3mp directory
+
+      File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
+      memeBuildingFrame.dispose();
+      try {
+        FileUtils.cleanDirectory(tempMemeToBeDeleted);
+        File readMe = new File(tempMemeTemplateFolder + "ReadMe.txt");
+        readMe.createNewFile();
+        FileWriter readMeWriter = new FileWriter(tempMemeTemplateFolder + "filename.txt");
+        readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty");
+        readMeWriter.close();
+
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
       memeBuildingFrame.dispose();
     }
   });
