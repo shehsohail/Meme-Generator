@@ -104,12 +104,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     uploadLabel = new JLabel("Upload " +String.valueOf(y));
     presetLabel = new JLabel("Preset " +String.valueOf(z));
     buildMemeLabel = new JLabel("Preset " +String.valueOf(z));
-    welcomeLabel = new JLabel("Please Select from the Following Options Below:");
-
+    welcomeLabel = new JLabel("Please Select from the Following Options Below:",JLabel.LEFT);
+    welcomeLabel.setFont(new Font("ARIAL", Font.PLAIN, 17));
+    
 
 
 //    memePanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
     memePanel.setBorder(BorderFactory.createTitledBorder("Meme Generation"));
+
     memePanel.setLayout(null);
     //I like it better without the gridlayout
     //memePanel.setLayout(new GridLayout());
@@ -134,9 +136,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memeFrame.add(memePanel, BorderLayout.CENTER);
     memeFrame.setDefaultCloseOperation(memeFrame.EXIT_ON_CLOSE);
     memeFrame.setTitle("Much Great Meme Generator");
+    
 
     //Set  Location
-    welcomeLabel.setBounds(285,20,570,15);
+    welcomeLabel.setBounds(255,20,570,20);
     browse.setBounds(30,60,150,30);
     upload.setBounds(220,60,245,30);
     preset.setBounds(505,60,130,30);
@@ -144,6 +147,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     close.setBounds(675,120,120,30);
     delete.setBounds(505,120,130,30);
     deleteTemplate.setBounds(220,120,245,30);
+    
 
     //Set Border
     browse.setBorder(BorderFactory.createLineBorder(Color.black));
