@@ -514,7 +514,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.setLayout(null);
 
   JLabel typingInstructions = new JLabel("<html><strong>" +
-          "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. </strong></html>",JLabel.LEFT);
+          "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. +x is right and +y is down. </strong></html>",JLabel.LEFT);
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:",JLabel.CENTER);
@@ -770,8 +770,19 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
                 image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "PNG"));
               } catch (Exception e12) {
                 //TODO: handle exception
-            e8.printStackTrace();
-            previewing = previewing - 1;
+                try {
+                  ImageIO.write(image, "gif", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "gif"));
+                  image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "gif"));
+                } catch (Exception ex) {
+                  try {
+                    ImageIO.write(image, "GIF", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "GIF"));
+                    image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "GIF"));
+                  } catch (Exception eZ) {
+                    //TODO: handle exception
+                    eZ.printStackTrace();
+                    previewing = previewing - 1;
+                  }
+                }
               }
             }
             // TODO Auto-generated catch block
