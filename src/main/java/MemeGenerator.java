@@ -709,7 +709,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
 
   
-  JButton save = new JButton("Store Partial");
+  JButton save = new JButton("Save this Edit");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       if(previewing == 0){
