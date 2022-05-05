@@ -171,22 +171,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     if(e.getSource() == browse){
       //4/10/22 Found issue where memes that were created during the program are not shown while browsing
       //Do the browse method
-      System.out.println(277353);
       browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
-
-      //Pops up a blue pic
-      // JFrame oldMemesViewer = new JFrame();
-      // oldMemesViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      // oldMemesViewer.setPreferredSize(new Dimension(550, 300));
-      // oldMemesViewer.getContentPane().setBackground(Color.BLUE);
-      // oldMemesViewer.pack();
-      // oldMemesViewer.setVisible(true);
-      //Pops up a blue window
-
-      //Want to pop up window with picture
-        //This works.  For now I added some memes to try.
-        //For now lets say memes are saved in \Meme-Generator
-        //and templates are saved somewhere else
       try {
         browsedFile = BrowseWindow("Doesnt matter", "browse");  
         browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
@@ -474,22 +459,59 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
       int index = newMemePath.lastIndexOf("\\");
       String newMemeName = newMemePath.substring(index + 1);
-
-      String destinationPath = currentPath + "\\Blank-Templates\\";
-      File destinationFile = new File(destinationPath + newMemeName);
-
-      try {
-        Files.copy(newMeme.toPath(), destinationFile.toPath());
-      } catch (IOException ex) {
-        ex.printStackTrace();
+      if(isAnImage(newMemeName)){
+        String destinationPath = currentPath + "\\Blank-Templates\\";
+        File destinationFile = new File(destinationPath + newMemeName);
+  
+        try {
+          Files.copy(newMeme.toPath(), destinationFile.toPath());
+        } catch (IOException ex) {
+          ex.printStackTrace();
+        }
+        this.setContentPane(new JPanel() {
+        });
+  
+        add(new JLabel(new ImageIcon(destinationPath + newMemeName)));
+        pack();
+        setVisible(true);
       }
-      this.setContentPane(new JPanel() {
-      });
+      else{
+        System.out.println("Only upload images!");
+        System.out.println("Please consult the instructions.");
+        try {
+          openTheInstructionsFile();
+        } catch (Exception e) {
+          try {
+            readTheInstructionsFile();
+          } catch (Exception doBetter) {
+            System.err.println("I can't open the instructions but only upload jpg, png, or gif.");
+          }
+        }
+      }
+    }
+  }
 
-      add(new JLabel(new ImageIcon(destinationPath + newMemeName)));
-      pack();
-      setVisible(true);
-
+  public boolean isAnImage(String theFileName){
+    if(theFileName.contains(".jpg")){
+      return true;
+    }
+    else if(theFileName.contains(".JPG")){
+      return true;
+    }
+    else if(theFileName.contains(".png")){
+      return true;
+    }
+    else if(theFileName.contains(".PNG")){
+      return true;
+    }
+    else if(theFileName.contains(".GIF")){
+      return true;
+    }
+    else if(theFileName.contains(".gif")){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 
