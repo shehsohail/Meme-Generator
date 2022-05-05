@@ -204,13 +204,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     else if(e.getSource() == upload){
       //Do the upload a meme template method
       z++;
-      System.out.println(177013);
       try {
         UploadWindow();
         uploadLabel.setText("Upload" + String.valueOf(z));
       } catch (Exception BW) {
         //TODO: handle exception
-        System.out.println(BW.getStackTrace());
+        System.out.println("I don't know why but you can't upload that");
       }
     }
    else if(e.getSource() == buildMeme){
@@ -221,7 +220,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
      
      w++;
-     System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
+     //System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
      try {
        createTheMeme(memeTemplate);
      } catch (IOException e1) {
@@ -284,11 +283,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     if(option.equals("browse")){
     File file=new File(".");
     String directory = file.getAbsolutePath();
-    System.out.println(directory);
     File generatedMemesDirectory = new File(directory);
     String backgroundImage[] = generatedMemesDirectory.list();
-    System.out.println(backgroundImage.length);
-    System.out.println(indexOfBrowsingMeme);
     int readyForReturn = 0;
     if(indexOfBrowsingMeme+1 >= backgroundImage.length){
       
@@ -338,11 +334,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }}
     else if(option.equals("preset")){
       String directory = path;
-      System.out.println(directory);
       File generatedMemesDirectory = new File(directory);
       String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println(backgroundImage.length);
-      System.out.println(indexOfBrowsingPresteMeme);
       int readyForReturn = 0;
       if(indexOfBrowsingPresteMeme == backgroundImage.length){
         
@@ -394,10 +387,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     else if(option.equals("preview")){
       
       String directory = path;
-      System.out.println(directory);
       File generatedMemesDirectory = new File(directory);
       String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println(backgroundImage.length);
       System.out.println("previewing: " + backgroundImage[backgroundImage.length - 1]);
       this.setContentPane(new JPanel() {
       });
@@ -536,10 +527,18 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
-    System.out.println("raw = " + rawMeme);
+    Red = 255;
+    Green = 255;
+    Blue = 255;
+    topX = 1;
+    topY = 1;
+    fontSize = 1;
+    memeText = "";
+    newMemeFileName = "default";
+    TextCaption = "";
+    System.out.println("You are about to meme: " + rawMeme);
     String[] format = rawMeme.split("\\.");
     newMemeFileFormat = format[1];
-    System.out.println(newMemeFileFormat);
     image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
     memeHeight = image.getHeight();
     memeWidth = image.getWidth();
@@ -586,7 +585,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     public void actionPerformed(ActionEvent f){
       memeText=caption.getText();
       caption.setBackground(Color.WHITE);
-      System.out.println(memeText);
     }
   });
 
@@ -744,6 +742,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton save = new JButton("Save this Edit");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
+      System.out.println("Your caption is: " + memeText);
+      System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(Red) + ", " + Integer.toString(Green) + ", " + Integer.toString(Blue) + ") ");
+      System.out.println("Your text location starting point (X, Y) is: (" + Integer.toString(topX) +  ", " + Integer.toString(topY) + ") ");
       if(previewing == 0){
         //Delete all files in t3mp if this is the first attemot of memeing
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
@@ -901,11 +902,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
-
-        //Delete most recent file
-
-        //Increment previewing
-        //System.out.println("This feature is not working");
       }
     }
   });
@@ -937,13 +933,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   startFromScratch.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       previewing = 0;
+      indexOfBrowsingMeme = 0;
+      indexOfBrowsingPresteMeme = 0;
       Red = 255;
       Green = 255;
       Blue = 255;
       topX = 1;
       topY = 1;
-      indexOfBrowsingMeme = 0;
-      indexOfBrowsingPresteMeme = 0;
       fontSize = 1;
       memeText = "";
       newMemeFileName = "default";
@@ -1041,39 +1037,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   startFromScratch.setBorder(BorderFactory.createLineBorder(Color.black));
   closeWindow.setBorder(BorderFactory.createLineBorder(Color.black));
 
-  //read the image
-    //blankMemeTemplateFolder is where the meme templates are
-    //System.out.println(memeWidth);
-   //get the Graphics object
-   //set font
-     //fontSize variable
-   //System.out.println(fontSize);
-   //fontSize = 25f;
-   //display the text at the coordinates(x=50, y=150)
-   //added color of text
-     //Added RGB variables
-     //GUI should have input field for them
-   //Red = 204;
-   //Green = 204;
-   //Blue = 255;
-   //Added coordinents of XY for text box corner
-     //GUI should have input field for them
-   //topX = 50;
-   //topY = 150;
-   //Added variable for the text
-     //GUI should have input field for it
-   //memeText = "Is this what we need? Yeah pretty much";
-   //write the image
-   //Added variables for naming the new meme and file format
-     //For now lets limit to png and jpg
-     //Gif will technically work but will produce a static gif image
-   //newMemeFileName = "imageafter";
-   //newMemeFileFormat = "png";
-
-  //This method is what overlays text to the image
-   //Im thinking pop up a window and that window has a box for text, a box for x cooridinate,
-   //a box for y, an enter button that takes the info and adds it to the image, and a save
-   //button that saves the new meme, oh and a box for entering the name of the new meme
+  
    return 1;
 }
 }
