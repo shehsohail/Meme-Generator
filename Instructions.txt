@@ -34,3 +34,36 @@ There is a text box for each color in RGB.  You can type the ranges on the inter
 You can start the text anywhere on the image as long as the x location is on the interval [0,width] and the y location is on the interval [0,height]
 You can specify the name of your new meme.  Please make the names unique
 The caption will be whatever text you want.
+When entering values into the fields be sure to press enter
+When you entered all desired info into the fields click Save this Edit
+A preview of your edit will be displayed.  If you are done click submit.  If you like it and want to continue memeing that image then enter the desired information in the fields and then
+press Save this Edit.  If you do not like the edit then click Undo and reenter the information with the corrected details
+If you want to completely start over then click Restart Meme Building.
+  Restart Meme Building:
+  Resets the browsing indexes and meme choosing indexes
+  You must rebrowse to the template you want
+  The partially made meme is deleted so that you can start fresh
+  The meme building window is closed
+
+  Undo:
+  Undoes the most recent edit
+  Note that it only undoes the most recent edit.  You can not undo twice in a row.  Please click Restart Meme Building if you want to undo more than the most recent edit
+
+  Save this Edit:
+  This overlays the text on the image and saves your second most recent edit
+  The new edit is displayed for you to see before being permanately added to the image
+  If the template is an animated gif then text is saved on a random frame.  Each save afterwards will be on the static gif image
+
+  Submit:
+  Saves your most recent edit to the image and puts the completed meme in the same place as the other completed memes
+  Closes the meme building window
+
+  Instructions:
+  Brings up this handydandy document
+
+  Exit Window:
+  Closes the meme building window mid meme building
+  You will have to start the meme building process over again if you do click this
+
+Exit Program:
+Closes all windows and safely closes the program

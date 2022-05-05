@@ -40,6 +40,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton deleteTemplate;
   JButton close;
   JButton Submit;
+  JButton theInstructions;
   JFrame PreMeme;
   JLabel presetLabel;
   JLabel browseLabel;
@@ -90,6 +91,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     delete = new JButton("Delete This Meme");
     deleteTemplate = new JButton("Delete This Template");
     close = new JButton("Exit Program");
+    theInstructions = new JButton("Open Instructionz");
 
     //wait for button pressed then perform action associated with that button
     browse.addActionListener(this);
@@ -99,6 +101,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     close.addActionListener(this);
     delete.addActionListener(this);
     deleteTemplate.addActionListener(this);
+    theInstructions.addActionListener(this);
 
     //Final product might not need label but if it does the label exists
     browseLabel = new JLabel("Browse " +String.valueOf(x));
@@ -129,6 +132,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(close);
     memePanel.add(delete);
     memePanel.add(deleteTemplate);
+    memePanel.add(theInstructions);
 
     memeFrame.setSize(850,220);
     memePanel.setSize(850,220);
@@ -148,6 +152,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     close.setBounds(675,120,120,30);
     delete.setBounds(505,120,130,30);
     deleteTemplate.setBounds(220,120,245,30);
+    theInstructions.setBounds(30,120,150,30);
     
 
     //Set Border
@@ -158,6 +163,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     close.setBorder(BorderFactory.createLineBorder(Color.black));
     delete.setBorder(BorderFactory.createLineBorder(Color.black));
     deleteTemplate.setBorder(BorderFactory.createLineBorder(Color.black));
+    theInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
 //    memeFrame.pack();
     memeFrame.setVisible(true);
   }
@@ -288,6 +294,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
      deletedFile.delete();
      System.out.println("Deleted file iz: " + memeTemplate);
+   }
+   else if(e.getSource() == theInstructions){
+     //Open instructions
+    try {
+      openTheInstructionsFile();
+    } catch (Exception otif) {
+      //TODO: handle exception
+      try {
+        readTheInstructionsFile();
+      } catch (Exception otif2) {
+        //TODO: handle exception
+        System.err.println("Could not show you the instructions");
+      }
+    }
    }
     else{System.out.println("");}
     
@@ -491,6 +511,26 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       setVisible(true);
 
     }
+  }
+
+  public void readTheInstructionsFile(){
+    try {
+      File instructions = new File(instructionsFile);
+      BufferedReader readInstructions = new BufferedReader(new FileReader(instructions));
+      String instructionsString;
+      while((instructionsString = readInstructions.readLine()) != null){
+        System.out.println(instructionsString);
+      }
+      readInstructions.close();
+    } catch (Exception io) {
+      //TODO: handle exception
+      io.printStackTrace();
+    }
+  }
+
+  public void openTheInstructionsFile() throws IOException{
+    ProcessBuilder instructionsDotText = new ProcessBuilder(Notepad, instructionsFile);
+    instructionsDotText.start();
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
@@ -803,8 +843,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     public void actionPerformed(ActionEvent f){
       try {
         //Open Instrustions txt doc
-        ProcessBuilder instructionsDotText = new ProcessBuilder(Notepad, instructionsFile);
-        instructionsDotText.start();
+        openTheInstructionsFile();
         //BrowseWindow(tempMemeTemplateFolder, "preview");
       } catch (IOException e) {
         // TODO Auto-generated catch block
@@ -812,18 +851,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         System.err.println("Couldn't open the file");
         System.err.println("Going to try and read the file and print the instructions");
         System.err.println("Install Notepad.exe in the future please");
-        try {
-          File instructions = new File(instructionsFile);
-          BufferedReader readInstructions = new BufferedReader(new FileReader(instructions));
-          String instructionsString;
-          while((instructionsString = readInstructions.readLine()) != null){
-            System.out.println(instructionsString);
-          }
-          readInstructions.close();
-        } catch (Exception io) {
-          //TODO: handle exception
-          io.printStackTrace();
-        }
+        readTheInstructionsFile();
       }
     }
   });
