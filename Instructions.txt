@@ -33,7 +33,7 @@ You have control over the color of the text
 You can freely change the font size
 There is a text box for each color in RGB.  You can type the ranges on the interval [0,255].  For example periwinkle's RGB would be R=204, G=204, and B=255
 You can start the text anywhere on the image as long as the x location is on the interval [0,width] and the y location is on the interval [0,height]
-You can specify the name of your new meme.  Please make the names unique
+You can specify the name of your new meme.  Please make the names unique.  Also please only enter the meme name once.  You can't change it mid build
 The caption will be whatever text you want.
 When entering values into the fields be sure to press enter
 When you entered all desired info into the fields click Save this Edit
