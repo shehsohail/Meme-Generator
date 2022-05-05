@@ -18,6 +18,7 @@ Each click will display a different meme.
 Upload Your Own Meme Template:
 Clicking this button will display a file browser.  Navigate to the directory where the meme is and open it.
 The meme will be displayed to you and added to the templates folder.  You do not need to add it again unles you delete it.
+Don't try and be funny by uploading a non supported image.  Only upload an image (gif, jpg, png)
 
 Choose a Meme:
 Similarly to Browse the Memes, this button one by one cycles through templates in the templates folder.
@@ -67,3 +68,6 @@ If you want to completely start over then click Restart Meme Building.
 
 Exit Program:
 Closes all windows and safely closes the program
+
+Open Instructionz:
+Also brings up this handydandy document
