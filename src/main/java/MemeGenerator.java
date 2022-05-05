@@ -351,7 +351,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     indexOfBrowsingMeme++;
     return backgroundImage[indexOfBrowsingMeme];
     }}
-    else if(option == "preset"){
+    else if(option.equals("preset")){
       String directory = path;
       System.out.println(directory);
       File generatedMemesDirectory = new File(directory);
@@ -532,7 +532,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.setLayout(null);
 
   JLabel typingInstructions = new JLabel("<html><strong>" +
-          "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. +x is right and +y is down. </strong></html>",JLabel.LEFT);
+          "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. +x is right and +y is down. </strong></html>");
   //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
   //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
@@ -997,7 +997,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   TitleLabel.setBounds(30,275,200,30);
   Title.setBounds(220,275,175,30);
 
-  startFromScratch.setBounds(220,315,155,30);
+  startFromScratch.setBounds(225,315,155,30);
 
   sizeOfFontLabel.setBounds(30,355,200,30);
   sizeOfFont.setBounds(220,355,175,30);
