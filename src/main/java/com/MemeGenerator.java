@@ -36,16 +36,16 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton delete;
   JButton deleteTemplate;
   JButton close;
-  JButton Submit;
+  JButton submit;
   JButton theInstructions;
-  JFrame PreMeme;
+  JFrame preMeme;
   JLabel welcomeLabel;
   JLabel widthLabel;
   JLabel heightLabel;
   int previewing = 0;
-  int Red;
-  int Green;
-  int Blue;
+  int red;
+  int green;
+  int blue;
   int topX;
   int topY;
   int memeHeight;
@@ -61,10 +61,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   String memeText;
   String newMemeFileName;
   String newMemeFileFormat;
-  String TextCaption;
+  String textCaption;
   String previewedMeme;
   String browsedFile;
-  String Notepad = "Notepad.exe";
+  String notepad = "Notepad.exe";
   String instructionsFile = "Instructions.txt";
   File blankmemet3mpFile = new File(tempMemeTemplateFolder);
 
@@ -491,20 +491,20 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
   public void openTheInstructionsFile() throws IOException{
-    ProcessBuilder instructionsDotText = new ProcessBuilder(Notepad, instructionsFile);
+    ProcessBuilder instructionsDotText = new ProcessBuilder(notepad, instructionsFile);
     instructionsDotText.start();
   }
 
    public int createTheMeme(String rawMeme) throws IOException{
-    Red = 255;
-    Green = 255;
-    Blue = 255;
+    red = 255;
+    green = 255;
+    blue = 255;
     topX = 1;
     topY = 1;
     fontSize = 1;
     memeText = "";
     newMemeFileName = "default";
-    TextCaption = "";
+    textCaption = "";
     System.out.println("You are about to meme: " + rawMeme);
     String[] format = rawMeme.split("\\.");
     newMemeFileFormat = format[1];
@@ -566,10 +566,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       String RString = redBox.getText();
       redBox.setBackground(Color.WHITE);
       try {
-        Red = Integer.parseInt(RString);
+        red = Integer.parseInt(RString);
       } catch (Exception fonts) {
         //TODO: handle exception
-        Red = 4;
+        red = 4;
       }
     }
   });
@@ -586,10 +586,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       String GString = greenBox.getText();
       greenBox.setBackground(Color.WHITE);
       try {
-        Green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
+        green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
       } catch (Exception e) {
         //TODO: handle exception
-        Green = 2;
+        green = 2;
       }
     }
   });
@@ -605,10 +605,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       String BString = blueBox.getText();
       blueBox.setBackground(Color.WHITE);
       try {
-        Blue = Integer.parseInt(BString);
+        blue = Integer.parseInt(BString);
       } catch (Exception e) {
         //TODO: handle exception
-      Blue = 0;
+      blue = 0;
       }
     }
   });
@@ -674,7 +674,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     public void actionPerformed(ActionEvent f){
       Graphics g = image.getGraphics();
       g.setFont(g.getFont().deriveFont(fontSize));
-      Color fontColor = new Color(Red, Green, Blue);
+      Color fontColor = new Color(red, green, blue);
       g.setColor(fontColor);
       g.drawString(memeText, topX, topY);
       g.dispose();
@@ -711,7 +711,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     public void actionPerformed(ActionEvent f){
       System.out.println("the value of previewing is: " + previewing);
       System.out.println("Your caption is: " + memeText);
-      System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(Red) + ", " + Integer.toString(Green) + ", " + Integer.toString(Blue) + ") ");
+      System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(red) + ", " + Integer.toString(green) + ", " + Integer.toString(blue) + ") ");
       System.out.println("Your text location starting point (X, Y) is: (" + Integer.toString(topX) +  ", " + Integer.toString(topY) + ") ");
       if(previewing == 0){
         //Delete all files in t3mp if this is the first attemot of memeing
@@ -727,12 +727,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if(memeText == null){memeText = "";}
       if(newMemeFileName == null){newMemeFileName = "default";}
       if(newMemeFileFormat == null){newMemeFileFormat = "png";}
-      if(Red > 255){Red = 255;}
-      if(Red < 0){Red = 0;}
-      if(Green > 255){Green = 255;}
-      if(Green < 0){Green = 0;}
-      if(Blue > 255){Blue = 255;}
-      if(Blue < 0){Blue = 0;}
+      if(red > 255){red = 255;}
+      if(red < 0){red = 0;}
+      if(green > 255){green = 255;}
+      if(green < 0){green = 0;}
+      if(blue > 255){blue = 255;}
+      if(blue < 0){blue = 0;}
       if(topX > memeWidth){topX = memeWidth / 2;}
       if(topX < 0){topX = 1;}
       if(topY > memeHeight){topY = memeHeight / 2;}
@@ -740,7 +740,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if(fontSize <= 0){fontSize = 1;}
       Graphics g = image.getGraphics();
       g.setFont(g.getFont().deriveFont(fontSize));
-      Color fontColor = new Color(Red, Green, Blue);
+      Color fontColor = new Color(red, green, blue);
       g.setColor(fontColor);
       g.drawString(memeText, topX, topY);
       g.dispose();
@@ -897,15 +897,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       previewing = 0;
       indexOfBrowsingMeme = 0;
       indexOfBrowsingPresteMeme = 0;
-      Red = 255;
-      Green = 255;
-      Blue = 255;
+      red = 255;
+      green = 255;
+      blue = 255;
       topX = 1;
       topY = 1;
       fontSize = 1;
       memeText = "";
       newMemeFileName = "default";
-      TextCaption = "";
+      textCaption = "";
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
       memeBuildingFrame.dispose();
       try {
