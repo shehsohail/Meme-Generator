@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
@@ -28,7 +30,7 @@ import org.apache.commons.io.FileUtils;
  */
 public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 {
-  BufferedImage image;
+  transient BufferedImage image;
   JButton browse;
   JButton upload;
   JButton preset;
@@ -143,7 +145,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memeFrame.setVisible(true);
   }
 
-  public static void main( String[] args ) throws IOException
+  public static void main( String[] args )
   {
     new MemeGenerator();
     
@@ -221,15 +223,42 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    else if(e.getSource() == delete){
      
      //Delete the meme that you browsed to 
-     File deletedFile = new File(mainDirectory + "\\" + browsedFile);
-     deletedFile.delete();
-     System.out.println("Deleted file iz: " + browsedFile);
+    //  File deletedFile = new File(mainDirectory + "\\" + browsedFile);
+    //  deletedFile.delete();
+     try {
+      Files.delete(Paths.get(mainDirectory).resolve(browsedFile));
+      System.out.println("Deleted file iz: " + browsedFile);
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      try {
+        File deletedFile = new File(mainDirectory + "\\" + browsedFile);
+        deletedFile.delete();
+        System.out.println("Files path delete failed");
+        System.out.println("Deleted file iz: " + browsedFile);
+      } catch (Exception el) {
+        //TODO: handle exception
+        System.out.println("Couldn't delete: " + browsedFile);
+      }
+    }
    }
    else if(e.getSource() == deleteTemplate){
      //Delete the meme that you browsed to 
-     File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
-     deletedFile.delete();
-     System.out.println("Deleted file iz: " + memeTemplate);
+     try {//Not sure how to make this work
+          //File still gets deleted tho so low priority
+      Files.delete(Paths.get(mainDirectory).resolve("t3mp").resolve(memeTemplate));
+      System.out.println("Deleted file iz: " + memeTemplate);
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      try {
+        File deletedFile = new File(mainDirectory + "\\" + memeTemplate);
+        deletedFile.delete();
+        System.out.println("Files path delete failed");
+        System.out.println("Deleted file iz: " + memeTemplate);
+      } catch (Exception el) {
+        //TODO: handle exception
+        System.out.println("Couldn't delete: " + memeTemplate);
+      }
+    }
    }
    else if(e.getSource() == theInstructions){
      //Open instructions
