@@ -181,7 +181,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     else if(e.getSource() == upload){
       try {
         UploadWindow();
-        //uploadLabel.setText("Upload" + String.valueOf(z));
       } catch (Exception BW) {
         //TODO: handle exception
         System.out.println("I don't know why but you can't upload that");
@@ -192,17 +191,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        //Cycle through the choose meme button
        //Once settled on one you like click the button.
       //clear out t3mp directory
-
-     
-     //w++;
-     //System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
      try {
        createTheMeme(memeTemplate);
      } catch (IOException e1) {
        // TODO Auto-generated catch block
        e1.printStackTrace();
      }
-     //buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
    }
    else if(e.getSource() == close){
     //clear out t3mp directory
@@ -529,8 +523,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   JLabel typingInstructions = new JLabel("<html><strong>" +
           "Type in Requested Information in the Text Fields Below.<br> After Inputting Values, Press Enter for Yellow to Disappear <br> from Each Text Field. +x is right and +y is down. </strong></html>");
-  //JLabel typingInstructions = new JLabel("Type in the Requested Information in the Text Fields Below:");
-  //This is how you do text field.  Just like with buttons an action listener is needed
   JLabel sizeOfFontLabel = new JLabel("Enter in the Font Size:");
   JTextField sizeOfFont = new JTextField("Enter in the Font Size");
   sizeOfFont.setHorizontalAlignment(SwingConstants.CENTER);
@@ -803,7 +795,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         e.printStackTrace();
       }
     }
-    //The previewing function
   });
 
   
@@ -813,10 +804,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         //Open Instrustions txt doc
         openTheInstructionsFile();
-        //BrowseWindow(tempMemeTemplateFolder, "preview");
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        //e.printStackTrace();
         System.err.println("Couldn't open the file");
         System.err.println("Going to try and read the file and print the instructions");
         System.err.println("Install Notepad.exe in the future please");
@@ -836,7 +825,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       blueBox.setBackground(Color.YELLOW);
       xBox.setBackground(Color.YELLOW);
       yBox.setBackground(Color.YELLOW);
-      //Title.setBackground(Color.YELLOW); //Title should be set once 
       caption.setBackground(Color.YELLOW);
       //Get length of files in t3mp directory
       File generatedMemesDirectory = new File(tempMemeTemplateFolder);
@@ -862,8 +850,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //If more than one take second most recent and name it most recent
         //Seems to work but you cant undo twice
       else if(tempMeme.length > 1){
-        //Get list of all files in directory 
-        //String[] partialMemes = blankmemet3mpFile.list();
         System.out.println("newest file you want to delete: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat); //The newest file (You dont want that)
         System.out.println("second most recent file you want to go back to: " + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat); //The newest file (You want to undo back to this)
         //Make image = second most recent file
@@ -958,7 +944,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(xBoxLabel);
   memeBuildingPanel.add(yBoxLabel);
   memeBuildingPanel.add(TitleLabel);
-  //memeBuildingPanel.add(FileLabel);
   memeBuildingPanel.add(sizeOfFontLabel);
   memeBuildingPanel.add(captionLabel);
   memeBuildingPanel.add(startFromScratch);
