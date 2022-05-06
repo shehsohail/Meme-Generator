@@ -209,6 +209,27 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       File readMe = new File(tempMemeTemplateFolder + "ReadMe.txt");
       readMe.createNewFile();
       FileWriter readMeWriter = new FileWriter(tempMemeTemplateFolder + "filename.txt");
+      /**
+ * Since you mentioned being curious about this our issue was we want the t3mp folder to be empty
+ * It should only have files when a meme is being made
+ * 
+ * git status
+ * git add .
+ * git commit -m "stuff"
+ * git push
+ * 
+ * These commands caused the temp folder to be removed from github
+ * If someone later on were to clone it then the project wouldnt work because the folder doesnt exist
+ * You may notice it is called the t3mp folder now
+ * We thought maybe github didn't want to push a "temp" folder so the name was changed
+ * Eventually we figured out that a blank folder could not be pushed to github
+ * These text files serve no other purpose than to keep the folder from being empty
+ * The text was more of a complaint and me venting my frustrations
+ * 
+ * At the time we didnt have the stocks HW assignment where you told us about the assume unchanged thing so we didnt know about it
+ * Yes I also realize that we could just create the folder if it doesn't exist but that was not the first idea we had
+ * And as we all know first idea best idea
+ */
       readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty");
       readMeWriter.close();
 
