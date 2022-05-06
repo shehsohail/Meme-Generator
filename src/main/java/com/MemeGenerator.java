@@ -39,17 +39,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton Submit;
   JButton theInstructions;
   JFrame PreMeme;
-  JLabel presetLabel;
-  JLabel browseLabel;
-  JLabel uploadLabel;
   JLabel welcomeLabel;
-  JLabel buildMemeLabel;
   JLabel widthLabel;
   JLabel heightLabel;
-  int x;
-  int y;
-  int z;
-  int w;
   int previewing = 0;
   int Red;
   int Green;
@@ -100,11 +92,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     deleteTemplate.addActionListener(this);
     theInstructions.addActionListener(this);
 
-    //Final product might not need label but if it does the label exists
-    browseLabel = new JLabel("Browse " +String.valueOf(x));
-    uploadLabel = new JLabel("Upload " +String.valueOf(y));
-    presetLabel = new JLabel("Preset " +String.valueOf(z));
-    buildMemeLabel = new JLabel("Preset " +String.valueOf(z));
     welcomeLabel = new JLabel("Please Select from the Following Options Below:");
     welcomeLabel.setFont(new Font("ARIAL", Font.PLAIN, 17));
     
@@ -118,10 +105,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(upload);
     memePanel.add(preset);
     memePanel.add(buildMeme);
-    memePanel.add(browseLabel);
-    memePanel.add(uploadLabel);
-    memePanel.add(presetLabel);
-    memePanel.add(buildMemeLabel);
     memePanel.add(close);
     memePanel.add(delete);
     memePanel.add(deleteTemplate);
@@ -170,19 +153,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == browse){
-      //4/10/22 Found issue where memes that were created during the program are not shown while browsing
-      //Do the browse method
-      browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
       try {
-        browsedFile = BrowseWindow("Doesnt matter", "browse");  
-        browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
+        browsedFile = BrowseWindow("Doesnt matter", "browse");
         
       } catch (Exception BW) {
         //TODO: handle exception
         try {
           indexOfBrowsingMeme = 0;
           browsedFile = BrowseWindow("Doesnt matter", "browse");
-          browseLabel.setText("Browse " + String.valueOf(indexOfBrowsingMeme));
         } catch (IOException e1) {
           // TODO Auto-generated catch block
           e1.printStackTrace();
@@ -199,15 +177,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         // TODO Auto-generated catch block
         e1.printStackTrace();
       }
-      y++;
-      presetLabel.setText("Preset " + String.valueOf(indexOfBrowsingPresteMeme));
     }
     else if(e.getSource() == upload){
-      //Do the upload a meme template method
-      z++;
       try {
         UploadWindow();
-        uploadLabel.setText("Upload" + String.valueOf(z));
+        //uploadLabel.setText("Upload" + String.valueOf(z));
       } catch (Exception BW) {
         //TODO: handle exception
         System.out.println("I don't know why but you can't upload that");
@@ -220,7 +194,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //clear out t3mp directory
 
      
-     w++;
+     //w++;
      //System.out.println("Use " + (indexOfBrowsingPresteMeme-1) + " for building the meme unless it is negative 1");
      try {
        createTheMeme(memeTemplate);
@@ -228,7 +202,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        // TODO Auto-generated catch block
        e1.printStackTrace();
      }
-     buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
+     //buildMemeLabel.setText("Build " + String.valueOf(indexOfBrowsingPresteMeme));
    }
    else if(e.getSource() == close){
     //clear out t3mp directory
