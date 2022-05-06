@@ -390,7 +390,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       String directory = path;
       File generatedMemesDirectory = new File(directory);
       String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println("previewing: " + backgroundImage[backgroundImage.length - 1]);
+      System.out.println("previewing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
       this.setContentPane(new JPanel() {
       });
       try {
@@ -403,7 +403,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //TODO: handle exception
         System.out.println("preview error");
         indexOfBrowsingPresteMeme = 0;
-      add(new JLabel(new ImageIcon(path + backgroundImage[backgroundImage.length - 1])));
+      add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
       pack();
       setVisible(true);
       return backgroundImage[backgroundImage.length-1];
@@ -743,6 +743,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton save = new JButton("Save this Edit");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
+      System.out.println("the value of previewing is: " + previewing);
       System.out.println("Your caption is: " + memeText);
       System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(Red) + ", " + Integer.toString(Green) + ", " + Integer.toString(Blue) + ") ");
       System.out.println("Your text location starting point (X, Y) is: (" + Integer.toString(topX) +  ", " + Integer.toString(topY) + ") ");
@@ -888,9 +889,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //Seems to work but you cant undo twice
       else if(tempMeme.length > 1){
         //Get list of all files in directory 
-        String[] partialMemes = blankmemet3mpFile.list();
-        System.out.println(partialMemes[partialMemes.length-1]); //The newest file (You dont want that)
-        System.out.println(partialMemes[partialMemes.length-2]); //The newest file (You want to undo back to this)
+        //String[] partialMemes = blankmemet3mpFile.list();
+        System.out.println("newest file you want to delete: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat); //The newest file (You dont want that)
+        System.out.println("second most recent file you want to go back to: " + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat); //The newest file (You want to undo back to this)
         //Make image = second most recent file
         try {
           image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat));

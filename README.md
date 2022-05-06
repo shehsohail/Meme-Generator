@@ -1,4 +1,9 @@
 # Meme-Generator
+# To run do the following from the command line:
+#   cd to a path
+#   type: git clone https://github.com/shehsohail/Meme-Generator.git
+#   cd Meme-Generator
+#   type: mvn compile exec:java
 # Browse button browses the created memes
 #  Each click cycles through the created memes
 # Choose a meme allows you to select a meme from the list of templates
