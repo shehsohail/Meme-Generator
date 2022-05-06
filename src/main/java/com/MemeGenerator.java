@@ -390,7 +390,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       String directory = path;
       File generatedMemesDirectory = new File(directory);
       String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println("previewing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+      System.out.println("previewing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
       this.setContentPane(new JPanel() {
       });
       try {
@@ -876,10 +876,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         try {
           previewing = previewing + 1;
           image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
-          System.out.println("writing: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+          System.out.println("writing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
           ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
           image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
-          System.out.println("read: " + tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+          System.out.println("read: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
         } catch (IOException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
