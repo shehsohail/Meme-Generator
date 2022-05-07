@@ -780,6 +780,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       previewing = 0;
       try {
         ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
+        System.err.println("Submitted " + newMemeFileName + "." + newMemeFileFormat);
       } catch (IOException e) {
         // TODO Auto-generated catch block
         System.err.println("There wass an issue submitting the meme.  Not sure why tho");
