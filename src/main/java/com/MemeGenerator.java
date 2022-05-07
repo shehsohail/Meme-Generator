@@ -44,6 +44,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel welcomeLabel;
   JLabel widthLabel;
   JLabel heightLabel;
+  JTextField colorPreviewLabel = new JTextField("Preview your color");
   int previewing = 0;
   int red;
   int green;
@@ -622,6 +623,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //TODO: handle exception
         red = 4;
       }
+      finally{
+        try {
+          colorPreviewLabel.setBackground(new Color(red, green, blue));
+        } catch (Exception e) {
+          //TODO: handle exception
+          System.err.println("Enter integers for RGB");
+        }
+      }
     }
   });
 
@@ -642,6 +651,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //TODO: handle exception
         green = 2;
       }
+      finally{
+        try {
+          colorPreviewLabel.setBackground(new Color(red, green, blue));
+        } catch (Exception e) {
+          //TODO: handle exception
+          System.err.println("Enter integers for RGB");
+        }
+      }
     }
   });
   memeBuildingPanel.add(greenBox); //Each button/textbox needs to be added to the label
@@ -660,6 +677,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       } catch (Exception e) {
         //TODO: handle exception
       blue = 0;
+      }
+      finally{
+        try {
+          colorPreviewLabel.setBackground(new Color(red, green, blue));
+        } catch (Exception e) {
+          //TODO: handle exception
+          System.err.println("Enter integers for RGB");
+        }
       }
     }
   });
@@ -720,7 +745,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the label
 
   //JLabel colorPreviewLabel = new JLabel("Press enter to preview your color"); //Label not needed?
-  JTextField colorPreviewLabel= new JTextField("Preview your color");
   colorPreviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
   colorPreviewLabel.setBackground(Color.YELLOW);
