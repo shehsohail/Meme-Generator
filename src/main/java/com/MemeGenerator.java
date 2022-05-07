@@ -118,7 +118,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memeFrame.setLocationRelativeTo(null);
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
-    memeFrame.setDefaultCloseOperation(memeFrame.EXIT_ON_CLOSE);
+    memeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     memeFrame.setTitle("Much Great Meme Generator");
     
 
@@ -255,10 +255,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      setVisible(false);
    }
    else if(e.getSource() == delete){
-     
-     //Delete the meme that you browsed to 
-    //  File deletedFile = new File(mainDirectory + "\\" + browsedFile);
-    //  deletedFile.delete();
      try {
       Files.delete(Paths.get(mainDirectory).resolve(browsedFile));
       System.out.println("Deleted file iz: " + browsedFile);
@@ -1056,7 +1052,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
   memeBuildingFrame.add(memeBuildingPanel, BorderLayout.CENTER);
-  memeBuildingFrame.setDefaultCloseOperation(memeBuildingFrame.EXIT_ON_CLOSE);
+  memeBuildingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   memeBuildingFrame.setTitle("Much Great Meme Builder");
   memeBuildingFrame.setVisible(true);
 
@@ -1103,7 +1099,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   startFromScratch.setBorder(BorderFactory.createLineBorder(Color.black));
   closeWindow.setBorder(BorderFactory.createLineBorder(Color.black));
 
-  
+  //I forgot public void was a thing so I said public int
+  //We don't use this return but I dont feel like changing to void from int
+  //Just wanted to add this comment because I anticipate you having this question
    return 1;
 }
 }
