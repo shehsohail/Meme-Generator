@@ -526,14 +526,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
   public void readTheInstructionsFile(){
-    try {
-      File instructions = new File(instructionsFile);
-      BufferedReader readInstructions = new BufferedReader(new FileReader(instructions));
+    File instructions = new File(instructionsFile);
+    try(FileReader fr = new FileReader(instructions);
+      BufferedReader br = new BufferedReader(fr)) {
       String instructionsString;
-      while((instructionsString = readInstructions.readLine()) != null){
+      while((instructionsString = br.readLine()) != null){
         System.out.println(instructionsString);
       }
-      readInstructions.close();
     } catch (Exception io) {
       //TODO: handle exception
       io.printStackTrace();
