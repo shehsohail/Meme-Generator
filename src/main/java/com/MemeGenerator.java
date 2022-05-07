@@ -225,8 +225,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
  * Eventually we figured out that a blank folder could not be pushed to github
  * These text files serve no other purpose than to keep the folder from being empty
  * The text was more of a complaint and me venting my frustrations
+ * I actually kind of forgot about the files
+ * It was breifly touched on during the presentation but the specifics of the text files was forgotten
  * 
- * At the time we didnt have the stocks HW assignment where you told us about the assume unchanged thing so we didnt know about it
+ * At the time we didnt have the stonks HW assignment where you told us about the assume unchanged thing so we didnt know about it
  * Yes I also realize that we could just create the folder if it doesn't exist but that was not the first idea we had
  * And as we all know first idea best idea
  */
@@ -717,6 +719,24 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(Title); //Each button/textbox needs to be added to the label
 
+  //JLabel colorPreviewLabel = new JLabel("Press enter to preview your color"); //Label not needed?
+  JTextField colorPreviewLabel= new JTextField("Preview your color");
+  colorPreviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+  colorPreviewLabel.setBackground(Color.YELLOW);
+  // changed line 573 below from caption to Title.
+  colorPreviewLabel.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent t){
+      try {
+        colorPreviewLabel.setBackground(new Color(red, green, blue));
+      } catch (Exception e) {
+        //TODO: handle exception
+        System.err.println("Enter integers for RGB");
+      }
+    }
+  });
+  memeBuildingPanel.add(colorPreviewLabel); //Each button/textbox needs to be added to the label
+
    
   JButton select=new JButton("Submit");
   select.addActionListener(new ActionListener(){
@@ -997,6 +1017,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   memeBuildingPanel.add(captionLabel);
   memeBuildingPanel.add(startFromScratch);
   memeBuildingPanel.add(closeWindow);
+  memeBuildingPanel.add(colorPreviewLabel);
 
 
   memeBuildingFrame.getContentPane().setBackground(Color.BLUE);
@@ -1026,6 +1047,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   Title.setBounds(220,275,175,30);
 
   startFromScratch.setBounds(225,315,155,30);
+  colorPreviewLabel.setBounds(55,315,155,30);
 
   sizeOfFontLabel.setBounds(30,355,200,30);
   sizeOfFont.setBounds(220,355,175,30);
