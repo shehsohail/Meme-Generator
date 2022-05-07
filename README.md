@@ -20,3 +20,5 @@
 - Click preview
 - Submit the meme if you like the preview
 - Starting from scratch clears all indexes and the t3mp folder clears out
+- There are nore detailed instructions on operating the program
+     - Click the button on the gui to pull them up
