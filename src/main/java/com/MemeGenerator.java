@@ -176,7 +176,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           browsedFile = BrowseWindow("Doesnt matter", "browse");
         } catch (IOException e1) {
           // TODO Auto-generated catch block
-          e1.printStackTrace();
+          System.err.println("You might not have an meme to browse to");
         }  
       }
       //Want to pop up window with picture
@@ -188,7 +188,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
       } catch (IOException e1) {
         // TODO Auto-generated catch block
-        e1.printStackTrace();
+        System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
       }
     }
     else if(e.getSource() == upload){
@@ -208,7 +208,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        createTheMeme(memeTemplate);
      } catch (IOException e1) {
        // TODO Auto-generated catch block
-       e1.printStackTrace();
+       System.err.println("Something unexpected happened during the meme building");
      }
    }
    else if(e.getSource() == close){
@@ -248,7 +248,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
     } catch (IOException le) {
       // TODO Auto-generated catch block
-      le.printStackTrace();
+      System.err.println("One or both text files might not have been created.  Not a big deal though.");
     }
      System.exit(0);
      dispose();
@@ -485,7 +485,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         try {
           Files.copy(newMeme.toPath(), destinationFile.toPath());
         } catch (IOException ex) {
-          ex.printStackTrace();
+          System.err.println("For some unknown reason your template couldnt be uploaded");
         }
         this.setContentPane(new JPanel() {
         });
@@ -544,7 +544,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       }
     } catch (Exception io) {
       //TODO: handle exception
-      io.printStackTrace();
+      System.err.println("Get Notepad because the instructions couldn't be opened or read");
     }
   }
 
@@ -782,7 +782,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("There wass an issue submitting the meme.  Not sure why tho");
       }
       //clear out t3mp directory
 
@@ -798,7 +798,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("One or both text files might not have been created.  Not a big deal tho");
       }
     }
     
@@ -819,7 +819,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("Couldn't clean out the directory.  Might cause problems later on");
       }
 
       }
@@ -877,7 +877,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
                     image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "GIF"));
                   } catch (Exception eZ) {
                     //TODO: handle exception
-                    eZ.printStackTrace();
+                    System.err.println("Couldn't save this edit.  Be sure not to change the meme name mid meme. Please start over");
                     previewing = previewing - 1;
                   }
                 }
@@ -891,13 +891,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         BrowseWindow(tempMemeTemplateFolder, "preview");
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("The edit was probably saved but viewing the latest edit failed.");
       }
     }
   });
 
   
-  JButton preview=new JButton("Instrustions");
+  JButton preview=new JButton("Instructions");
   preview.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       try {
@@ -943,7 +943,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           System.out.println("read: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
         } catch (IOException e) {
           // TODO Auto-generated catch block
-          e.printStackTrace();
+          System.err.println("Undo failed.  Please start from scratch.");
         }
       }
       //If more than one take second most recent and name it most recent
@@ -961,7 +961,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
         } catch (IOException e) {
           // TODO Auto-generated catch block
-          e.printStackTrace();
+          System.err.println("Undo failed.  You must save an edit between Undos.  Please continue memeing or start over.");
         }
       }
     }
@@ -984,7 +984,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("One or both text files might not have been created.  Not a big deal tho.");
       }
       memeBuildingFrame.dispose();
     }
@@ -1012,7 +1012,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         memeBuildingFrame.dispose();
       } catch (IOException tmtbd) {
         // TODO Auto-generated catch block
-        tmtbd.printStackTrace();
+        System.err.println("For whatever reason the t3mp folder might not be cleared out.  Might or might not cause issues");
       }
       memeBuildingFrame.dispose();
       try {
@@ -1025,7 +1025,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
       } catch (IOException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        System.err.println("One or both text files might not have been created.  Not a big deal though");
       }
     }
   });
