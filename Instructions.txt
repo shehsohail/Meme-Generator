@@ -70,6 +70,7 @@ If you want to completely start over then click Restart Meme Building.
   Enter your RGB values in the appropriate fields
   Press enter in this box to view the current font color
   Feel free to try out different combinations
+  Updating the individual RGBs will auto update the preview
 
 Exit Program:
 Closes all windows and safely closes the program
