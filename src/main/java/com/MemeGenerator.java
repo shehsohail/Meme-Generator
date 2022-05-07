@@ -113,8 +113,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     memePanel.add(deleteTemplate);
     memePanel.add(theInstructions);
 
-    memeFrame.setSize(850,220);
-    memePanel.setSize(850,220);
+    memeFrame.setSize(850,350);
+    memePanel.setSize(850,350);
     memeFrame.setLocationRelativeTo(null);
     memeFrame.getContentPane().setBackground(Color.BLUE);
     memeFrame.add(memePanel, BorderLayout.CENTER);
@@ -124,14 +124,24 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
     //Set  Location
     welcomeLabel.setBounds(255,20,570,20);
-    browse.setBounds(30,60,150,30);
-    upload.setBounds(220,60,245,30);
-    preset.setBounds(505,60,130,30);
-    buildMeme.setBounds(675,60,120,30);
-    close.setBounds(675,120,120,30);
-    delete.setBounds(505,120,130,30);
-    deleteTemplate.setBounds(220,120,245,30);
-    theInstructions.setBounds(30,120,150,30);
+    theInstructions.setBounds(260,60,150,30);
+    close.setBounds(440,60,150,30);
+    upload.setBounds(180,120,215,30);
+    deleteTemplate.setBounds(420,120,215,30);
+    preset.setBounds(255,180,150,30);
+    buildMeme.setBounds(440,180,150,30);
+    browse.setBounds(255,240,150,30);
+    delete.setBounds(440,240,150,30);
+
+//    welcomeLabel.setBounds(255,20,570,20);
+//    theInstructions.setBounds(30,60,150,30);
+//    upload.setBounds(220,60,245,30);
+//    preset.setBounds(505,60,130,30);
+//    buildMeme.setBounds(675,60,120,30);
+//    close.setBounds(675,120,120,30);
+//    delete.setBounds(505,120,130,30);
+//    deleteTemplate.setBounds(220,120,245,30);
+//    browse.setBounds(30,120,150,30);
     
 
     //Set Border
