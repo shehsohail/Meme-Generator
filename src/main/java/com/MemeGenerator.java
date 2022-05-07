@@ -271,7 +271,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     } catch (IOException e1) {
       // TODO Auto-generated catch block
       try {
-        File deletedFile = new File(mainDirectory + "\\" + memeTemplate);
+        File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
         deletedFile.delete();
         System.out.println("Files path delete failed");
         System.out.println("Deleted file iz: " + memeTemplate);
