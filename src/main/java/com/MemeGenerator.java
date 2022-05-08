@@ -132,16 +132,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     buildMeme.setBounds(255,180,150,30);
     browse.setBounds(75,240,150,30);
     delete.setBounds(255,240,150,30);
-
-//    welcomeLabel.setBounds(255,20,570,20);
-//    theInstructions.setBounds(30,60,150,30);
-//    upload.setBounds(220,60,245,30);
-//    preset.setBounds(505,60,130,30);
-//    buildMeme.setBounds(675,60,120,30);
-//    close.setBounds(675,120,120,30);
-//    delete.setBounds(505,120,130,30);
-//    deleteTemplate.setBounds(220,120,245,30);
-//    browse.setBounds(30,120,150,30);
     
 
     //Set Border
@@ -163,53 +153,67 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if(e.getSource() == browse){
+  public void actionPerformedBrowse(){
+    try {
+      browsedFile = BrowseWindow("Doesnt matter", "browse");
+      
+    } catch (Exception BW) {
+      //TODO: handle exception
       try {
+        indexOfBrowsingMeme = 0;
         browsedFile = BrowseWindow("Doesnt matter", "browse");
-        
-      } catch (Exception BW) {
-        //TODO: handle exception
-        try {
-          indexOfBrowsingMeme = 0;
-          browsedFile = BrowseWindow("Doesnt matter", "browse");
-        } catch (IOException e1) {
-          // TODO Auto-generated catch block
-          System.err.println("You might not have an meme to browse to");
-        }  
-      }
-      //Want to pop up window with picture
-
-    }
-    else if(e.getSource() == preset){
-      //Do the preset meme method
-      try {
-        memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
       } catch (IOException e1) {
         // TODO Auto-generated catch block
-        System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
-      }
+        System.err.println("You might not have an meme to browse to");
+      }  
+    }
+  }
+
+  public void actionPerformedPreset(){
+    try {
+      memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
+    }
+  }
+
+  public void actionPerformedUpload(){
+    try {
+      UploadWindow();
+    } catch (Exception BW) {
+      //TODO: handle exception
+      System.out.println("I don't know why but you can't upload that");
+    }
+  }
+
+  public void actionPerformedBuildMeme(){
+    try {
+      createTheMeme(memeTemplate);
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      System.err.println("Something unexpected happened during the meme building");
+    }
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    //Want to pop up window with picture
+     if(e.getSource() == browse){actionPerformedBrowse();}
+     //Do the preset meme method
+    else if(e.getSource() == preset){
+      actionPerformedPreset();
     }
     else if(e.getSource() == upload){
-      try {
-        UploadWindow();
-      } catch (Exception BW) {
-        //TODO: handle exception
-        System.out.println("I don't know why but you can't upload that");
-      }
+      //Upload image
+      actionPerformedUpload();
     }
    else if(e.getSource() == buildMeme){
      //Do the build a meme method
        //Cycle through the choose meme button
        //Once settled on one you like click the button.
       //clear out t3mp directory
-     try {
-       createTheMeme(memeTemplate);
-     } catch (IOException e1) {
-       // TODO Auto-generated catch block
-       System.err.println("Something unexpected happened during the meme building");
-     }
+      actionPerformedBuildMeme();
    }
    else if(e.getSource() == close){
     //clear out t3mp directory
