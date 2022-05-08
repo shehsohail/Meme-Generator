@@ -312,15 +312,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    else if(e.getSource() == theInstructions){actionPerformedOpenTheInstructions();}
    else{System.out.println("");}
   }
-  public String BrowseWindow(String path, String option) throws IOException {
-    if(option.equals("browse")){
+
+  public String BrowseWindowBrowse(){
     File file=new File(".");
     String directory = file.getAbsolutePath();
     File generatedMemesDirectory = new File(directory);
     String backgroundImage[] = generatedMemesDirectory.list();
     int readyForReturn = 0;
     if(indexOfBrowsingMeme+1 >= backgroundImage.length){
-      
       indexOfBrowsingMeme = 0;
     }
     while(readyForReturn == 0){
@@ -364,59 +363,65 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     setVisible(true);
     indexOfBrowsingMeme++;
     return backgroundImage[indexOfBrowsingMeme];
-    }}
-    else if(option.equals("preset")){
-      String directory = path;
-      File generatedMemesDirectory = new File(directory);
-      String backgroundImage[] = generatedMemesDirectory.list();
-      int readyForReturn = 0;
-      if(indexOfBrowsingPresteMeme == backgroundImage.length){
-        
-        indexOfBrowsingPresteMeme = 0;
+    }
+  }
+
+  public String BrowseWindowPreset(String path){
+    String directory = path;
+    File generatedMemesDirectory = new File(directory);
+    String backgroundImage[] = generatedMemesDirectory.list();
+    int readyForReturn = 0;
+    if(indexOfBrowsingPresteMeme == backgroundImage.length){
+      
+      indexOfBrowsingPresteMeme = 0;
+    }
+    while(readyForReturn == 0){
+      if(backgroundImage[indexOfBrowsingPresteMeme].contains(".jpg")){
+        readyForReturn = 1;
       }
-      while(readyForReturn == 0){
-        if(backgroundImage[indexOfBrowsingPresteMeme].contains(".jpg")){
-          readyForReturn = 1;
-        }
-        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".gif")){
-          readyForReturn = 1;
-        }
-        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".JPG")){
-          readyForReturn = 1;
-        }
-        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".png")){
-          readyForReturn = 1;
-        }
-        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".PNG")){
-          readyForReturn = 1;
-        }
-        else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".GIF")){
-          readyForReturn = 1;
-        }
-        else {
-          indexOfBrowsingPresteMeme = indexOfBrowsingPresteMeme + 1;
-        }
+      else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".gif")){
+        readyForReturn = 1;
       }
-      System.out.println(backgroundImage[indexOfBrowsingPresteMeme]);
-      this.setContentPane(new JPanel() {
-      });
-      try {
-        add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
-        pack();
-        setVisible(true);
-        indexOfBrowsingPresteMeme++;
-        return backgroundImage[indexOfBrowsingPresteMeme-1];
-        
-      } catch (Exception e) {
-        //TODO: handle exception
-        indexOfBrowsingPresteMeme = 0;
+      else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".JPG")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".png")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".PNG")){
+        readyForReturn = 1;
+      }
+      else if(backgroundImage[indexOfBrowsingPresteMeme].contains(".GIF")){
+        readyForReturn = 1;
+      }
+      else {
+        indexOfBrowsingPresteMeme = indexOfBrowsingPresteMeme + 1;
+      }
+    }
+    System.out.println(backgroundImage[indexOfBrowsingPresteMeme]);
+    this.setContentPane(new JPanel() {
+    });
+    try {
       add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
       pack();
       setVisible(true);
       indexOfBrowsingPresteMeme++;
       return backgroundImage[indexOfBrowsingPresteMeme-1];
-      }
+      
+    } catch (Exception e) {
+      //TODO: handle exception
+      indexOfBrowsingPresteMeme = 0;
+    add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
+    pack();
+    setVisible(true);
+    indexOfBrowsingPresteMeme++;
+    return backgroundImage[indexOfBrowsingPresteMeme-1];
     }
+  }
+
+  public String BrowseWindow(String path, String option) throws IOException {
+    if(option.equals("browse")){return BrowseWindowBrowse();}
+    else if(option.equals("preset")){return BrowseWindowPreset(path);}
     else if(option.equals("preview")){
       
       String directory = path;
