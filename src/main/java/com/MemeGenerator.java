@@ -157,13 +157,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     try {
       browsedFile = BrowseWindow("Doesnt matter", "browse");
       
-    } catch (Exception BW) {
-      //TODO: handle exception
+    } catch (Exception mW) {
       try {
         indexOfBrowsingMeme = 0;
         browsedFile = BrowseWindow("Doesnt matter", "browse");
       } catch (IOException e1) {
-        // TODO Auto-generated catch block
         System.err.println("You might not have an meme to browse to");
       }  
     }
@@ -173,7 +171,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     try {
       memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
     } catch (IOException e1) {
-      // TODO Auto-generated catch block
       System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
     }
   }
@@ -181,8 +178,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public void actionPerformedUpload(){
     try {
       UploadWindow();
-    } catch (Exception BW) {
-      //TODO: handle exception
+    } catch (Exception bW) {
       System.out.println("I don't know why but you can't upload that");
     }
   }
@@ -191,7 +187,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     try {
       createTheMeme(memeTemplate);
     } catch (IOException e1) {
-      // TODO Auto-generated catch block
       System.err.println("Something unexpected happened during the meme building");
     }
   }
@@ -230,7 +225,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       readMeWriter.close();
 
     } catch (IOException le) {
-      // TODO Auto-generated catch block
       System.err.println("One or both text files might not have been created.  Not a big deal though.");
     }
      System.exit(0);
@@ -241,16 +235,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public void actionPerformedDeleteMeme(){
     try {
      Files.delete(Paths.get(mainDirectory).resolve(browsedFile));
-     System.out.println("Deleted file iz: " + browsedFile);
+     System.out.println("Deleted file is: " + browsedFile);
    } catch (IOException e1) {
-     // TODO Auto-generated catch block
      try {
        File deletedFile = new File(mainDirectory + "\\" + browsedFile);
        deletedFile.delete();
        System.out.println("Files path delete failed");
-       System.out.println("Deleted file iz: " + browsedFile);
+       System.out.println("The deleted file iz: " + browsedFile);
      } catch (Exception el) {
-       //TODO: handle exception
        System.out.println("Couldn't delete: " + browsedFile);
      }
    }
@@ -262,14 +254,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      Files.delete(Paths.get(mainDirectory).resolve("t3mp").resolve(memeTemplate));
      System.out.println("Deleted file iz: " + memeTemplate);
    } catch (IOException e1) {
-     // TODO Auto-generated catch block
      try {
        File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
        deletedFile.delete();
        System.out.println("Files path delete failed");
        System.out.println("Deleted file iz: " + memeTemplate);
      } catch (Exception el) {
-       //TODO: handle exception
        System.out.println("Couldn't delete: " + memeTemplate);
      }
    }
@@ -279,11 +269,9 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     try {
       openTheInstructionsFile();
     } catch (Exception otif) {
-      //TODO: handle exception
       try {
         readTheInstructionsFile();
       } catch (Exception otif2) {
-        //TODO: handle exception
         System.err.println("Could not show you the instructions");
       }
     }
@@ -317,7 +305,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     File file=new File(".");
     String directory = file.getAbsolutePath();
     File generatedMemesDirectory = new File(directory);
-    String backgroundImage[] = generatedMemesDirectory.list();
+    String[] backgroundImage = generatedMemesDirectory.list();
     int readyForReturn = 0;
     if(indexOfBrowsingMeme+1 >= backgroundImage.length){
       indexOfBrowsingMeme = 0;
@@ -356,7 +344,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       return backgroundImage[indexOfBrowsingMeme-1];
       
     } catch (Exception e) {
-      //TODO: handle exception
       indexOfBrowsingMeme = 6;
     add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
     pack();
@@ -369,7 +356,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public String BrowseWindowPreset(String path){
     String directory = path;
     File generatedMemesDirectory = new File(directory);
-    String backgroundImage[] = generatedMemesDirectory.list();
+    String[] backgroundImage = generatedMemesDirectory.list();
     int readyForReturn = 0;
     if(indexOfBrowsingPresteMeme == backgroundImage.length){
       
@@ -409,7 +396,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       return backgroundImage[indexOfBrowsingPresteMeme-1];
       
     } catch (Exception e) {
-      //TODO: handle exception
       indexOfBrowsingPresteMeme = 0;
     add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
     pack();
@@ -419,46 +405,45 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
   }
 
-  public String BrowseWindow(String path, String option) throws IOException {
-    if(option.equals("browse")){return BrowseWindowBrowse();}
-    else if(option.equals("preset")){return BrowseWindowPreset(path);}
-    else if(option.equals("preview")){
-      
-      String directory = path;
-      File generatedMemesDirectory = new File(directory);
-      String backgroundImage[] = generatedMemesDirectory.list();
-      System.out.println("previewing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
-      this.setContentPane(new JPanel() {
-      });
-      try {
-        add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
-        pack();
-        setVisible(true);
-        return backgroundImage[backgroundImage.length-1];
-        
-      } catch (Exception e) {
-        //TODO: handle exception
-        System.out.println("preview error");
-        indexOfBrowsingPresteMeme = 0;
+  public String BrowseWindowPreview(String path){
+    String directory = path;
+    File generatedMemesDirectory = new File(directory);
+    String[] backgroundImage = generatedMemesDirectory.list();
+    System.out.println("previewing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+    this.setContentPane(new JPanel() {
+    });
+    try {
       add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
       pack();
       setVisible(true);
       return backgroundImage[backgroundImage.length-1];
-      }
+      
+    } catch (Exception e) {
+      System.out.println("preview error");
+      indexOfBrowsingPresteMeme = 0;
+    add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
+    pack();
+    setVisible(true);
+    return backgroundImage[backgroundImage.length-1];
     }
+  }
+
+  public String BrowseWindow(String path, String option) throws IOException {
+    if(option.equals("browse")){return BrowseWindowBrowse();}
+    else if(option.equals("preset")){return BrowseWindowPreset(path);}
+    else if(option.equals("preview")){return BrowseWindowPreview(path);}
     else{return "else";}
  }
 
  public void fileDeleter(String dir, int index){
    File theDirectory = new File(dir);
-   String listOfFiles[] = theDirectory.list();
+   String[] listOfFiles = theDirectory.list();
    String theDeletedFileString = dir + listOfFiles[index];
    File theDeletedFile = new File(theDeletedFileString);
    System.out.println("The deleted file is " + theDeletedFileString);
    try {
     theDeletedFile.delete();
    } catch (Exception e) {
-     //TODO: handle exception
      System.out.println("I couldn't delete it");
    }
  }
@@ -553,7 +538,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         System.out.println(instructionsString);
       }
     } catch (Exception io) {
-      //TODO: handle exception
       System.err.println("Get Notepad because the instructions couldn't be opened or read");
     }
   }
@@ -563,6 +547,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     instructionsDotText.start();
   }
 
+   //Yeah not really sure how to go from 112 to 15
    public int createTheMeme(String rawMeme) throws IOException{
     red = 255;
     green = 255;
@@ -609,7 +594,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      try {
       fontSize = Float.parseFloat(input);
      } catch (Exception fonts) {
-       //TODO: handle exception
        fontSize = 1;
      }
      
@@ -636,14 +620,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         red = Integer.parseInt(RString);
       } catch (Exception fonts) {
-        //TODO: handle exception
         red = 4;
       }
       finally{
         try {
           colorPreviewLabel.setBackground(new Color(red, green, blue));
         } catch (Exception e) {
-          //TODO: handle exception
           System.err.println("Enter integers for RGB");
         }
       }
@@ -664,14 +646,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         green = Integer.parseInt(GString); // Ok I know this is childish but ha gstring.  Typed Rstring and followed the pattern with green but then realized what I typed and had a little laugh.
       } catch (Exception e) {
-        //TODO: handle exception
         green = 2;
       }
       finally{
         try {
           colorPreviewLabel.setBackground(new Color(red, green, blue));
         } catch (Exception e) {
-          //TODO: handle exception
           System.err.println("Enter integers for RGB");
         }
       }
@@ -691,14 +671,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         blue = Integer.parseInt(BString);
       } catch (Exception e) {
-        //TODO: handle exception
       blue = 0;
       }
       finally{
         try {
           colorPreviewLabel.setBackground(new Color(red, green, blue));
         } catch (Exception e) {
-          //TODO: handle exception
           System.err.println("Enter integers for RGB");
         }
       }
@@ -720,7 +698,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         topX = Integer.parseInt(XString);
       } catch (Exception e) {
-        //TODO: handle exception
       topX = 1;
       }
     }
@@ -739,7 +716,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         topY = Integer.parseInt(YString);
       } catch (Exception e) {
-        //TODO: handle exception
       topY = 1;
       }
     }
@@ -770,7 +746,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         colorPreviewLabel.setBackground(new Color(red, green, blue));
       } catch (Exception e) {
-        //TODO: handle exception
         System.err.println("Enter integers for RGB");
       }
     }
@@ -792,7 +767,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         ImageIO.write(image, newMemeFileFormat, new File(newMemeFileName + "." + newMemeFileFormat));
         System.err.println("Submitted " + newMemeFileName + "." + newMemeFileFormat);
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("There wass an issue submitting the meme.  Not sure why tho");
       }
       //clear out t3mp directory
@@ -808,7 +782,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         readMeWriter.close();
 
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("One or both text files might not have been created.  Not a big deal tho");
       }
     }
@@ -820,6 +793,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
       System.out.println("the value of previewing is: " + previewing);
+      System.out.println("Your font size is: " + fontSize);
       System.out.println("Your caption is: " + memeText);
       System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(red) + ", " + Integer.toString(green) + ", " + Integer.toString(blue) + ") ");
       System.out.println("Your text location starting point (X, Y) is: (" + Integer.toString(topX) +  ", " + Integer.toString(topY) + ") ");
@@ -829,7 +803,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       try {
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("Couldn't clean out the directory.  Might cause problems later on");
       }
 
@@ -859,12 +832,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
         image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         try {
           ImageIO.write(image, "png", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "png"));
           image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "png"));
         } catch (Exception e2) {
-          //TODO: handle exception
           try {
             ImageIO.write(image, "jpg", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
             image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "jpg"));
@@ -873,12 +844,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
               ImageIO.write(image, "JPG", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "JPG"));
               image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "JPG"));
             } catch (Exception e8) {
-              //TODO: handle exception
               try {
                 ImageIO.write(image, "PNG", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "PNG"));
                 image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "PNG"));
               } catch (Exception e12) {
-                //TODO: handle exception
                 try {
                   ImageIO.write(image, "gif", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "gif"));
                   image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "gif"));
@@ -887,21 +856,18 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
                     ImageIO.write(image, "GIF", new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "GIF"));
                     image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + "GIF"));
                   } catch (Exception eZ) {
-                    //TODO: handle exception
                     System.err.println("Couldn't save this edit.  Be sure not to change the meme name mid meme. Please start over");
                     previewing = previewing - 1;
                   }
                 }
               }
             }
-            // TODO Auto-generated catch block
           }
         }
       }
       try {
         BrowseWindow(tempMemeTemplateFolder, "preview");
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("The edit was probably saved but viewing the latest edit failed.");
       }
     }
@@ -915,7 +881,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //Open Instrustions txt doc
         openTheInstructionsFile();
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("Couldn't open the file");
         System.err.println("Going to try and read the file and print the instructions");
         System.err.println("Install Notepad.exe in the future please");
@@ -953,7 +918,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
           System.out.println("read: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           System.err.println("Undo failed.  Please start from scratch.");
         }
       }
@@ -971,7 +935,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
           ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
 
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           System.err.println("Undo failed.  You must save an edit between Undos.  Please continue memeing or start over.");
         }
       }
@@ -990,11 +953,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         File readMe = new File(tempMemeTemplateFolder + "ReadMe.txt");
         readMe.createNewFile();
         FileWriter readMeWriter = new FileWriter(tempMemeTemplateFolder + "filename.txt");
-        readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty");
+        readMeWriter.write("--");
         readMeWriter.close();
 
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("One or both text files might not have been created.  Not a big deal tho.");
       }
       memeBuildingFrame.dispose();
@@ -1022,7 +984,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         FileUtils.cleanDirectory(tempMemeToBeDeleted);
         memeBuildingFrame.dispose();
       } catch (IOException tmtbd) {
-        // TODO Auto-generated catch block
         System.err.println("For whatever reason the t3mp folder might not be cleared out.  Might or might not cause issues");
       }
       memeBuildingFrame.dispose();
@@ -1035,7 +996,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         readMeWriter.close();
 
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         System.err.println("One or both text files might not have been created.  Not a big deal though");
       }
     }
