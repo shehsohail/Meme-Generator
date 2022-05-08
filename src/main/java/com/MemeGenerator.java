@@ -221,7 +221,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
  * Yes I also realize that we could just create the folder if it doesn't exist but that was not the first idea we had
  * And as we all know first idea best idea
  */
-      readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty");
+      readMeWriter.write("Not sure what github/s problem is with a blank folder but now the folder is never empty.");
       readMeWriter.close();
 
     } catch (IOException le) {
@@ -409,7 +409,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     String directory = path;
     File generatedMemesDirectory = new File(directory);
     String[] backgroundImage = generatedMemesDirectory.list();
-    System.out.println("previewing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+    System.out.println("previewing: " + newMemeFileName + previewing + "." + newMemeFileFormat);
     this.setContentPane(new JPanel() {
     });
     try {
@@ -626,7 +626,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         try {
           colorPreviewLabel.setBackground(new Color(red, green, blue));
         } catch (Exception e) {
-          System.err.println("Enter integers for RGB");
+          System.err.println("Enter integers for (RGB)");
         }
       }
     }
@@ -652,7 +652,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         try {
           colorPreviewLabel.setBackground(new Color(red, green, blue));
         } catch (Exception e) {
-          System.err.println("Enter integers for RGB");
+          System.err.println("Enter the integers for RGB");
         }
       }
     }
@@ -684,8 +684,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(blueBox); //Each button/textbox needs to be added to the label
 
-  JLabel xBoxLabel = new JLabel("Enter in X value < " + String.valueOf(memeWidth) + ":");
-  JTextField xBox= new JTextField("Enter in X value < " + String.valueOf(memeWidth));
+  JLabel xBoxLabel = new JLabel("Enter in X value < " + memeWidth + ":");
+  JTextField xBox= new JTextField("Enter in X value < " + memeWidth);
   xBox.setHorizontalAlignment(SwingConstants.CENTER);
 
   xBox.setBackground(Color.YELLOW);
@@ -704,8 +704,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   });
   memeBuildingPanel.add(xBox); //Each button/textbox needs to be added to the label
 
-  JLabel yBoxLabel = new JLabel("Enter in Y value < " + String.valueOf(memeHeight) +":");
-  JTextField yBox= new JTextField("Enter in Y value < " + String.valueOf(memeHeight));
+  JLabel yBoxLabel = new JLabel("Enter in Y value < " + memeHeight +":");
+  JTextField yBox= new JTextField("Enter in Y value < " + memeHeight);
   yBox.setHorizontalAlignment(SwingConstants.CENTER);
 
   yBox.setBackground(Color.YELLOW);
@@ -795,8 +795,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       System.out.println("the value of previewing is: " + previewing);
       System.out.println("Your font size is: " + fontSize);
       System.out.println("Your caption is: " + memeText);
-      System.out.println("Your color triplet (R,G,B) is: (" + Integer.toString(red) + ", " + Integer.toString(green) + ", " + Integer.toString(blue) + ") ");
-      System.out.println("Your text location starting point (X, Y) is: (" + Integer.toString(topX) +  ", " + Integer.toString(topY) + ") ");
+      System.out.println("Your color triplet (R,G,B) is: (" + red + ", " + green + ", " + blue + ") ");
+      System.out.println("Your text location starting point (X, Y) is: (" + topX +  ", " + topY + ") ");
       if(previewing == 0){
         //Delete all files in t3mp if this is the first attemot of memeing
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
@@ -903,7 +903,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       caption.setBackground(Color.YELLOW);
       //Get length of files in t3mp directory
       File generatedMemesDirectory = new File(tempMemeTemplateFolder);
-      String tempMeme[] = generatedMemesDirectory.list();
+      String[] tempMeme = generatedMemesDirectory.list();
       //If 0 do nothing
       if(tempMeme.length == 0){
         System.out.println("Nothing to undo");
@@ -913,10 +913,10 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         try {
           previewing = previewing + 1;
           image = ImageIO.read(new File(blankMemeTemplateFolder + rawMeme));
-          System.out.println("writing: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
-          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
-          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
-          System.out.println("read: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+          System.out.println("writing: " + newMemeFileName + previewing + "." + newMemeFileFormat);
+          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + previewing + "." + newMemeFileFormat));
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + previewing + "." + newMemeFileFormat));
+          System.out.println("read: " + newMemeFileName + previewing + "." + newMemeFileFormat);
         } catch (IOException e) {
           System.err.println("Undo failed.  Please start from scratch.");
         }
@@ -924,15 +924,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       //If more than one take second most recent and name it most recent
         //Seems to work but you cant undo twice
       else if(tempMeme.length > 1){
-        System.out.println("newest file you want to delete: " + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat); //The newest file (You dont want that)
-        System.out.println("second most recent file you want to go back to: " + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat); //The newest file (You want to undo back to this)
+        System.out.println("newest file you want to delete: " + newMemeFileName + previewing + "." + newMemeFileFormat); //The newest file (You dont want that)
+        System.out.println("second most recent file you want to go back to: " + newMemeFileName + (previewing-1) + "." + newMemeFileFormat); //The newest file (You want to undo back to this)
         //Make image = second most recent file
         try {
-          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing-1) + "." + newMemeFileFormat));
-          File undidMeme = new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat);
+          image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + (previewing-1) + "." + newMemeFileFormat));
+          File undidMeme = new File(tempMemeTemplateFolder + newMemeFileName + previewing + "." + newMemeFileFormat);
           undidMeme.delete();
           previewing = previewing + 1;
-          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+          ImageIO.write(image, newMemeFileFormat, new File(tempMemeTemplateFolder + newMemeFileName + previewing + "." + newMemeFileFormat));
 
         } catch (IOException e) {
           System.err.println("Undo failed.  You must save an edit between Undos.  Please continue memeing or start over.");
