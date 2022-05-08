@@ -196,28 +196,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     }
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    //Want to pop up window with picture
-     if(e.getSource() == browse){actionPerformedBrowse();}
-     //Do the preset meme method
-    else if(e.getSource() == preset){
-      actionPerformedPreset();
-    }
-    else if(e.getSource() == upload){
-      //Upload image
-      actionPerformedUpload();
-    }
-   else if(e.getSource() == buildMeme){
-     //Do the build a meme method
-       //Cycle through the choose meme button
-       //Once settled on one you like click the button.
-      //clear out t3mp directory
-      actionPerformedBuildMeme();
-   }
-   else if(e.getSource() == close){
-    //clear out t3mp directory
-
+  public void actionPerformedClose(){
     File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
     try {
       FileUtils.cleanDirectory(tempMemeToBeDeleted);
@@ -257,45 +236,46 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
      System.exit(0);
      dispose();
      setVisible(false);
-   }
-   else if(e.getSource() == delete){
+  }
+
+  public void actionPerformedDeleteMeme(){
+    try {
+     Files.delete(Paths.get(mainDirectory).resolve(browsedFile));
+     System.out.println("Deleted file iz: " + browsedFile);
+   } catch (IOException e1) {
+     // TODO Auto-generated catch block
      try {
-      Files.delete(Paths.get(mainDirectory).resolve(browsedFile));
-      System.out.println("Deleted file iz: " + browsedFile);
-    } catch (IOException e1) {
-      // TODO Auto-generated catch block
-      try {
-        File deletedFile = new File(mainDirectory + "\\" + browsedFile);
-        deletedFile.delete();
-        System.out.println("Files path delete failed");
-        System.out.println("Deleted file iz: " + browsedFile);
-      } catch (Exception el) {
-        //TODO: handle exception
-        System.out.println("Couldn't delete: " + browsedFile);
-      }
-    }
+       File deletedFile = new File(mainDirectory + "\\" + browsedFile);
+       deletedFile.delete();
+       System.out.println("Files path delete failed");
+       System.out.println("Deleted file iz: " + browsedFile);
+     } catch (Exception el) {
+       //TODO: handle exception
+       System.out.println("Couldn't delete: " + browsedFile);
+     }
    }
-   else if(e.getSource() == deleteTemplate){
-     //Delete the meme that you browsed to 
-     try {//Not sure how to make this work
-          //File still gets deleted tho so low priority
-      Files.delete(Paths.get(mainDirectory).resolve("t3mp").resolve(memeTemplate));
-      System.out.println("Deleted file iz: " + memeTemplate);
-    } catch (IOException e1) {
-      // TODO Auto-generated catch block
-      try {
-        File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
-        deletedFile.delete();
-        System.out.println("Files path delete failed");
-        System.out.println("Deleted file iz: " + memeTemplate);
-      } catch (Exception el) {
-        //TODO: handle exception
-        System.out.println("Couldn't delete: " + memeTemplate);
-      }
-    }
+  }
+
+  public void actionPerformedDeleteMemeTemplate(){
+    try {//Not sure how to make this work
+         //File still gets deleted tho so low priority
+     Files.delete(Paths.get(mainDirectory).resolve("t3mp").resolve(memeTemplate));
+     System.out.println("Deleted file iz: " + memeTemplate);
+   } catch (IOException e1) {
+     // TODO Auto-generated catch block
+     try {
+       File deletedFile = new File(blankMemeTemplateFolder + "\\" + memeTemplate);
+       deletedFile.delete();
+       System.out.println("Files path delete failed");
+       System.out.println("Deleted file iz: " + memeTemplate);
+     } catch (Exception el) {
+       //TODO: handle exception
+       System.out.println("Couldn't delete: " + memeTemplate);
+     }
    }
-   else if(e.getSource() == theInstructions){
-     //Open instructions
+  }
+
+  public void actionPerformedOpenTheInstructions(){
     try {
       openTheInstructionsFile();
     } catch (Exception otif) {
@@ -307,9 +287,30 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         System.err.println("Could not show you the instructions");
       }
     }
-   }
-    else{System.out.println("");}
-    
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    //Want to pop up window with picture
+     if(e.getSource() == browse){actionPerformedBrowse();}
+     //Do the preset meme method
+    else if(e.getSource() == preset){actionPerformedPreset();}
+    //Upload image
+    else if(e.getSource() == upload){actionPerformedUpload();}
+    //Do the build a meme method
+      //Cycle through the choose meme button
+      //Once settled on one you like click the button.
+     //clear out t3mp directory
+   else if(e.getSource() == buildMeme){actionPerformedBuildMeme();}
+   //clear out t3mp directory
+   else if(e.getSource() == close){actionPerformedClose();}
+   //Deletes a meme that was made
+   else if(e.getSource() == delete){actionPerformedDeleteMeme();}
+   //Delete the meme template
+   else if(e.getSource() == deleteTemplate){actionPerformedDeleteMemeTemplate();}
+   //Open instructions
+   else if(e.getSource() == theInstructions){actionPerformedOpenTheInstructions();}
+   else{System.out.println("");}
   }
   public String BrowseWindow(String path, String option) throws IOException {
     if(option.equals("browse")){
