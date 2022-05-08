@@ -739,7 +739,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   //JLabel colorPreviewLabel = new JLabel("Press enter to preview your color"); //Label not needed?
   colorPreviewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-  colorPreviewLabel.setBackground(Color.YELLOW);
+  colorPreviewLabel.setBackground(new Color(red, green, blue));
   // changed line 573 below from caption to Title.
   colorPreviewLabel.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent t){
