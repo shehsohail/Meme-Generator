@@ -549,8 +549,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
    //Yeah not really sure how to go from 112 to 15
    public int createTheMeme(String rawMeme) throws IOException{
-    red = 255;
-    green = 255;
+    red = 204;
+    green = 204;
     blue = 255;
     topX = 1;
     topY = 1;
