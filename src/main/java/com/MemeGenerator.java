@@ -31,6 +31,7 @@ import org.apache.commons.io.FileUtils;
 public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 {
   transient BufferedImage image;
+  double scale;
   JButton browse;
   JButton upload;
   JButton preset;
@@ -45,6 +46,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel widthLabel;
   JLabel heightLabel;
   JTextField colorPreviewLabel = new JTextField("Preview your color");
+  Image scaledImage;
+  ImageIcon scaledImageIcon;
   int previewing = 0;
   int red;
   int green;
@@ -53,8 +56,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   int topY;
   int memeHeight;
   int memeWidth;
+  int imageHeight;
+  int imageWidth;
   int indexOfBrowsingMeme;
   int indexOfBrowsingPresteMeme;
+  int screenWidth;
+  int screenHeight;
   File memeFile = new File(".");
   float fontSize;
   String mainDirectory = memeFile.getAbsolutePath();
@@ -74,6 +81,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public MemeGenerator(){
     JFrame memeFrame = new JFrame();
     JPanel memePanel = new JPanel();
+
+    //Get the screen dimensions
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+    screenWidth = (int)size.getWidth();
+    screenHeight = (int)size.getHeight();
+    System.out.println("Your screen width is: " + screenWidth);
+    System.out.println("Your screen height is: " + screenHeight);
 
     //Created buttons
     browse = new JButton("Browse the Memes");
@@ -337,7 +351,30 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     this.setContentPane(new JPanel() {
     });
     try {
-      add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
+      image = ImageIO.read(new File(backgroundImage[indexOfBrowsingMeme]));
+    } catch (IOException e1) {
+      System.err.println("Couldn't read the image.");
+    }
+    imageHeight = image.getHeight();
+    imageWidth = image.getWidth();
+    scale = 1.1;
+    try {
+      //If the image is bigger than your screen then scale it
+      if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
+        while(imageHeight > screenHeight){
+          scale = scale + .1;
+          imageHeight = (int)(imageHeight / scale);
+        }
+        while(imageWidth > screenWidth){
+          scale = scale + .1;
+          imageWidth = (int)(imageWidth / scale);
+        }
+        scaledImage = image.getScaledInstance((int)(image.getWidth()/scale), (int)(image.getHeight()/scale), Image.SCALE_SMOOTH);
+        scaledImageIcon = new ImageIcon(scaledImage);
+        add(new JLabel(scaledImageIcon));
+      }
+      //If it isn't then display the unscaled image
+      else{add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));}
       pack();
       setVisible(true);
       indexOfBrowsingMeme++;
@@ -345,7 +382,22 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       
     } catch (Exception e) {
       indexOfBrowsingMeme = 6;
-    add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));
+      //If the image is bigger than your screen then scale it
+      if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
+        while(imageHeight > screenHeight){
+          scale = scale + .1;
+          imageHeight = (int)(imageHeight / scale);
+        }
+        while(imageWidth > screenWidth){
+          scale = scale + .1;
+          imageWidth = (int)(imageWidth / scale);
+        }
+        scaledImage = image.getScaledInstance((int)(image.getWidth()/scale), (int)(image.getHeight()/scale), Image.SCALE_SMOOTH);
+        scaledImageIcon = new ImageIcon(scaledImage);
+        add(new JLabel(scaledImageIcon));
+      }
+      //If it isn't then display the unscaled image
+      else{add(new JLabel(new ImageIcon(backgroundImage[indexOfBrowsingMeme])));}
     pack();
     setVisible(true);
     indexOfBrowsingMeme++;
@@ -389,7 +441,32 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     this.setContentPane(new JPanel() {
     });
     try {
-      add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
+      image = ImageIO.read(new File(path + backgroundImage[indexOfBrowsingPresteMeme]));
+    } catch (Exception e) {
+      System.err.println("Cant read this image");
+    }
+    imageHeight = image.getHeight();
+    imageWidth = image.getWidth();
+    scale = 1.1;
+    //Scale the image if it is bigger than your screen
+    try {
+      if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
+        while(imageHeight > screenHeight){
+          imageHeight = (int)(imageHeight / scale);
+          scale = scale + .1;
+        }
+        while(imageWidth > screenWidth){
+          imageWidth = (int)(imageWidth / scale);
+          scale = scale + .1;
+        }
+        System.out.println("The image needed to be scaled down by a factor if " + scale);
+        scaledImage = image.getScaledInstance((int)(image.getWidth()/scale), (int)(image.getHeight()/scale), Image.SCALE_SMOOTH);
+        scaledImageIcon = new ImageIcon(scaledImage);
+        add(new JLabel(scaledImageIcon));
+      }
+      //Display the image as is since its not too big
+      else{add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));}
+      
       pack();
       setVisible(true);
       indexOfBrowsingPresteMeme++;
@@ -397,7 +474,29 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       
     } catch (Exception e) {
       indexOfBrowsingPresteMeme = 0;
-    add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));
+      try {
+        image = ImageIO.read(new File(path + backgroundImage[indexOfBrowsingPresteMeme]));
+      } catch (Exception ej) {
+        System.err.println("Can't read this image");
+      }
+      imageHeight = image.getHeight();
+      imageWidth = image.getWidth();
+      scale = 1.1;
+      if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
+        while(imageHeight > screenHeight){
+          imageHeight = (int)(imageHeight / scale);
+          scale = scale + .1;
+        }
+        while(imageWidth > screenWidth){
+          imageWidth = (int)(imageWidth / scale);
+          scale = scale + .1;
+        }
+        scaledImage = image.getScaledInstance((int)(image.getWidth()/scale), (int)(image.getHeight()/scale), Image.SCALE_SMOOTH);
+        scaledImageIcon = new ImageIcon(scaledImage);
+        add(new JLabel(scaledImageIcon));
+      }
+      //Display the image as is since its not too big
+      else{add(new JLabel(new ImageIcon(path + backgroundImage[indexOfBrowsingPresteMeme])));}
     pack();
     setVisible(true);
     indexOfBrowsingPresteMeme++;
@@ -412,6 +511,12 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     System.out.println("previewing: " + newMemeFileName + previewing + "." + newMemeFileFormat);
     this.setContentPane(new JPanel() {
     });
+    try {
+      image = ImageIO.read(new File(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat));
+    } catch (Exception e) {
+      System.err.println("Reading what should be previewed failed.");
+    }
+
     try {
       add(new JLabel(new ImageIcon(tempMemeTemplateFolder + newMemeFileName + String.valueOf(previewing) + "." + newMemeFileFormat)));
       pack();
