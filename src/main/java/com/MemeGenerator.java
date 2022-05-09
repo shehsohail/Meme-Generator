@@ -990,7 +990,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if(topX < 0){topX = 1;}
       if(topY > memeHeight){topY = memeHeight / 2;}
       if(topY < 0){topY = 1;}
-      if(fontSize <= 0){fontSize = 1;}
+      if(fontSize <= 1){fontSize = 1;}
       Graphics g = image.getGraphics();
       g.setFont(g.getFont().deriveFont(fontSize));
       Color fontColor = new Color(red, green, blue);
