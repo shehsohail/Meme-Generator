@@ -47,7 +47,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JLabel widthLabel;
   JLabel heightLabel;
   JTextField colorPreviewLabel = new JTextField("Preview your color");
-  Image scaledImage;
+  transient Image scaledImage;
   ImageIcon scaledImageIcon;
   int previewing = 0;
   int red;
