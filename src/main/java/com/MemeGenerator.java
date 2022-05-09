@@ -267,7 +267,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        System.out.println("Files path delete failed");
        System.out.println("The deleted file iz: " + browsedFile);
      } catch (Exception el) {
-       System.out.println("Couldn't delete: " + browsedFile);
+       try {
+        System.out.println("Couldn't delete: " + browsedFile);
+       } catch (NullPointerException e) {
+        System.out.println("You have not browsed to a meme.  Browse to a meme first.");
+       }
      }
    }
   }
@@ -284,7 +288,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
        System.out.println("Files path delete failed");
        System.out.println("Deleted file iz: " + memeTemplate);
      } catch (Exception el) {
-       System.out.println("Couldn't delete: " + memeTemplate);
+       try {
+        System.out.println("Couldn't delete: " + memeTemplate);
+       } catch (NullPointerException e) {
+        System.out.println("You have not browsed to a template.  Browse to a template first.");
+       }
      }
    }
   }
@@ -317,9 +325,21 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
    //clear out t3mp directory
    else if(e.getSource() == close){actionPerformedClose();}
    //Deletes a meme that was made
-   else if(e.getSource() == delete){actionPerformedDeleteMeme();}
+   else if(e.getSource() == delete){
+     try {
+      actionPerformedDeleteMeme();
+     } catch (NullPointerException en) {
+      System.out.println("You have not browsed to a meme.  Please browse to a meme first.");
+     }
+    }
    //Delete the meme template
-   else if(e.getSource() == deleteTemplate){actionPerformedDeleteMemeTemplate();}
+   else if(e.getSource() == deleteTemplate){
+     try {
+      actionPerformedDeleteMemeTemplate();
+     } catch (NullPointerException en2) {
+      System.out.println("You have not browsed to a template.  You must browse to a template first.");
+     }
+    }
    //Open instructions
    else if(e.getSource() == theInstructions){actionPerformedOpenTheInstructions();}
    else{System.out.println("");}
