@@ -650,8 +650,30 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         }
         this.setContentPane(new JPanel() {
         });
-  
-        add(new JLabel(new ImageIcon(destinationPath + newMemeName)));
+        try {
+          browsingImage = ImageIO.read(new File(destinationPath + newMemeName));
+        } catch (Exception e) {
+          System.out.println("Not sure why but I could not read the image.");
+        }
+        imageHeight = browsingImage.getHeight();
+        imageWidth = browsingImage.getWidth();
+        scale = 1.1;
+        //Checking if the image needs to be scaled down
+        if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
+          while(imageHeight > screenHeight){
+            imageHeight = (int)(imageHeight / scale);
+            scale = scale + .1;
+          }
+          while(imageWidth > screenWidth){
+            imageWidth = (int)(imageWidth / scale);
+            scale = scale + .1;
+          }
+          scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
+          scaledImageIcon = new ImageIcon(scaledImage);
+          System.out.println("This image needed to be scaled down be a factor of " + scale);
+          add(new JLabel(scaledImageIcon));
+        }
+        else{add(new JLabel(new ImageIcon(destinationPath + newMemeName)));}
         pack();
         setVisible(true);
       }
