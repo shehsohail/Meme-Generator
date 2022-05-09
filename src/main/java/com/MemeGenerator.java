@@ -203,9 +203,15 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
   public void actionPerformedBuildMeme(){
     try {
-      createTheMeme(memeTemplate);
-    } catch (IOException e1) {
+      if((isAnImage(memeTemplate))){createTheMeme(memeTemplate);}
+      else{System.err.println("Cycle through the templates first");}
+    } catch (Exception e1) {
       System.err.println("Something unexpected happened during the meme building");
+      try {
+        openTheInstructionsFile();
+      } catch (Exception e) {
+        readTheInstructionsFile();
+      }
     }
   }
 
@@ -648,25 +654,29 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   }
 
   public boolean isAnImage(String theFileName){
-    if(theFileName.contains(".jpg")){
-      return true;
-    }
-    else if(theFileName.contains(".JPG")){
-      return true;
-    }
-    else if(theFileName.contains(".png")){
-      return true;
-    }
-    else if(theFileName.contains(".PNG")){
-      return true;
-    }
-    else if(theFileName.contains(".GIF")){
-      return true;
-    }
-    else if(theFileName.contains(".gif")){
-      return true;
-    }
-    else{
+    try {
+      if(theFileName.contains(".jpg")){
+        return true;
+      }
+      else if(theFileName.contains(".JPG")){
+        return true;
+      }
+      else if(theFileName.contains(".png")){
+        return true;
+      }
+      else if(theFileName.contains(".PNG")){
+        return true;
+      }
+      else if(theFileName.contains(".GIF")){
+        return true;
+      }
+      else if(theFileName.contains(".gif")){
+        return true;
+      }
+      else{
+        return false;
+      }
+    } catch (Exception e) {
       return false;
     }
   }
