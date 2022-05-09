@@ -85,8 +85,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
 
     //Get the screen dimensions
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+    //Added a bit of extra space
     screenWidth = (int)size.getWidth();
+    screenWidth = screenWidth - (int)(screenWidth / 10);
     screenHeight = (int)size.getHeight();
+    screenHeight = screenHeight - (int)(screenHeight / 10);
     System.out.println("Your screen width is: " + screenWidth);
     System.out.println("Your screen height is: " + screenHeight);
 
