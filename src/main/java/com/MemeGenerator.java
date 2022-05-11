@@ -277,7 +277,8 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public void actionPerformedDeleteMemeTemplate(){
     try {//Not sure how to make this work
          //File still gets deleted tho so low priority
-     Files.delete(Paths.get(mainDirectory).resolve("t3mp").resolve(memeTemplate));
+     //Path thePath
+     Files.delete(Paths.get(mainDirectory, "Blank-Templates").resolve(memeTemplate));
      System.out.println("Deleted file iz: " + memeTemplate);
    } catch (IOException e1) {
      try {
