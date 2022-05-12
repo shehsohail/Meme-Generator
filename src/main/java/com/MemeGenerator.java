@@ -186,8 +186,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   public void actionPerformedPreset(){
     try {
       memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
-    } catch (IOException e1) {
-      System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
+    } catch (Exception e1) {
+      try {
+        indexOfBrowsingPresteMeme = 0;
+        memeTemplate = BrowseWindow(blankMemeTemplateFolder, "preset");
+      } catch (Exception e) {
+        System.err.println("Please ensure you didn't delete all of the meme templates.  Upload a new template if you did");
+      }
     }
   }
 
@@ -350,10 +355,13 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     File generatedMemesDirectory = new File(directory);
     String[] backgroundImage = generatedMemesDirectory.list();
     int readyForReturn = 0;
-    if(indexOfBrowsingMeme+1 >= backgroundImage.length){
+    if(indexOfBrowsingMeme >= backgroundImage.length){
       indexOfBrowsingMeme = 0;
     }
     while(readyForReturn == 0){
+      if(indexOfBrowsingMeme >= backgroundImage.length){
+        indexOfBrowsingMeme = 0;
+      }
       if(backgroundImage[indexOfBrowsingMeme].contains(".jpg")){
         readyForReturn = 1;
       }
@@ -441,11 +449,14 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     File generatedMemesDirectory = new File(directory);
     String[] backgroundImage = generatedMemesDirectory.list();
     int readyForReturn = 0;
-    if(indexOfBrowsingPresteMeme == backgroundImage.length){
+    if(indexOfBrowsingPresteMeme >= backgroundImage.length){
       
       indexOfBrowsingPresteMeme = 0;
     }
     while(readyForReturn == 0){
+      if(indexOfBrowsingPresteMeme >= backgroundImage.length){
+        indexOfBrowsingPresteMeme = 0;
+      }
       if(backgroundImage[indexOfBrowsingPresteMeme].contains(".jpg")){
         readyForReturn = 1;
       }
