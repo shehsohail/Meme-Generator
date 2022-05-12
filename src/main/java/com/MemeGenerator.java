@@ -89,7 +89,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     screenWidth = (int)size.getWidth();
     screenWidth = screenWidth - 666;
     screenHeight = (int)size.getHeight();
-    screenHeight = screenHeight - (int)(screenHeight / 10);
+    screenHeight = screenHeight - (int)(screenHeight / 8);
 
     //Created buttons
     browse = new JButton("Browse the Memes");
