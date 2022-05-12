@@ -996,11 +996,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
   JButton save = new JButton("Save this Edit");
   save.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent f){
-      System.out.println("the value of previewing is: " + previewing);
-      System.out.println("Your font size is: " + fontSize);
-      System.out.println("Your caption is: " + memeText);
-      System.out.println("Your color triplet (R,G,B) is: (" + red + ", " + green + ", " + blue + ") ");
-      System.out.println("Your text location starting point (X, Y) is: (" + topX +  ", " + topY + ") ");
       if(previewing == 0){
         //Delete all files in t3mp if this is the first attemot of memeing
       File tempMemeToBeDeleted = new File(tempMemeTemplateFolder);
@@ -1009,7 +1004,6 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       } catch (IOException e) {
         System.err.println("Couldn't clean out the directory.  Might cause problems later on");
       }
-
       }
       if(memeText == null){memeText = "";}
       if(newMemeFileName == null){newMemeFileName = "default";}
@@ -1025,6 +1019,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if(topY > memeHeight){topY = memeHeight / 2;}
       if(topY < 0){topY = 1;}
       if(fontSize <= 1){fontSize = 1;}
+      System.out.println("the value of previewing is: " + previewing);
+      System.out.println("Your font size is: " + fontSize);
+      System.out.println("Your caption is: " + memeText);
+      System.out.println("Your color triplet (R,G,B) is: (" + red + ", " + green + ", " + blue + ") ");
+      System.out.println("Your text location starting point (X, Y) is: (" + topX +  ", " + topY + ") ");
       Graphics g = image.getGraphics();
       g.setFont(g.getFont().deriveFont(fontSize));
       Color fontColor = new Color(red, green, blue);
