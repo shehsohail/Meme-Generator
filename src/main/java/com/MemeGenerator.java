@@ -89,7 +89,7 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     screenWidth = (int)size.getWidth();
     screenWidth = screenWidth - 666;
     screenHeight = (int)size.getHeight();
-    screenHeight = screenHeight - (int)(screenHeight / 4);
+    screenHeight = screenHeight - (int)(screenHeight / 10);
 
     //Created buttons
     browse = new JButton("Browse the Memes");
@@ -400,11 +400,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
           scale = scale + .1;
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
         }
         while(imageWidth > screenWidth){
           scale = scale + .1;
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
         }
         scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
         scaledImageIcon = new ImageIcon(scaledImage);
@@ -424,11 +424,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
           scale = scale + .1;
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
         }
         while(imageWidth > screenWidth){
           scale = scale + .1;
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
         }
         scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
         scaledImageIcon = new ImageIcon(scaledImage);
@@ -494,11 +494,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
     try {
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
           scale = scale + .1;
         }
         while(imageWidth > screenWidth){
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
           scale = scale + .1;
         }
         System.out.println("The image needed to be scaled down by a factor of " + scale);
@@ -526,11 +526,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       scale = 1.1;
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
           scale = scale + .1;
         }
         while(imageWidth > screenWidth){
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
           scale = scale + .1;
         }
         scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
@@ -566,11 +566,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
           scale = scale + .1;
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
         }
         while(imageWidth > screenWidth){
           scale = scale + .1;
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
         }
         scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
         scaledImageIcon = new ImageIcon(scaledImage);
@@ -588,11 +588,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
       if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
         while(imageHeight > screenHeight){
           scale = scale + .1;
-          imageHeight = (int)(imageHeight / scale);
+          imageHeight = (int)(browsingImage.getHeight() / scale);
         }
         while(imageWidth > screenWidth){
           scale = scale + .1;
-          imageWidth = (int)(imageWidth / scale);
+          imageWidth = (int)(browsingImage.getWidth() / scale);
         }
         scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
         scaledImageIcon = new ImageIcon(scaledImage);
@@ -673,11 +673,11 @@ public class MemeGenerator extends javax.swing.JFrame implements ActionListener
         //Checking if the image needs to be scaled down
         if((imageHeight > screenHeight) || (imageWidth > screenWidth)){
           while(imageHeight > screenHeight){
-            imageHeight = (int)(imageHeight / scale);
+            imageHeight = (int)(browsingImage.getHeight() / scale);
             scale = scale + .1;
           }
           while(imageWidth > screenWidth){
-            imageWidth = (int)(imageWidth / scale);
+            imageWidth = (int)(browsingImage.getWidth() / scale);
             scale = scale + .1;
           }
           scaledImage = browsingImage.getScaledInstance((int)(browsingImage.getWidth()/scale), (int)(browsingImage.getHeight()/scale), Image.SCALE_SMOOTH);
